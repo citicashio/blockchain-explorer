@@ -1,11 +1,26 @@
 <?php
 
+namespace App;
+
+use Nette\Configurator;
+use Tracy\Debugger;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-$configurator = new Nette\Configurator;
+$configurator = new Configurator;
 
-//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
-$configurator->enableTracy(__DIR__ . '/../log');
+$debugMode = $configurator->isDebugMode();
+$tempDirectory = 'temp';
+if (\PHP_SAPI === 'cli') {
+	$debugMode = \getenv('development') === 'true';
+	$tempDirectory = 'tempcli';
+}
+
+$configurator->setTimeZone('Europe/Prague');
+$configurator->setDebugMode($debugMode);
+
+$configurator->enableTracy();
+$configurator->setTempDirectory(__DIR__ . '/../var/' . $tempDirectory);
 
 $configurator->setTimeZone('Europe/Prague');
 $configurator->setTempDirectory(__DIR__ . '/../var/temp');
@@ -16,6 +31,8 @@ $configurator->createRobotLoader()
 
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
+
+Debugger::enable(!$debugMode, __DIR__ . '/../var/log', 'salek@citicash.io');
 
 $container = $configurator->createContainer();
 
