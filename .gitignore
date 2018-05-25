@@ -1,0 +1,10 @@
+vendor/*
+!.gitignore
+!.htaccess
+!web.config
+app/config/config.local.neon
+tests/**/output/*Test.actual
+tests/**/output/*Test.expected
+.idea
+node_modules
+.vscode
