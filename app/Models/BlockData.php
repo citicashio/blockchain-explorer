@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Nette\Utils\DateTime;
+use Nette\Utils\Json;
 use stdClass;
 
 class BlockData
@@ -58,9 +60,14 @@ class BlockData
 	private $reward;
 
 	/**
-	 * @var \DateTime
+	 * @var int
 	 */
 	private $timestamp;
+
+	/**
+	 * @var \DateTime
+	 */
+	private $dateTime;
 
 	/**
 	 * @var string
@@ -72,6 +79,11 @@ class BlockData
 	 */
 	private $raw;
 
+	/**
+	 * @var string[]
+	 */
+	private $txHashes = [];
+
 	public function __construct()
 	{
 
@@ -79,7 +91,7 @@ class BlockData
 
 	public static function fromResponse(stdClass $response)
 	{
-		dump($response);
+		//dump($response);
 
 		$header = $response->result->block_header;
 
@@ -95,8 +107,13 @@ class BlockData
 		$blockData->prev_hash = $header->prev_hash;
 		$blockData->reward = $header->reward;
 		$blockData->timestamp = $header->timestamp;
+		$blockData->dateTime = DateTime::from($header->timestamp);
 		$blockData->blob = $response->result->blob;
 		$blockData->raw = $response;
+
+		$json = Json::decode($response->result->json);
+		//dump($json);
+		$blockData->txHashes = $json->tx_hashes;
 
 		return $blockData;
 	}
@@ -151,8 +168,18 @@ class BlockData
 		return $this->reward;
 	}
 
-	public function getTimestamp(): \DateTime
+	public function getTimestamp(): int
 	{
 		return $this->timestamp;
+	}
+
+	public function getDateTime(): \DateTime
+	{
+		return $this->dateTime;
+	}
+
+	public function getTxHashes(): array
+	{
+		return $this->txHashes;
 	}
 }
