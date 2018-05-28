@@ -36,6 +36,20 @@ class RpcDaemon
 		);
 	}
 
+	public function getInfo(): InfoData
+	{
+		$body = [
+			'method' => 'get_info',
+		];
+
+		/** @var Request $request */
+		$request = $this->client->get('/json_rpc', ['body' => Json::encode($body)]);
+
+		$response = Json::decode($request->getBody()->getContents());
+
+		return InfoData::fromResponse($response);
+	}
+
 	public function getHeight(): int
 	{
 		$body = [
