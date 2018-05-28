@@ -1,0 +1,30 @@
+{default $maxCountLinks = 10}
+{default $successivePages = 4}
+{var $min = $paginator->getBase()}
+{var $max = $paginator->getPageCount()}
+{var $count = ($max - $min)}
+{var $currentPage = $paginator->getPage()}
+{var $additionalPages = $maxCountLinks - 2 - ($successivePages*2) + 1}
+{var $freePlaces = $maxCountLinks - $additionalPages}
+{var $additionalStep = ceil(($max - $min) / $freePlaces)}
+
+<div class="pagination-container">
+	{if (($max-$min) <= $maxCountLinks)} {* Can links be render gradually? *}
+		{for $p = $min; $p<=$max; $p++}
+			<span n:class="pagination-item, ($currentPage == $p)? active">
+				<a class="pagination-link" n:href="this, page => $p">{$p}</a>
+			</span>
+		{/for}
+	{else}
+		{for $p = $min; $p<=$max; $p++}
+			{var $firstAndLast = ($p == $min || $p == $max)}
+			{var $closestRange = ($p > ($currentPage - $successivePages) && $p < ($currentPage + $successivePages))}
+			{var $addOn = (($p % $additionalStep) == 0)}
+			{if $firstAndLast || $closestRange || $addOn}
+				<span n:class="pagination-item, ($currentPage == $p) ? active">
+					<a class="pagination-link" n:href="this, page => $p">{$p}</a>
+				</span>
+			{/if}
+		{/for}
+	{/if}
+</div>

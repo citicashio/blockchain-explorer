@@ -1,1 +1,18 @@
 {block content}
+<table>
+	<thead>
+		<td>height</td>
+		<td>reward</td>
+		<td>datetime</td>
+	</thead>
+	<tr n:foreach="$blocks as $block">
+		<td>{$block->getHeight()}</td>
+		<td>{$block->getReward()}</td>
+		<td>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</td>
+		<td>{$block->getHash()}</td>
+		<td>{$block->getHash()}</td>
+		<td n:foreach="$block->getTxHashes() as $txHash">{$txHash}{sep}, {/sep}</td>
+	</tr>
+</table>
+
+{include ../VisualPaginator/paginator.latte}
