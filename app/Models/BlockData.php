@@ -182,4 +182,9 @@ class BlockData
 	{
 		return $this->txHashes;
 	}
+
+	public function getTxCount(): int
+	{
+		return \count($this->txHashes);
+	}
 }

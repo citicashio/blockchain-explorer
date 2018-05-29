@@ -14,6 +14,8 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 	public function renderDefault(int $page = 0)
 	{
 		$rpcDaemon = new RpcDaemon('http://192.168.24.126', 19834);
+		$infoData = $rpcDaemon->getInfo();
+		$this->template->info = $infoData;
 		$actualHeight = $rpcDaemon->getHeight();
 		//dump($height);
 

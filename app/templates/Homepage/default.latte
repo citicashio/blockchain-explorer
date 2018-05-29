@@ -1,13 +1,18 @@
 {block content}
+Difficulty: {$info->getDifficulty()}
+Height: {$info->getHeight()}
+
 <table>
 	<thead>
 		<td>height</td>
 		<td>reward</td>
+		<td>TX</td>
 		<td>datetime</td>
 	</thead>
 	<tr n:foreach="$blocks as $block">
 		<td>{$block->getHeight()}</td>
 		<td>{$block->getReward()}</td>
+		<td>{$block->getTxCount()}</td>
 		<td>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</td>
 		<td>{$block->getHash()}</td>
 		<td>{$block->getHash()}</td>
