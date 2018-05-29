@@ -1,0 +1,13 @@
+{block content}
+Difficulty: {$info->getDifficulty()}
+Height: {$info->getHeight()}
+
+<ul>
+	<li>{$block->getHeight()}</li>
+	<li>{$block->getReward()}</li>
+	<li>{$block->getTxCount()}</li>
+	<li>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</li>
+	<li>{$block->getHash()}</li>
+	<li>{$block->getHash()}</li>
+	<li n:foreach="$block->getTxHashes() as $txHash">{$txHash}{sep}, {/sep}</li>
+</ul>

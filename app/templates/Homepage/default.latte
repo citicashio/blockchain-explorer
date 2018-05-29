@@ -15,7 +15,7 @@ Height: {$info->getHeight()}
 		<td>{$block->getTxCount()}</td>
 		<td>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</td>
 		<td>{$block->getHash()}</td>
-		<td>{$block->getHash()}</td>
+		<td><a n:href="detail, $block->getHash()">{$block->getHash()}</a></td>
 		<td n:foreach="$block->getTxHashes() as $txHash">{$txHash}{sep}, {/sep}</td>
 	</tr>
 </table>

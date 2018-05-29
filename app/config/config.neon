@@ -18,6 +18,7 @@ session:
 
 services:
 	router: App\Router\RouterFactory::createRouter
+	- App\Models\RpcDaemon(%daemon_url%, %daemon_port%)
 
 http:
 	headers:
