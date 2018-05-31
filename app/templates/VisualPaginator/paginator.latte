@@ -8,12 +8,13 @@
 {var $freePlaces = $maxCountLinks - $additionalPages}
 {var $additionalStep = ceil(($max - $min) / $freePlaces)}
 
-<div class="pagination-container">
+<nav aria-label="Page navigation example">
+	<ul class="pagination">
 	{if (($max-$min) <= $maxCountLinks)} {* Can links be render gradually? *}
 		{for $p = $min; $p<=$max; $p++}
-			<span n:class="pagination-item, ($currentPage == $p)? active">
-				<a class="pagination-link" n:href="this, page => $p">{$p}</a>
-			</span>
+			<li n:class="page-item, ($currentPage == $p)? active">
+				<a class="page-link" n:href="this, page => $p">{$p}</a>
+			</li>
 		{/for}
 	{else}
 		{for $p = $min; $p<=$max; $p++}
@@ -21,10 +22,10 @@
 			{var $closestRange = ($p > ($currentPage - $successivePages) && $p < ($currentPage + $successivePages))}
 			{var $addOn = (($p % $additionalStep) == 0)}
 			{if $firstAndLast || $closestRange || $addOn}
-				<span n:class="pagination-item, ($currentPage == $p) ? active">
-					<a class="pagination-link" n:href="this, page => $p">{$p}</a>
-				</span>
+				<li n:class="page-item, ($currentPage == $p) ? active">
+					<a class="page-link" n:href="this, page => $p">{$p}</a>
+				</li>
 			{/if}
 		{/for}
 	{/if}
-</div>
+</nav>
