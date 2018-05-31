@@ -2,16 +2,48 @@
 Actual Difficulty: {$info->getDifficulty()}
 Actual Height: {$info->getHeight()}
 
-<ul>
-	<li>Height: {$block->getHeight()}</li>
-	<li>Blob: {$block->getBlob()}</li>
-	<li>Reward {$block->getReward()}</li>
-	<li>Pref Hash <a n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></li>
-	<li>TxCount {$block->getTxCount()}</li>
-	<li>Date: {$block->getDateTime()|date:"Y-m-d H:i:sP"}</li>
-	<li>Hash: {$block->getHash()}</li>
-	Tx Hashes: <span n:foreach="$block->getTxHashes() as $txHash">{$txHash}{sep}, {/sep}</span>
+<table class="table">
+	<tr>
+		<td>Height</td>
+		<td>{$block->getHeight()}</td>
+	</tr>
+	<tr>
+		<td>Blob</td>
+		<td><textarea rows="20" cols="60">{$block->getBlob()}</textarea></td>
+	</tr>
+	<tr>
+		<td>Reward</td>
+		<td>{$block->getReward()}</td>
+	</tr>
+	<tr>
+		<td>Pref Hash</td>
+		<td><a n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></td>
+	</tr>
+	<tr>
+		<td>TxCount</td>
+		<td>{$block->getTxCount()}</td>
+	</tr>
+	<tr>
+		<td>Date</td>
+		<td>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</td>
+	</tr>
+	<tr>
+		<td>Hash</td>
+		<td>{$block->getHash()}</td>
+	</tr>
+	<tr n:foreach="$block->getTxHashes() as $txHash">
+		<td>Tx Hashes</td>
+		<td>{$txHash}</td>
+	</tr>
 
-	<li n:foreach="$block->getMinerTxVin() as $input">Inputs: {$input->gen->height}</li>
-	<li n:foreach="$block->getMinerTxVout() as $output">Outputs: amount: {$output->amount} key: {$output->target->key}</li>
-</ul>
+	<tr n:foreach="$block->getMinerTxVin() as $input">
+		<td>intput</td>
+		<td>{$input->gen->height}</td>
+	</tr>
+	<tr n:foreach="$block->getMinerTxVout() as $output">
+		<td>Output amount</td>
+		<td>{$output->amount}</td>
+		<td>key: {$output->target->key}</td>
+	</tr>
+	</tr>
+</table>
