@@ -28,21 +28,22 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->info = $infoData;
 	}
 
-	public function renderDefault(int $page = 0)
+	public function renderDefault(int $heightStart = 0)
 	{
-		$actualHeight = $this->rpcDaemon->getHeight();
-		//dump($height);
+		$lastHeight = $this->rpcDaemon->getHeight() - 1;
+		if ($heightStart === 0) {
+			$heightStart = $lastHeight;
+		}
 
-		$height = ($actualHeight - 1) - (self::ITEMS_PER_PAGE * $page);
-
-		$blocks = $this->rpcDaemon->getBlocksByHeight($height, self::ITEMS_PER_PAGE);
+		$blocks = $this->rpcDaemon->getBlocksByHeight($heightStart, self::ITEMS_PER_PAGE);
 		//dump($blocks);
 		$this->template->blocks = $blocks;
+		$this->template->heightStart = $heightStart;
 		$paginator = new Paginator();
-		$paginator->setItemCount($actualHeight - 1);
+		$paginator->setItemCount($lastHeight - 1);
 		$paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
-		$paginator->setPage($page);
-		$paginator->setBase(0);
+		$paginator->setPage($heightStart);
+		$paginator->setBase(1);
 		$this->template->paginator = $paginator;
 	}
 

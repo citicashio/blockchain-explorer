@@ -1,7 +1,8 @@
-{default $maxCountLinks = 10}
-{default $successivePages = 4}
+{default $maxCountLinks = 20}
+{default $successivePages = 8}
 {var $min = $paginator->getBase()}
 {var $max = $paginator->getPageCount()}
+{var $itemCount = $paginator->getItemCount()}
 {var $count = ($max - $min)}
 {var $currentPage = $paginator->getPage()}
 {var $additionalPages = $maxCountLinks - 2 - ($successivePages*2) + 1}
@@ -13,17 +14,17 @@
 	{if (($max-$min) <= $maxCountLinks)} {* Can links be render gradually? *}
 		{for $p = $min; $p<=$max; $p++}
 			<li n:class="page-item, ($currentPage == $p)? active">
-				<a class="page-link" n:href="this, page => $p">{$p}</a>
+				<a class="page-link" n:href="this, heihtStart => $p">{$p}</a>
 			</li>
 		{/for}
 	{else}
-		{for $p = $min; $p<=$max; $p++}
+		{for $p = $max; $p>=$min; $p--}
 			{var $firstAndLast = ($p == $min || $p == $max)}
 			{var $closestRange = ($p > ($currentPage - $successivePages) && $p < ($currentPage + $successivePages))}
 			{var $addOn = (($p % $additionalStep) == 0)}
 			{if $firstAndLast || $closestRange || $addOn}
-				<li n:class="page-item, ($currentPage == $p) ? active">
-					<a class="page-link" n:href="this, page => $p">{$p}</a>
+				<li n:class="page-item, ($heightStart == min($p * 30, $itemCount)) ? active">
+					<a class="page-link" n:href="this, heightStart => min($p * 30, $itemCount)">{min($p * 30, $itemCount)}</a>
 				</li>
 			{/if}
 		{/for}
