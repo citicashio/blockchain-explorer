@@ -89,11 +89,15 @@ class RpcDaemon
 	/**
 	 * @return BlockData[]
 	 */
-	public function getBlocksByHeight(int $height, int $limit): array
+	public function getBlocksByHeight(int $heightStart, int $limit): array
 	{
 		$response = [];
 		for ($i = 0; $i < $limit; $i++) {
-			$response[$height - $i] = $this->getBlockByHeight($height - $i);
+			$actualHeightPointer = $heightStart - $i;
+			if ($actualHeightPointer < 1) {
+				break;
+			}
+			$response[$actualHeightPointer] = $this->getBlockByHeight($actualHeightPointer);
 		}
 
 		return $response;
