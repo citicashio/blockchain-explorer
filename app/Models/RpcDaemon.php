@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use Nette\Application\BadRequestException;
 use Nette\Utils\Json;
+use stdClass;
 
 class RpcDaemon
 {
@@ -43,10 +43,7 @@ class RpcDaemon
 			'method' => 'get_info',
 		];
 
-		/** @var Request $request */
-		$request = $this->client->get('/json_rpc', ['body' => Json::encode($body)]);
-
-		$response = Json::decode($request->getBody()->getContents());
+		$response = $this->getResponse($body);
 
 		return InfoData::fromResponse($response);
 	}
@@ -56,10 +53,7 @@ class RpcDaemon
 		$body = [
 			'method' => 'getblockcount',
 		];
-		/** @var Request $request */
-		$request = $this->client->get('/json_rpc', ['body' => Json::encode($body)]);
-
-		$response = Json::decode($request->getBody()->getContents());
+		$response = $this->getResponse($body);
 
 		return (int)$response->result->count;
 	}
@@ -73,14 +67,8 @@ class RpcDaemon
 			],
 		];
 
-		/** @var Request $request */
-		$request = $this->client->get('/json_rpc', ['body' => Json::encode($body)]);
+		$response = $this->getResponse($body);
 
-		$response = Json::decode($request->getBody()->getContents());
-
-		if ($response->error->message) {
-			throw new BadRequestException($response->error->message);
-		}
 		return BlockData::fromResponse($response);
 	}
 
@@ -93,10 +81,7 @@ class RpcDaemon
 			],
 		];
 
-		/** @var Request $request */
-		$request = $this->client->get('/json_rpc', ['body' => Json::encode($body)]);
-
-		$response = Json::decode($request->getBody()->getContents());
+		$response = $this->getResponse($body);
 
 		return BlockData::fromResponse($response);
 	}
@@ -109,6 +94,22 @@ class RpcDaemon
 		$response = [];
 		for ($i = 0; $i < $limit; $i++) {
 			$response[$height - $i] = $this->getBlockByHeight($height - $i);
+		}
+
+		return $response;
+	}
+
+	/**
+	 * @param mixed[] $body
+	 */
+	private function getResponse(array $body): stdClass
+	{
+		$request = $this->client->get('/json_rpc', ['body' => Json::encode($body)]);
+
+		$response = Json::decode($request->getBody()->getContents());
+
+		if (isset($response->error) && isset($response->error->message)) {
+			throw new BadRequestException($response->error->message);
 		}
 
 		return $response;
