@@ -1,13 +1,17 @@
 {block content}
-Difficulty: {$info->getDifficulty()}
-Height: {$info->getHeight()}
+Actual Difficulty: {$info->getDifficulty()}
+Actual Height: {$info->getHeight()}
 
 <ul>
-	<li>{$block->getHeight()}</li>
-	<li>{$block->getReward()}</li>
-	<li>{$block->getTxCount()}</li>
-	<li>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</li>
-	<li>{$block->getHash()}</li>
-	<li>{$block->getHash()}</li>
-	<li n:foreach="$block->getTxHashes() as $txHash">{$txHash}{sep}, {/sep}</li>
+	<li>Height: {$block->getHeight()}</li>
+	<li>Blob: {$block->getBlob()}</li>
+	<li>Reward {$block->getReward()}</li>
+	<li>Pref Hash <a n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></li>
+	<li>TxCount {$block->getTxCount()}</li>
+	<li>Date: {$block->getDateTime()|date:"Y-m-d H:i:sP"}</li>
+	<li>Hash: {$block->getHash()}</li>
+	Tx Hashes: <span n:foreach="$block->getTxHashes() as $txHash">{$txHash}{sep}, {/sep}</span>
+
+	<li n:foreach="$block->getMinerTxVin() as $input">Inputs: {$input->gen->height}</li>
+	<li n:foreach="$block->getMinerTxVout() as $output">Outputs: amount: {$output->amount} key: {$output->target->key}</li>
 </ul>

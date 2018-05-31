@@ -32,12 +32,12 @@ class BlockData
 	/**
 	 * @var int
 	 */
-	private $major_version;
+	private $majorVersion;
 
 	/**
 	 * @var int
 	 */
-	private $minor_version;
+	private $minorVersion;
 
 	/**
 	 * @var int
@@ -47,12 +47,12 @@ class BlockData
 	/**
 	 * @var bool
 	 */
-	private $orphan_status;
+	private $orphanStatus;
 
 	/**
 	 * @var string
 	 */
-	private $prev_hash;
+	private $prevHash;
 
 	/**
 	 * @var int
@@ -84,6 +84,41 @@ class BlockData
 	 */
 	private $txHashes = [];
 
+	/**
+	 * @var string
+	 */
+	private $prevId;
+
+	/**
+	 * @var int
+	 */
+	private $minerTxVersion;
+
+	/**
+	 * @var int
+	 */
+	private $minerTxUnlockTime;
+
+	/**
+	 * @var string[]
+	 */
+	private $minerTxVin = [];
+
+	/**
+	 * @var string[]
+	 */
+	private $minerTxVout = [];
+
+	/**
+	 * @var int[]
+	 */
+	private $minerTxExtra = [];
+
+	/**
+	 * @var string
+	 */
+	private $minerTxSignatures;
+
 	public function __construct()
 	{
 
@@ -100,20 +135,30 @@ class BlockData
 		$blockData->difficulty = $header->difficulty;
 		$blockData->hash = $header->hash;
 		$blockData->height = $header->height;
-		$blockData->major_version = $header->major_version;
-		$blockData->minor_version = $header->minor_version;
+		$blockData->majorVersion = $header->major_version;
+		$blockData->minorVersion = $header->minor_version;
 		$blockData->nonce = $header->nonce;
-		$blockData->orphan_status = $header->orphan_status;
-		$blockData->prev_hash = $header->prev_hash;
+		$blockData->orphanStatus = $header->orphan_status;
+		$blockData->prevHash = $header->prev_hash;
 		$blockData->reward = $header->reward;
 		$blockData->timestamp = $header->timestamp;
 		$blockData->dateTime = DateTime::from($header->timestamp);
+
 		$blockData->blob = $response->result->blob;
 		$blockData->raw = $response;
 
 		$json = Json::decode($response->result->json);
 		//dump($json);
 		$blockData->txHashes = $json->tx_hashes;
+		$blockData->prevId = $json->prev_id;
+		$blockData->minerTxVersion = $json->miner_tx->version;
+		$blockData->minerTxUnlockTime = $json->miner_tx->unlock_time;
+		$blockData->minerTxVin = $json->miner_tx->vin;
+		$blockData->minerTxVout = $json->miner_tx->vout;
+		$blockData->minerTxExtra = $json->miner_tx->extra;
+		//$blockData->minerTxSignatures = $json->miner_tx->signatures;
+
+		//dump($blockData);
 
 		return $blockData;
 	}
@@ -140,12 +185,12 @@ class BlockData
 
 	public function getMajorVersion(): int
 	{
-		return $this->major_version;
+		return $this->majorVersion;
 	}
 
 	public function getMinorVersion(): int
 	{
-		return $this->minor_version;
+		return $this->minorVersion;
 	}
 
 	public function getNonce(): int
@@ -155,12 +200,12 @@ class BlockData
 
 	public function isOrphanStatus(): bool
 	{
-		return $this->orphan_status;
+		return $this->orphanStatus;
 	}
 
 	public function getPrevHash(): string
 	{
-		return $this->prev_hash;
+		return $this->prevHash;
 	}
 
 	public function getReward(): int
@@ -186,5 +231,50 @@ class BlockData
 	public function getTxCount(): int
 	{
 		return \count($this->txHashes);
+	}
+
+	public function getBlob(): string
+	{
+		return $this->blob;
+	}
+
+	public function getRaw(): stdClass
+	{
+		return $this->raw;
+	}
+
+	public function getPrevId(): string
+	{
+		return $this->prevId;
+	}
+
+	public function getMinerTxVersion(): int
+	{
+		return $this->minerTxVersion;
+	}
+
+	public function getMinerTxUnlockTime(): int
+	{
+		return $this->minerTxUnlockTime;
+	}
+
+	public function getMinerTxVin(): array
+	{
+		return $this->minerTxVin;
+	}
+
+	public function getMinerTxVout(): array
+	{
+		return $this->minerTxVout;
+	}
+
+	public function getMinerTxExtra(): array
+	{
+		return $this->minerTxExtra;
+	}
+
+	public function getMinerTxSignatures(): string
+	{
+		return $this->minerTxSignatures;
 	}
 }

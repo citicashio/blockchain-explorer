@@ -84,8 +84,6 @@ class InfoData
 
 	public static function fromResponse(stdClass $response)
 	{
-		dump($response);
-
 		$result = $response->result;
 
 		$infoData = new InfoData();
