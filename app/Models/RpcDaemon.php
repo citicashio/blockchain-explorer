@@ -4,6 +4,7 @@ namespace App\Models;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Nette\Application\BadRequestException;
 use Nette\Utils\Json;
 
 class RpcDaemon
@@ -77,6 +78,9 @@ class RpcDaemon
 
 		$response = Json::decode($request->getBody()->getContents());
 
+		if ($response->error->message) {
+			throw new BadRequestException($response->error->message);
+		}
 		return BlockData::fromResponse($response);
 	}
 
