@@ -1,13 +1,14 @@
 {block content}
-Difficulty: {$info->getDifficulty()}
-Height: {$info->getHeight()}
 
-<table class="table">
-	<thead>
-		<td>height</td>
-		<td>reward</td>
-		<td>TX</td>
-		<td>datetime</td>
+<table class="table table-striped table-hover">
+	<thead class="thead-dark">
+	<tr>
+		<th>height</th>
+		<th>reward</th>
+		<th>TX</th>
+		<th>datetime</th>
+		<th>hash</th>
+	</tr>
 	</thead>
 	<tr n:foreach="$blocks as $block">
 		<td>{$block->getHeight()}</td>

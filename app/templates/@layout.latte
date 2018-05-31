@@ -9,10 +9,13 @@
 </head>
 
 <body>
-<h1><a n:href="Homepage:">CitiCash blockchain explorer</a></h1>
-<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+<div class="container-fluid">
 
-{include content}
+	<h1><a n:href="Homepage:">CitiCash blockchain explorer</a></h1>
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
+
+	{include content}
+</div>
 </body>
 </html>
