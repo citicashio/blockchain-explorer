@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use App\Models\RpcDaemon;
+use GuzzleHttp\Exception\ConnectException;
 use Nette;
 use Nette\Utils\Paginator;
 
@@ -24,8 +25,12 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
 	public function beforeRender()
 	{
-		$infoData = $this->rpcDaemon->getInfo();
-		$this->template->info = $infoData;
+		try {
+			$infoData = $this->rpcDaemon->getInfo();
+			$this->template->info = $infoData;
+		} catch (ConnectException $e) {
+			$this->setView('error');
+		}
 	}
 
 	public function renderDefault(int $heightStart = 0)

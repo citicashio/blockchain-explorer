@@ -14,7 +14,7 @@
 	<h1><a n:href="Homepage:">CitiCash blockchain explorer</a></h1>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	<div class="jumbotron">
+	<div class="jumbotron" n:ifset="$info">
 		Difficulty: {$info->getDifficulty()}
 		Height: {$info->getHeight()}
 	</div>
