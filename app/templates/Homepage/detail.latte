@@ -35,7 +35,7 @@
 	</tr>
 	<tr n:foreach="$block->getTxHashes() as $txHash">
 		<td>Tx Hashes</td>
-		<td>{$txHash}</td>
+		<td><a n:href="transaction, $txHash">{$txHash}</a></td>
 	</tr>
 
 	<tr n:foreach="$block->getMinerTxVin() as $input">

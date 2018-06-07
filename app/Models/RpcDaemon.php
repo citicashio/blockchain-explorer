@@ -104,12 +104,27 @@ class RpcDaemon
 	}
 
 	/**
+	 * @param string[] $transactions
+	 */
+	public function getTransactions(array $transactions): TransactionData
+	{
+		$body = [
+			'txs_hashes' => $transactions,
+			'decode_as_json' => true,
+		];
+
+		$response = $this->getResponse('/gettransactions', $body);
+
+		return TransactionData::fromResponse($response);
+	}
+
+	/**
 	 * @param mixed[] $body
 	 */
 	private function getResponse(string $path, array $body): stdClass
 	{
 		$options = ['body' => Json::encode($body)];
-		dump($options);
+//		dump($options);
 		$request = $this->client->get($path, $options);
 
 		$response = Json::decode($request->getBody()->getContents());

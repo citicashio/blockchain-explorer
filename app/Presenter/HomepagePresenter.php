@@ -6,6 +6,7 @@ use App\Models\RpcDaemon;
 use GuzzleHttp\Exception\ConnectException;
 use Nette;
 use Nette\Application\UI\Form;
+use Nette\Utils\Json;
 use Nette\Utils\Paginator;
 
 class HomepagePresenter extends Nette\Application\UI\Presenter
@@ -65,6 +66,13 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 	{
 		$this->template->block = $this->rpcDaemon->getBlockByHeight($height);
 		$this->setView('detail');
+	}
+
+	public function renderTransaction(string $hash): void
+	{
+		$transactions = $this->rpcDaemon->getTransactions([$hash]);
+		$this->template->transactions = $transactions;
+		$this->template->pretty = Json::encode($transactions->getData(), Json::PRETTY);
 	}
 
 	protected function createComponentSearchForm(): Form
