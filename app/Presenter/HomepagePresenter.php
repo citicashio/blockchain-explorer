@@ -78,6 +78,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 			if (\is_numeric($search)) {
 				$this->redirect('detailByHeight', $search);
 			}
+			$this->redirect('detail', $search);
 		};
 
 		return $form;
