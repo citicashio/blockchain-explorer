@@ -5,6 +5,7 @@ namespace App\Presenters;
 use App\Models\RpcDaemon;
 use GuzzleHttp\Exception\ConnectException;
 use Nette;
+use Nette\Application\UI\Form;
 use Nette\Utils\Paginator;
 
 class HomepagePresenter extends Nette\Application\UI\Presenter
@@ -58,5 +59,27 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 	public function renderDetail(string $hash): void
 	{
 		$this->template->block = $this->rpcDaemon->getBlockByHash($hash);
+	}
+
+	public function renderDetailByHeight(int $height): void
+	{
+		$this->template->block = $this->rpcDaemon->getBlockByHeight($height);
+		$this->setView('detail');
+	}
+
+	protected function createComponentSearchForm(): Form
+	{
+		$form = new Form();
+		$form->addText('search', 'Search')
+			->setRequired();
+		$form->addSubmit('send');
+		$form->onSuccess[] = function (Form $form): void {
+			$search = $form->getValues()->search;
+			if (\is_numeric($search)) {
+				$this->redirect('detailByHeight', $search);
+			}
+		};
+
+		return $form;
 	}
 }
