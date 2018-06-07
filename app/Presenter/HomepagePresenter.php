@@ -23,7 +23,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->rpcDaemon = $rpcDaemon;
 	}
 
-	public function beforeRender()
+	public function beforeRender(): void
 	{
 		$this->template->getLatte()->addFilter('wordwrap', function (string $text, int $width): string {
 			return \wordwrap($text, $width, "\n", true);
@@ -36,7 +36,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		}
 	}
 
-	public function renderDefault(int $heightStart = 0)
+	public function renderDefault(int $heightStart = 0): void
 	{
 		$lastHeight = $this->rpcDaemon->getHeight() - 1;
 		if ($heightStart === 0) {
@@ -55,7 +55,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->paginator = $paginator;
 	}
 
-	public function renderDetail(string $hash)
+	public function renderDetail(string $hash): void
 	{
 		$this->template->block = $this->rpcDaemon->getBlockByHash($hash);
 	}
