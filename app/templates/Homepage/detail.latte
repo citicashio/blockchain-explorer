@@ -1,7 +1,4 @@
 {block content}
-Actual Difficulty: {$info->getDifficulty()}
-Actual Height: {$info->getHeight()}
-
 <table class="table">
 	<tr>
 		<td>Height</td>
@@ -9,7 +6,8 @@ Actual Height: {$info->getHeight()}
 	</tr>
 	<tr>
 		<td>Blob</td>
-		<td><textarea rows="20" cols="60">{$block->getBlob()}</textarea></td>
+		<td><textarea rows="7" cols="60">{$block->getBlob()}</textarea></td>
+		{* <td>{$block->getBlob()|wordwrap:200}</td> *}
 	</tr>
 	<tr>
 		<td>Reward</td>
@@ -26,6 +24,10 @@ Actual Height: {$info->getHeight()}
 	<tr>
 		<td>Date</td>
 		<td>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</td>
+	</tr>
+	<tr>
+		<td>Depth</td>
+		<td>{$block->getDepth()}</td>
 	</tr>
 	<tr>
 		<td>Hash</td>
