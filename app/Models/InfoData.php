@@ -77,6 +77,16 @@ class InfoData
 	 */
 	private $whitePeerlistSize;
 
+	/**
+	 * @var int
+	 */
+	private $targetHeight;
+
+	/**
+	 * @var int
+	 */
+	private $hashRate;
+
 	public function __construct()
 	{
 
@@ -102,6 +112,7 @@ class InfoData
 		$infoData->txCount = $result->tx_count;
 		$infoData->txPoolSize = $result->tx_pool_size;
 		$infoData->whitePeerlistSize = $result->white_peerlist_size;
+		$infoData->hashRate = $result->hash_rate;
 
 		return $infoData;
 	}
@@ -174,5 +185,15 @@ class InfoData
 	public function getWhitePeerlistSize(): int
 	{
 		return $this->whitePeerlistSize;
+	}
+
+	public function getHashRate(): int
+	{
+		return $this->hashRate;
+	}
+
+	public function getTargetHeight(): int
+	{
+		return $this->targetHeight;
 	}
 }
