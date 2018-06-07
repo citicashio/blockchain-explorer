@@ -43,7 +43,7 @@ class RpcDaemon
 			'method' => 'get_info',
 		];
 
-		$response = $this->getResponse($body);
+		$response = $this->getResponse('/json_rpc', $body);
 
 		return InfoData::fromResponse($response);
 	}
@@ -53,7 +53,7 @@ class RpcDaemon
 		$body = [
 			'method' => 'getblockcount',
 		];
-		$response = $this->getResponse($body);
+		$response = $this->getResponse('/json_rpc', $body);
 
 		return (int)$response->result->count;
 	}
@@ -67,7 +67,7 @@ class RpcDaemon
 			],
 		];
 
-		$response = $this->getResponse($body);
+		$response = $this->getResponse('/json_rpc', $body);
 
 		return BlockData::fromResponse($response);
 	}
@@ -81,7 +81,7 @@ class RpcDaemon
 			],
 		];
 
-		$response = $this->getResponse($body);
+		$response = $this->getResponse('/json_rpc', $body);
 
 		return BlockData::fromResponse($response);
 	}
@@ -106,9 +106,11 @@ class RpcDaemon
 	/**
 	 * @param mixed[] $body
 	 */
-	private function getResponse(array $body): stdClass
+	private function getResponse(string $path, array $body): stdClass
 	{
-		$request = $this->client->get('/json_rpc', ['body' => Json::encode($body)]);
+		$options = ['body' => Json::encode($body)];
+		dump($options);
+		$request = $this->client->get($path, $options);
 
 		$response = Json::decode($request->getBody()->getContents());
 
