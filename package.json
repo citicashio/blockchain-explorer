@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^3.4.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "npm-run-all": "^4.1.2"
+  },
+  "dependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp-autoprefixer": "^4.1.0",
+    "npm": "^6.0.1"
+  },
+  "scripts": {
+    "server": "php -S localhost:8000 -t www &",
+    "gulp": "gulp",
+    "start": "npm-run-all server gulp"
+  }
+}

@@ -1,0 +1,27 @@
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    .pagination-item{
+        margin-right: 1rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: block;
+        border-radius: @small-radius;
+        border: 1px solid @blue;
+        background: @white;
+        .pagination-link{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: @grey;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .pagination-item.active{
+        background: @lighten-blue;
+        .pagination-link{
+            color: @blue;
+        }
+    }
+}

@@ -1,22 +1,27 @@
 {block content}
 
-<table class="table table-striped table-hover">
-	<thead class="thead-dark">
-	<tr>
-		<th>height</th>
-		<th>reward</th>
-		<th>TX</th>
-		<th>datetime</th>
-		<th>hash</th>
-	</tr>
-	</thead>
-	<tr n:foreach="$blocks as $block">
-		<td>{$block->getHeight()}</td>
-		<td>{$block->getReward()}</td>
-		<td>{$block->getTxCount()}</td>
-		<td>{$block->getDateTime()|date:"Y-m-d H:i:sP"}</td>
-		<td><a n:href="detail, $block->getHash()">{$block->getHash()}</a></td>
-	</tr>
-</table>
+<div class="section section--stronger">
+	<div class="section__name">
+		<h1 class="section__heading"> Transactions in blocks </h1>
+	</div>
+	<table class="table">
+		<thead class="table__header">
+		<tr>
+			<th class="table__cell">Height</th>
+			<th class="table__cell">Datetime</th>
+			<th class="table__cell">Hash</th>
+			<th class="table__cell">Reward</th>
+			<th class="table__cell">TX</th>
+		</tr>
+		</thead>
+		<tr n:foreach="$blocks as $block" class="table__row">
+			<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHeight()}</a></td>
+			<td class="table__cell">{$block->getDateTime()|date:"Y-m-d H:i:s"}</td>
+			<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
+			<td class="table__cell">{$block->getReward()}</td>
+			<td class="table__cell">{$block->getTxCount()}</td>
+		</tr>
+	</table>
+</div>
 
 {include ../VisualPaginator/paginator.latte}

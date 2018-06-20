@@ -1,0 +1,29 @@
+.table{
+    width: 100%;
+    text-align: left;
+    display: table;
+    border-collapse: collapse;
+    .table__header{
+        background: @white;
+        border-bottom: 1px solid @grey;
+        .table__cell{
+            font-size: 0.9rem;
+            padding: 1.4rem 1rem 0.8rem 1rem;
+        }
+    }
+    .table__row{
+        display: table-row;
+    }
+    .table__row:nth-child(2n){
+        background: @white;
+        border-bottom: 1px solid @light-blue;
+        border-top: 1px solid @light-blue;
+    }
+    .table__cell{
+        padding: 0.8rem 1rem;
+        font-size: 0.8rem;
+    }
+    .table__link{
+        color: @blue;
+    }
+}

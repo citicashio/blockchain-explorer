@@ -2,29 +2,35 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{$basePath}/build/css/styles.css">
 	<title>{ifset title}{include title|stripHtml} | {/ifset}</title>
 </head>
 
 <body>
-<div class="container-fluid">
-
-	<h1><a n:href="Homepage:">CitiCash blockchain explorer</a></h1>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-
-	<div class="jumbotron" n:ifset="$info">
-		Difficulty: {$info->getDifficulty()}
-		Height: {$info->getHeight()}
-		HashRate: {$info->getHashRate()} H/s
+	<div class="header">
+		<div class="header__container">
+			<div class="header__item">
+				<img class="header__img" src="/images/layout/long-blue-red-logo.svg">
+			</div>
+			<div class="header__item">
+				<a href="#" class="header__link">
+				</a>
+			</div>
+		</div>
 	</div>
 
-	<div>
-		{control searchForm}
-	</div>
+	<div class="body">
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		
+		<div class="section section--search">
+			<form n:name="searchForm" class="search">
+				<input n:name="search" class="search__input">
+				<input n:name="send" class="search__button">
+			</form>
+		</div>
 
-	{include content}
-</div>
+		{include content}
+	</div>
 </body>
 </html>

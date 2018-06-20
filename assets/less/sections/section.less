@@ -1,0 +1,38 @@
+.section{
+	width: 100%;
+	border-radius: @small-radius;
+	border: 1px solid @black;
+	margin: 2rem auto;
+	.section__name{
+		width: 100%;
+		padding: 0.3rem 1rem;
+		background: @blue;
+		color: @white;
+		border-bottom: 1px solid @black;
+
+	}
+	.section__heading{
+		font-weight: 300;
+		text-align: left;
+		font-size: 1.1rem;
+	}
+}
+.section--search{
+	margin: 0 auto 4rem auto;
+}
+.search{
+	display: flex;
+	.search__input{
+		flex: 1;
+		border: none;
+		padding: 0.6rem 1rem;
+		font-size: 0.8rem;
+	}
+	.search__button{
+		color: @white;
+		background: @blue;
+		border: none;
+		padding: 0.6rem 1rem;
+		cursor: pointer;
+	}
+}
