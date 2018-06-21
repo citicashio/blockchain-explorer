@@ -5,23 +5,31 @@
     border-collapse: collapse;
     .table__header{
         background: @white;
-        border-bottom: 1px solid @grey;
+        border-bottom: 1px solid @light-grey;
         .table__cell{
-            font-size: 0.9rem;
-            padding: 1.4rem 1rem 0.8rem 1rem;
+            color: @black;
+            font-size: 0.8rem;
+            padding: 0.8rem 1rem 0.8rem 1rem;
         }
     }
     .table__row{
         display: table-row;
+    }
+    .table__row:hover{
+        background: @light-hover-blue;
     }
     .table__row:nth-child(2n){
         background: @white;
         border-bottom: 1px solid @light-blue;
         border-top: 1px solid @light-blue;
     }
+    .table__row:nth-child(2n):hover{
+        background: @hover-white;
+    }
     .table__cell{
         padding: 0.8rem 1rem;
         font-size: 0.8rem;
+        color: @dark-grey;
     }
     .table__link{
         color: @blue;

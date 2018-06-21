@@ -1,20 +1,23 @@
 .section{
 	width: 100%;
 	border-radius: @small-radius;
-	border: 1px solid @black;
+	border: 1px solid @light-grey;
 	margin: 0 auto 3rem auto;
+	overflow: hidden;
 	.section__name{
 		width: 100%;
+		background: @white;
 		padding: 0.3rem 1rem;
-		background: @blue;
-		color: @white;
-		border-bottom: 1px solid @black;
+		color: @blue;
 
+	}
+	.section__name--alone{
+		border-bottom: 1px solid @light-grey;
 	}
 	.section__heading{
 		font-weight: 300;
 		text-align: left;
-		font-size: 1.1rem;
+		font-size: 1rem;
 	}
 }
 .section--search{

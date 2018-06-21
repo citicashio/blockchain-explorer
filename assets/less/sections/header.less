@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     background: @white;
-    border-bottom: 1px solid @grey;
+    border-bottom: 1px solid @light-grey;
     z-index: 999;
     height: 5rem;
     display: flex;
@@ -16,13 +16,19 @@
         justify-content: space-between;
         align-items: center;
     }
-    .header__item{
-    }
     .header__img{
         width: 100%;
         max-width: 11rem;
     }
     .header__link{
         color: @blue;
+    }
+}
+@media @--narrow-viewport{
+    .header{
+        .header__container{
+            margin-left: 2rem;
+            margin-right: 2rem; 
+        }
     }
 }
