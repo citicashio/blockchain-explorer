@@ -10,12 +10,12 @@
 	<table class="table">
 		<thead class="table__header">
 		<tr>
-			<th class="table__cell">Age</th>
-			<th class="table__cell">TX Hash</th>
-			<th class="table__cell">Fees</th>
-			<th class="table__cell">In/out</th>
-			<th class="table__cell">Mixin</th>
-			<th class="table__cell">Size(kb)</th>
+			<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--in-out"> In/out </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--mixin"> Mixin </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--save"> Size(kb) </span></th>
 		</tr>
 		</thead>
 		{for $i = 0; $i < 5; $i++}
@@ -38,14 +38,13 @@
 	<table class="table">
 		<thead class="table__header">
 		<tr>
-			<th class="table__cell">Height</th>
-			<th class="table__cell">Age</th>
-			<th class="table__cell">TX Hash</th>
-			<th class="table__cell">Fees</th>
-			<!--<th class="table__cell">Reward</th>-->
-			<th class="table__cell">In/out</th>
-			<th class="table__cell">Mixin</th>
-			<th class="table__cell">Size(kb)</th>
+			<th class="table__cell"><span class="pictogram pictogram--block"> Height </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--in-out"> In/out </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--mixin"> Mixin </span></th>
+			<th class="table__cell"><span class="pictogram pictogram--save"> Size(kb) </span></th>
 		</tr>
 		</thead>
 		<tr n:foreach="$blocks as $block" class="table__row">
@@ -53,9 +52,7 @@
 			<td class="table__cell">{$block->getDateTime()|date:"Y-m-d H:i:s"}</td>
 			<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
 			<td class="table__cell">0.007</td>
-			<!--<td class="table__cell">{$block->getReward()}</td>-->
 			<td class="table__cell"> 0 / 1</td>
-			<!--<td class="table__cell">{$block->getTxCount()}</td>-->
 			<td class="table__cell"> N / A </td>
 			<td class="table__cell">  27.43 </td>
 		</tr>
