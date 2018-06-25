@@ -1,0 +1,3 @@
+parameters:
+	daemon_url: 'http://ubnt'
+	daemon_port: 19834
