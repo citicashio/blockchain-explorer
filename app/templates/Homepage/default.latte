@@ -7,55 +7,59 @@
 	<div class="section__name">
 		<h1 class="section__heading"> Memory pool </h1>
 	</div>
-	<table class="table">
-		<thead class="table__header">
-		<tr>
-			<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--in-out"> In/out </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--mixin"> Mixin </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--save"> Size(kb) </span></th>
-		</tr>
-		</thead>
-		{for $i = 0; $i < 5; $i++}
-		<tr class="table__row">
-			<td class="table__cell"> 2018-06-21 09:54:13 </td>
-			<td class="table__cell"> <a class="table__link"> e2c7de52d48b47d4a23fd1c9f49aafe6b9334afc5647d85233e978af7fb87217</a> </td>
-			<td class="table__cell">0.007</td>
-			<td class="table__cell"> 0 / 1</td>
-			<td class="table__cell"> N / A </td>
-			<td class="table__cell">  27.43 </td>
-		</tr>
-		{/for}
-	</table>
+	<div class="section__table-container">
+		<table class="table">
+			<thead class="table__header">
+			<tr>
+				<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--in-out"> In/out </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--mixin"> Mixin </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--save"> Size(kb) </span></th>
+			</tr>
+			</thead>
+			{for $i = 0; $i < 5; $i++}
+			<tr class="table__row">
+				<td class="table__cell"> 2018-06-21 09:54:13 </td>
+				<td class="table__cell"> <a class="table__link"> e2c7de52d48b47d4a23fd1c9f49aafe6b9334afc5647d85233e978af7fb87217</a> </td>
+				<td class="table__cell">0.007</td>
+				<td class="table__cell"> 0 / 1</td>
+				<td class="table__cell"> N / A </td>
+				<td class="table__cell">  27.43 </td>
+			</tr>
+			{/for}
+		</table>
+	</div>
 </div>
 
 <div class="section">
 	<div class="section__name">
 		<h1 class="section__heading"> Transactions in blocks </h1>
 	</div>
-	<table class="table">
-		<thead class="table__header">
-		<tr>
-			<th class="table__cell"><span class="pictogram pictogram--block"> Height </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--in-out"> In/out </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--mixin"> Mixin </span></th>
-			<th class="table__cell"><span class="pictogram pictogram--save"> Size(kb) </span></th>
-		</tr>
-		</thead>
-		<tr n:foreach="$blocks as $block" class="table__row">
-			<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHeight()}</a></td>
-			<td class="table__cell">{$block->getDateTime()|date:"Y-m-d H:i:s"}</td>
-			<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
-			<td class="table__cell">0.007</td>
-			<td class="table__cell"> 0 / 1</td>
-			<td class="table__cell"> N / A </td>
-			<td class="table__cell">  27.43 </td>
-		</tr>
-	</table>
+	<div class="section__table-container">
+		<table class="table">
+			<thead class="table__header">
+			<tr>
+				<th class="table__cell"><span class="pictogram pictogram--block"> Height </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--in-out"> In/out </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--mixin"> Mixin </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--save"> Size(kb) </span></th>
+			</tr>
+			</thead>
+			<tr n:foreach="$blocks as $block" class="table__row">
+				<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHeight()}</a></td>
+				<td class="table__cell">{$block->getDateTime()|date:"Y-m-d H:i:s"}</td>
+				<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
+				<td class="table__cell">0.007</td>
+				<td class="table__cell"> 0 / 1</td>
+				<td class="table__cell"> N / A </td>
+				<td class="table__cell">  27.43 </td>
+			</tr>
+		</table>
+	</div>
 	{include ../VisualPaginator/paginator.latte}
 </div>
