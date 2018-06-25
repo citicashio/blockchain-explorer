@@ -7,7 +7,7 @@ use Tracy\Debugger;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$configurator = new Configurator;
+$configurator = new Configurator();
 
 $debugMode = $configurator->isDebugMode();
 $tempDirectory = 'temp';
