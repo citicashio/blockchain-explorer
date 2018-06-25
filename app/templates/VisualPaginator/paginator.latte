@@ -11,23 +11,23 @@
 
 <nav aria-label="Page navigation example">
 	<ul class="pagination">
-	{if (($max-$min) <= $maxCountLinks)} {* Can links be render gradually? *}
-		{for $p = $min; $p<=$max; $p++}
-			<li n:class="pagination__item, ($currentPage == $p)? active">
-				<a class="pagination__link" n:href="this, heihtStart => $p">{$p}</a>
-			</li>
-		{/for}
-	{else}
-		{for $p = $max; $p>=$min; $p--}
-			{var $firstAndLast = ($p == $min || $p == $max)}
-			{var $closestRange = ($p > ($currentPage - $successivePages) && $p < ($currentPage + $successivePages))}
-			{var $addOn = (($p % $additionalStep) == 0)}
-			{if $firstAndLast || $closestRange || $addOn}
-				<li n:class="pagination__item, ($heightStart == min($p * 30, $itemCount)) ? active">
-					<a class="pagination__link" n:href="this, heightStart => min($p * 30, $itemCount)">{min($p * 30, $itemCount)}</a>
+		{if (($max-$min) <= $maxCountLinks)} {* Can links be render gradually? *}
+			{for $p = $min; $p<=$max; $p++}
+				<li n:class="pagination__item, ($currentPage == $p)? active">
+					<a class="pagination__link" n:href="this, heihtStart => $p">{$p}</a>
 				</li>
-				<li class="pagination__item"> | </li>
-			{/if}
-		{/for}
-	{/if}
+			{/for}
+		{else}
+			{for $p = $max; $p>=$min; $p--}
+				{var $firstAndLast = ($p == $min || $p == $max)}
+				{var $closestRange = ($p > ($currentPage - $successivePages) && $p < ($currentPage + $successivePages))}
+				{var $addOn = (($p % $additionalStep) == 0)}
+				{if $firstAndLast || $closestRange || $addOn}
+					<li n:class="pagination__item, ($heightStart == min($p * 30, $itemCount)) ? active">
+						<a class="pagination__link" n:href="this, heightStart => min($p * 30, $itemCount)">{min($p * 30, $itemCount)}</a>
+					</li>
+					<li class="pagination__item"> |</li>
+				{/if}
+			{/for}
+		{/if}
 </nav>

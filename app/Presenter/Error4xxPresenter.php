@@ -1,12 +1,12 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Presenters;
 
 use Nette;
 
-
 class Error4xxPresenter extends Nette\Application\UI\Presenter
 {
+
 	public function startup()
 	{
 		parent::startup();
@@ -14,7 +14,6 @@ class Error4xxPresenter extends Nette\Application\UI\Presenter
 			$this->error();
 		}
 	}
-
 
 	public function renderDefault(Nette\Application\BadRequestException $exception)
 	{

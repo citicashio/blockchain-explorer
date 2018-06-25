@@ -124,7 +124,7 @@ class RpcDaemon
 	private function getResponse(string $path, array $body): stdClass
 	{
 		$options = ['body' => Json::encode($body)];
-//		dump($options);
+		//		dump($options);
 		$request = $this->client->get($path, $options);
 
 		$response = Json::decode($request->getBody()->getContents());
@@ -136,4 +136,3 @@ class RpcDaemon
 		return $response;
 	}
 }
-

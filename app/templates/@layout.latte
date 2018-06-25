@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="{$basePath}/build/css/styles.css">
-		<base href="{$baseUri}/"/>
-		<title>{ifset title}{include title|stripHtml} | {/ifset}</title>
-	</head>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{$basePath}/build/css/styles.css">
+	<base href="{$baseUri}/"/>
+	<title>{ifset title}{include title|stripHtml} | {/ifset}</title>
+</head>
 
-	<body>
-		<div class="header">
-			<div class="header__container">
-				<div class="header__item">
-					<a n:href="Homepage:default">
-						<img class="header__img" src="{$baseUri}/images/layout/cc-logo-explorer.svg">
-					</a>
-				</div>
-				<div class="header__item">
-					<a href="http://www.citicash.loc/?lang=cs" target="_blank" class="header__link">
-						Citicash.loc
-					</a>
-				</div>
-			</div>
+<body>
+<div class="header">
+	<div class="header__container">
+		<div class="header__item">
+			<a n:href="Homepage:default">
+				<img class="header__img" src="{$baseUri}/images/layout/cc-logo-explorer.svg">
+			</a>
 		</div>
-
-		<div class="body">
-			<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-			
-			<div class="section section--search">
-				<form n:name="searchForm" class="search">
-					<input n:name="search" class="search__input" placeholder="blk height, blk hash, tx hash, tx payment id, encrypted payment id, tx public key, input key image, stealth address, and datetime">
-					<button n:name="send" class="search__button">
-						<span class="pictogram pictogram--search"> Odeslat </span>
-					</button>
-				</form>
-			</div>
-
-			{include content}
+		<div class="header__item">
+			<a href="http://www.citicash.loc/?lang=cs" target="_blank" class="header__link">
+				Citicash.loc
+			</a>
 		</div>
+	</div>
+</div>
 
-		<div class="footer">
-			<p class="text"> Copyright © {$now->format('Y')} CitiCash.io </p>
-		</div>
-	</body>
+<div class="body">
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+	<div class="section section--search">
+		<form n:name="searchForm" class="search">
+			<input n:name="search" class="search__input"
+								   placeholder="blk height, blk hash, tx hash, tx payment id, encrypted payment id, tx public key, input key image, stealth address, and datetime">
+			<button n:name="send" class="search__button">
+				<span class="pictogram pictogram--search"> Odeslat </span>
+			</button>
+		</form>
+	</div>
+
+	{include content}
+</div>
+
+<div class="footer">
+	<p class="text"> Copyright © {$now->format('Y')} CitiCash.io </p>
+</div>
+</body>
 </html>
