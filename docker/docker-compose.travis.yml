@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  percona:
+    container_name: percona
+    environment:
+      MYSQL_ROOT_PASSWORD: k9XjPjCaYmda
+      #MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    build:
+      context: .
+      dockerfile: percona/Dockerfile
+    ports:
+      - "33306:3306"
+  redis:
+    container_name: redis
+    build:
+      context: .
+      dockerfile: redis/Dockerfile
+    ports:
+      - "36379:6379"
+  travis_php:
+    container_name: travis_php
+    links:
+      - redis
+      - percona
+#    image: 454469028716.dkr.ecr.us-east-1.amazonaws.com/shipmonk-php72-travis:latest
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    volumes:
+      - ..:/var/www/citicash/www/
+      - ~/.ssh:/root/.ssh
+    command: bash -c "composer install"

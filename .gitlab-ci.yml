@@ -1,0 +1,32 @@
+image: php:7.2
+services:
+
+before_script:
+  # Install composer dependencies
+  - wget https://composer.github.io/installer.sig -O - -q | tr -d '\n' > installer.sig
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php -r "if (hash_file('SHA384', 'composer-setup.php') === file_get_contents('installer.sig')) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+  - php composer-setup.php
+  - php -r "unlink('composer-setup.php'); unlink('installer.sig');"
+  - php composer.phar install
+
+after_script:
+
+stages:
+  - build
+  - test-cs
+
+job1:
+  tags:
+    - php
+  stage: build
+  script:
+    - docker/docker.sh private:travis:before_script
+    - php vendor/php-parallel-lint/parallel-lint.php -e php -j 5 --exclude vendor --show-deprecated .
+    - vendor/phpcs/bin/phpcs --standard=ruleset.xml --extensions=php --warning-severity=0 --encoding=utf-8 --report-width=auto -sp app/
+
+# Cache libraries in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - vendor/

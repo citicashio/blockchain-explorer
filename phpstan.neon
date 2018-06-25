@@ -1,0 +1,27 @@
+includes:
+	- vendor/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+	- vendor/phpstan/vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+parameters:
+	root: %rootDir%/../..
+	tmpDir: %rootDir%/var/cache
+	excludes_analyse:
+		- %root%/var/
+	universalObjectCratesClasses:
+		- Mockery\ExpectationInterface
+		- Mockery\HigherOrderMessage
+		- Nette\Utils\ArrayHash
+		- Nette\Bridges\ApplicationLatte\Template
+	autoload_directories:
+		- %root%/tests
+	fileExtensions:
+		- php
+		- phpt
+	autoload_files:
+		- %root%/vendor/autoload.php
+		- %root%/tests/autoloadForPhpstan.php
+	ignoreErrors:
+		- '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::(andReturn|with)\(\).#'
+		- '#Call to an undefined method Mockery\\ExpectationInterface|Mockery\\ExpectsHigherOrderMessage::andReturn\(\).#'
+		- '#Parameter \#(.*) \$(.*) of class App\\Models\\(.*) constructor expects (.*), Mockery\\MockInterface given.#'
+		- '#Parameter \#1 \$transfers of class App\\Models\\Parser\\AllTransfersData constructor expects array, object given.#'
+		- '#Call to an undefined method Nette\\Utils\\Html::addClass\(\).#'
