@@ -30,6 +30,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->getLatte()->addFilter('wordwrap', function (string $text, int $width): string {
 			return \wordwrap($text, $width, "\n", true);
 		});
+		$this->template->now = new \DateTime();
 		try {
 			$infoData = $this->rpcDaemon->getInfo();
 			$this->template->info = $infoData;
