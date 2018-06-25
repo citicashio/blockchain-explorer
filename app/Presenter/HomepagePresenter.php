@@ -31,6 +31,8 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 			return \wordwrap($text, $width, "\n", true);
 		});
 		$this->template->now = new \DateTime();
+		$nowUtc = new \DateTime('now', new \DateTimeZone('UTC'));
+		$this->template->nowUtc = $nowUtc->format(\DateTime::RFC850);
 		try {
 			$infoData = $this->rpcDaemon->getInfo();
 			$this->template->info = $infoData;
