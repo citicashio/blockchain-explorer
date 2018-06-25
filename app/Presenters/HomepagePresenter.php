@@ -6,9 +6,13 @@ use App\Models\RpcDaemon;
 use GuzzleHttp\Exception\ConnectException;
 use Nette;
 use Nette\Application\UI\Form;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Json;
 use Nette\Utils\Paginator;
 
+/**
+ * @property-read Template $template
+ */
 class HomepagePresenter extends Nette\Application\UI\Presenter
 {
 
