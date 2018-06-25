@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<title>{ifset title}{include title|stripHtml} | {/ifset}</title>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{$basePath}/build/css/styles.css">
+		<title>{ifset title}{include title|stripHtml} | {/ifset}</title>
+	</head>
 
-<body>
-<div class="container-fluid">
+	<body>
+		<div class="header">
+			<div class="header__container">
+				<div class="header__item">
+					<a n:href="Homepage:default">
+						<img class="header__img" src="/images/layout/cc-logo-explorer.svg">
+					</a>
+				</div>
+				<div class="header__item">
+					<a href="http://www.citicash.loc/?lang=cs" target="_blank" class="header__link">
+						Citicash.loc
+					</a>
+				</div>
+			</div>
+		</div>
 
-	<h1><a n:href="Homepage:">CitiCash blockchain explorer</a></h1>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		<div class="body">
+			<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+			
+			<div class="section section--search">
+				<form n:name="searchForm" class="search">
+					<input n:name="search" class="search__input" placeholder="blk height, blk hash, tx hash, tx payment id, encrypted payment id, tx public key, input key image, stealth address, and datetime">
+					<button n:name="send" class="search__button">
+						<span class="pictogram pictogram--search"> Odeslat </span>
+					</button>
+				</form>
+			</div>
 
-	<div class="jumbotron" n:ifset="$info">
-		Difficulty: {$info->getDifficulty()}
-		Height: {$info->getHeight()}
-		HashRate: {$info->getHashRate()} H/s
-	</div>
+			{include content}
+		</div>
 
-	<div>
-		{control searchForm}
-	</div>
-
-	{include content}
-</div>
-</body>
+		<div class="footer">
+			<p class="text"> Copyright © 2018 Citicash.loc </p>
+		</div>
+	</body>
 </html>

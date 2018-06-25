@@ -1,0 +1,131 @@
+.pop-up{
+    z-index: 9999;
+    position: fixed;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    width: 100%;
+    pointer-events: none;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    align-items: center;
+    justify-content: center;
+    .content-container{
+        pointer-events: all;
+        position: fixed;
+        background: @white;
+        border-radius: @normal-radius;
+        padding: 4rem 0;
+    }
+    .close-button-container{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        cursor: pointer;
+        .img{
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+    .headings{
+        padding: 0 8rem;
+        margin-bottom: 4rem;
+    }
+    .main-heading{
+        text-align: center;
+        color: @blue;
+    }
+    .row-container{
+        position: relative;
+        max-height: 15.55rem;
+        overflow-x: scroll;
+        .row{
+            padding: 1.5rem 0;
+            margin:0;
+            width: 100%;
+            cursor: pointer;
+        }
+        .row:nth-child(2n+1){
+            background: @light-white;
+        }
+        .row:hover{
+            background: @light-blue;
+        }
+        .row:nth-child(2n+1):hover{
+            background: @lighten-blue;
+        }
+        .text{
+            margin: 0 0 0 2rem;
+            text-transform: inherit;
+            font-size: 0.9rem;
+            color: @black;
+        }
+        .row.active{
+            background: @lighten-blue;
+            .text{
+                color: @blue;
+            }
+        }
+    }
+    .form-container{
+        padding: 0 5rem;
+        input{
+            width: 100%;
+        }
+    }
+    .controls-container{
+        margin-top: 4rem;
+        display: flex;
+        justify-content: center;
+        .button{
+            padding-left: 6rem;
+            padding-right: 6rem;
+        }
+    }
+}
+.pop-up.closed{
+    display: none;
+}
+.pop-up.open{
+    display: flex;
+}
+
+@media @--mobile-landscape-menu{
+    .pop-up{
+        .content-container{
+            border-radius: 0;
+            position: absolute;
+            top: 0; right: 0;
+            bottom: 0; left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0;
+        }
+        .headings{
+            margin: 2rem auto;
+        }
+        .controls-container{
+            margin: 2rem auto;
+        }
+    } 
+}
+
+@media @--mobile-landscape-viewport{
+    .pop-up{
+        .content-container{
+            border-radius: 0;
+            position: absolute;
+            top: 0; right: 0;
+            bottom: 0; left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .headings{
+            margin: 0;
+        }
+        .row-container{
+            max-height: inherit;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+.header{
+    position: fixed;
+    width: 100%;
+    background: @white;
+    border-bottom: 1px solid @light-grey;
+    z-index: 999;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .header__container{
+        width: 100%;
+        max-width: @max-content-width;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .header__img{
+        width: 100%;
+        max-width: 11rem;
+    }
+    .header__link{
+        color: @blue;
+    }
+}
+@media @--narrow-viewport{
+    .header{
+        .header__container{
+            margin-left: 2rem;
+            margin-right: 2rem; 
+        }
+    }
+}
