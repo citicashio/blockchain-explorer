@@ -92,7 +92,7 @@ class InfoData
 
 	}
 
-	public static function fromResponse(stdClass $response)
+	public static function fromResponse(stdClass $response): InfoData
 	{
 		$result = $response->result;
 

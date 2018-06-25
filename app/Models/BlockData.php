@@ -124,7 +124,7 @@ class BlockData
 
 	}
 
-	public static function fromResponse(stdClass $response)
+	public static function fromResponse(stdClass $response): BlockData
 	{
 		//dump($response);
 

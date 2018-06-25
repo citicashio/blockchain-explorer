@@ -18,7 +18,7 @@ class TransactionData
 
 	}
 
-	public static function fromResponse(stdClass $response)
+	public static function fromResponse(stdClass $response): TransactionData
 	{
 		//dump($response);
 		$data = $response->txs[0]->as_json;
