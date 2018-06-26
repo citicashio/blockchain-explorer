@@ -28,10 +28,12 @@
 }
 .search{
 	display: flex;
+	.search__input, .search__button{
+		padding: 0.6rem 1rem;
+	}
 	.search__input{
 		flex: 1;
 		border: none;
-		padding: 0.6rem 1rem;
 		font-size: @small-font-size;
 	}
 	.search__button{
@@ -39,7 +41,20 @@
 		border-left: 1px solid @light-grey;
 		color: @white;
 		background: @red;
-		padding: 0.6rem 1rem;
 		cursor: pointer;
+	}
+}
+@media @--mobile-landscape-viewport{
+	.search{
+		display: flex;
+		flex-wrap: wrap;
+		.search__input, .search__button{
+			width: 100%;
+			padding: 1rem;
+		}
+		.search__button{
+			border: none;
+			border-top: 1px solid @light-grey;
+		}
 	}
 }

@@ -4,6 +4,7 @@
     background: @white;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     .pagination__item{
         list-style-type: none;
         margin: 2rem 1rem 1rem 1rem;
@@ -14,5 +15,20 @@
     }
     .pagination__link{
         color: @blue;
+    }
+}
+@media @--large-viewport{
+    .pagination{
+        .pagination__item--hidden{
+            display: none;
+        }
+    }
+}
+@media @--small-tablet-viewport{
+    .pagination{
+        padding-top: 2rem;
+        .pagination__item{
+            margin: 1rem;
+        }
     }
 }
