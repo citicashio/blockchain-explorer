@@ -7,7 +7,7 @@ use Nette\Application\IResponse;
 use Nette\Application\Responses;
 use Tracy\ILogger;
 
-class ErrorPresenter implements Nette\Application\IPresenter
+class ErrorPresenter extends BasePresenter
 {
 
 	use Nette\SmartObject;

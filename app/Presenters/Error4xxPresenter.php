@@ -3,22 +3,34 @@
 namespace App\Presenters;
 
 use Nette;
+use Nette\Application\UI\Presenter;
 
-class Error4xxPresenter extends Nette\Application\UI\Presenter
+/**
+ * @property-read Nette\Application\UI\ITemplate $template
+ */
+class Error4xxPresenter extends BasePresenter
 {
 
-	public function startup()
+	public function startup(): void
 	{
 		parent::startup();
-		if (!$this->getRequest()->isMethod(Nette\Application\Request::FORWARD)) {
-			$this->error();
+		$request = $this->getRequest();
+		if ($request !== null && $request->isMethod(Nette\Application\Request::FORWARD)) {
+			return;
 		}
+
+		$this->error();
 	}
 
-	public function renderDefault(Nette\Application\BadRequestException $exception)
+	public function renderDefault(Nette\Application\BadRequestException $exception): void
 	{
-		// load template 403.latte or 404.latte or ... 4xx.latte
-		$file = __DIR__ . "/templates/Error/{$exception->getCode()}.latte";
-		$this->template->setFile(is_file($file) ? $file : __DIR__ . '/templates/Error/4xx.latte');
+		// Load template 403.latte or 404.latte or ... 4xx.latte.
+		$file = \sprintf('%s/../templates/Error/%s.latte', __DIR__, $exception->getCode());
+
+		if (\is_file($file) === false) {
+			$file = __DIR__ . '../templates/Error/4xx.latte';
+		}
+
+		$this->template->setFile($file);
 	}
 }
