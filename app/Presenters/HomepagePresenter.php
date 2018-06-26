@@ -3,9 +3,6 @@
 namespace App\Presenters;
 
 use App\Models\RpcDaemon;
-use GuzzleHttp\Exception\ConnectException;
-use Nette;
-use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Json;
 use Nette\Utils\Paginator;
@@ -13,7 +10,7 @@ use Nette\Utils\Paginator;
 /**
  * @property-read Template $template
  */
-class HomepagePresenter extends Nette\Application\UI\Presenter
+class HomepagePresenter extends BasePresenter
 {
 
 	private const ITEMS_PER_PAGE = 30;
@@ -31,18 +28,8 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
 	public function beforeRender(): void
 	{
-		$this->template->getLatte()->addFilter('wordwrap', function (string $text, int $width): string {
-			return \wordwrap($text, $width, "\n", true);
-		});
-		$this->template->now = new \DateTime();
-		$nowUtc = new \DateTime('now', new \DateTimeZone('UTC'));
-		$this->template->nowUtc = $nowUtc->format(\DateTime::RFC850);
-		try {
-			$infoData = $this->rpcDaemon->getInfo();
-			$this->template->info = $infoData;
-		} catch (ConnectException $e) {
-			$this->setView('error');
-		}
+		$infoData = $this->rpcDaemon->getInfo();
+		$this->template->info = $infoData;
 	}
 
 	public function renderDefault(int $heightStart = 0): void
@@ -80,22 +67,5 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$transactions = $this->rpcDaemon->getTransactions([$hash]);
 		$this->template->transactions = $transactions;
 		$this->template->pretty = Json::encode($transactions->getData(), Json::PRETTY);
-	}
-
-	protected function createComponentSearchForm(): Form
-	{
-		$form = new Form();
-		$form->addText('search', 'Search')
-			->setRequired();
-		$form->addSubmit('send');
-		$form->onSuccess[] = function (Form $form): void {
-			$search = $form->getValues()->search;
-			if (\is_numeric($search)) {
-				$this->redirect('detailByHeight', $search);
-			}
-			$this->redirect('detail', $search);
-		};
-
-		return $form;
 	}
 }

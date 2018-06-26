@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Nette\Application\Application;
 use Nette\Configurator;
 use Tracy\Debugger;
 
@@ -34,6 +35,19 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
 Debugger::enable(!$debugMode, __DIR__ . '/../var/log', 'salek@citicash.io');
 
+\set_error_handler(function ($severity, $message, $file, $line): void {
+	if (!(\error_reporting() & $severity)) { // This error code is not included in error_reporting
+		return;
+	}
+	throw new \ErrorException($message, 0, $severity, $file, $line);
+});
+
 $container = $configurator->createContainer();
+
+/** @var Application $application */
+$application = $container->getByType(Application::class);
+$application->errorPresenter = 'Error';
+$application->catchExceptions = !$configurator->isDebugMode();
+
 
 return $container;
