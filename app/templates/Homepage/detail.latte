@@ -47,8 +47,22 @@
 		</div>
 	</div>
 </div>
-<!--
-		<td>Blob</td>
-		<td><textarea rows="7" cols="60">{$block->getBlob()}</textarea></td>
-		{* <td>{$block->getBlob()|wordwrap:200}</td> *}
--->
+<tr n:foreach="$block->getTxHashes() as $txHash">
+	<td>Tx Hashes</td>
+	<td><a n:href="transaction, $txHash">{$txHash}</a></td>
+</tr>
+
+<tr n:foreach="$block->getMinerTxVin() as $input">
+	<td>intput</td>
+	<td>{$input->gen->height}</td>
+</tr>
+<tr n:foreach="$block->getMinerTxVout() as $output">
+	<td>Output amount</td>
+	<td>{$output->amount}</td>
+	<td>key: {$output->target->key}</td>
+</tr>
+
+{php dump($block);}
+<td>Blob</td>
+<td><textarea rows="7" cols="60">{$block->getBlob()}</textarea></td>
+
