@@ -7,7 +7,10 @@ use Nette\Application\IResponse;
 use Nette\Application\Responses;
 use Tracy\ILogger;
 
-class ErrorPresenter extends BasePresenter
+/**
+ * @property-read Nette\Application\UI\ITemplate $template
+ */
+class ErrorPresenter extends Nette\Application\UI\Presenter
 {
 
 	use Nette\SmartObject;
@@ -19,19 +22,28 @@ class ErrorPresenter extends BasePresenter
 
 	public function __construct(ILogger $logger)
 	{
+		parent::__construct();
 		$this->logger = $logger;
 	}
 
 	public function run(Nette\Application\Request $request): IResponse
 	{
-		$e = $request->getParameter('exception');
+		$this->template->hostname = \gethostname();
 
+		$e = $request->getParameter('exception');
 		if ($e instanceof Nette\Application\BadRequestException) {
 			// $this->logger->log("HTTP code {$e->getCode()}: {$e->getMessage()} in {$e->getFile()}:{$e->getLine()}", 'access');
-			list($module, , $sep) = Nette\Application\Helpers::splitName($request->getPresenterName());
-			$errorPresenter = $module . $sep . 'Error4xx';
 
-			return new Responses\ForwardResponse($request->setPresenterName($errorPresenter));
+			$file = \sprintf('%s/../templates/Error/%s.latte', __DIR__, $e->getCode());
+
+			if (\is_file($file) === false) {
+				$file = __DIR__ . '../templates/Error/4xx.latte';
+			}
+
+			$this->template->setFile($file);
+			$source = $this->template->render();
+
+			return new Responses\TextResponse($source);
 		}
 
 		$this->logger->log($e, ILogger::EXCEPTION);
@@ -39,5 +51,12 @@ class ErrorPresenter extends BasePresenter
 		return new Responses\CallbackResponse(function (): void {
 			include __DIR__ . '/../templates/Error/500.phtml';
 		});
+	}
+
+	public function formatLayoutTemplateFiles(): array
+	{
+		return [
+			__DIR__ . '/../templates/@layout.latte',
+		];
 	}
 }
