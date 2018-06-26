@@ -86,6 +86,17 @@ class RpcDaemon
 		return BlockData::fromResponse($response);
 	}
 
+	public function getTransactionPool(): TransactionsPoolData
+	{
+
+		$body = [
+			'decode_as_json' => true,
+		];
+		$response = $this->getResponse('/get_transaction_pool', $body);
+
+		return new TransactionsPoolData($response);
+	}
+
 	/**
 	 * @return BlockData[]
 	 */

@@ -8,3 +8,4 @@ tests/**/output/*Test.expected
 .idea
 node_modules
 .vscode
+var/*
