@@ -39,8 +39,9 @@ class HomepagePresenter extends BasePresenter
 			$heightStart = $lastHeight;
 		}
 
+		$transactionsPoolData = $this->rpcDaemon->getTransactionPool();
+		$this->template->tpData = $transactionsPoolData->getAllData();
 		$blocks = $this->rpcDaemon->getBlocksByHeight($heightStart, self::ITEMS_PER_PAGE);
-		//dump($blocks);
 		$this->template->blocks = $blocks;
 		$this->template->heightStart = $heightStart;
 		$paginator = new Paginator();
