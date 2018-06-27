@@ -89,7 +89,6 @@ class InfoData
 
 	public function __construct()
 	{
-
 	}
 
 	public static function fromResponse(stdClass $response): InfoData

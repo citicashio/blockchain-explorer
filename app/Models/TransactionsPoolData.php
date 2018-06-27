@@ -14,13 +14,11 @@ class TransactionsPoolData
 
 	public function __construct(stdClass $response)
 	{
-		if(isset($response->transactions)) {
-			foreach($response->transactions as $transactions) {
+		if (isset($response->transactions)) {
+			foreach ($response->transactions as $transactions) {
 				$this->tpData[] = new TransPoolData($transactions);
 			}
 		}
-
-		return $this->getAllData();
 	}
 
 	/**

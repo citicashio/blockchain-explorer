@@ -3,7 +3,6 @@
 namespace App\Presenters;
 
 use Nette;
-use Nette\Application\UI\Presenter;
 
 /**
  * @property-read Nette\Application\UI\ITemplate $template

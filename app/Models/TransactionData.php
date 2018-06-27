@@ -15,7 +15,6 @@ class TransactionData
 
 	public function __construct()
 	{
-
 	}
 
 	public static function fromResponse(stdClass $response): TransactionData

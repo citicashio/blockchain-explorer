@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Nette\Utils\DateTime;
 use stdClass;
 
 class TransPoolData
@@ -82,6 +83,10 @@ class TransPoolData
 	 */
 	private $txJson;
 
+	/**
+	 * @var DateTime
+	 */
+	public $created;
 
 	/**
 	 * @param mixed[] $data
@@ -89,7 +94,6 @@ class TransPoolData
 	public function __construct(stdClass $data)
 	{
 		$this->blobSize = $data->blob_size;
-
 		$this->fee = $data->fee;
 		$this->idHash = $data->id_hash;
 		$this->keptByBlock = $data->kept_by_block;
@@ -100,12 +104,11 @@ class TransPoolData
 		$this->maxUsedBlockIdHash = $data->max_used_block_id_hash;
 		$this->receiveTime = $data->receive_time;
 		$this->relayed = $data->relayed;
-
 		//$this->doNotRelay = $data->do_not_relay;
 		//$this->doubleSpendSeen = $data->double_spend_seen;
 		//$this->lastRelayedTime = $data->last_relayed_time;
 		//$this->txBlob = $data->tx_blob;
-
+		$this->created = new DateTime();
 		if (isset($data->tx_json)) {
 			$this->tx_json = new TransPoolDetailData($data->tx_json);
 		}
@@ -184,5 +187,11 @@ class TransPoolData
 	public function getTxJson(): string
 	{
 		return $this->txJson;
+	}
+
+	public function getAge(): string
+	{
+		$timeBefore = $this->created->getTimestamp() - $this->getReceiveTime();
+		return \gmstrftime('%H:%M:%S', $timeBefore);
 	}
 }

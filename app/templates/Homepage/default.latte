@@ -13,12 +13,12 @@
 			<tr>
 				<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
 				<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
-				<th class="table__cell"><span class="pictogram pictogram--fee"> Fee </span></th>
+				<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
 				<th class="table__cell"><span class="pictogram pictogram--save"> Size(kb) </span></th>
 			</tr>
 			</thead>
 			<tr n:foreach="$tpData as $data" class="table__row">
-				<td class="table__cell">{$data->getReceiveTime()|date:"Y-m-d H:i:s"}</td>
+				<td class="table__cell">{$data->getAge()}</td>
 				<td class="table__cell"><a n:href="detail, $data->getIdHash()" class="table__link">{$data->getIdHash()}</a></td>
 				<td class="table__cell">{$data->getFee()/1000000000} CCH</td>
 				<td class="table__cell">{$data->getBlobSize()/1000} kB</td>
@@ -36,6 +36,7 @@
 			<thead class="table__header">
 			<tr>
 				<th class="table__cell"><span class="pictogram pictogram--block"> Height </span></th>
+				{*<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>*}
 				<th class="table__cell"><span class="pictogram pictogram--age"> Age </span></th>
 				<th class="table__cell"><span class="pictogram pictogram--transaction"> TX Hash </span></th>
 				<th class="table__cell"><span class="pictogram pictogram--fee"> Fees </span></th>
@@ -47,7 +48,8 @@
 			<tr n:foreach="$blocks as $block" class="table__row">
 				<td class="table__cell"><a n:href="detail, $block->getHash()"
 							class="table__link">{$block->getHeight()}</a></td>
-				<td class="table__cell">{$block->getDateTime()|date:"Y-m-d H:i:s"}</td>
+				{*<td class="table__cell">{$block->getDateTime()|date:"Y-m-d H:i:s"}</td>*}
+				<td class="table__cell">{$block->getAge()}</td>
 				<td class="table__cell"><a n:href="detail, $block->getHash()"
 							class="table__link">{$block->getHash()}</a></td>
 				<td class="table__cell">0.007</td>

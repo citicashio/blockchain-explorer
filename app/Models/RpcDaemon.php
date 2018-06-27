@@ -88,7 +88,6 @@ class RpcDaemon
 
 	public function getTransactionPool(): TransactionsPoolData
 	{
-
 		$body = [
 			'decode_as_json' => true,
 		];
@@ -130,14 +129,15 @@ class RpcDaemon
 	}
 
 	/**
+	 * @param string $path
 	 * @param mixed[] $body
+	 * @return stdClass
+	 * @throws BadRequestException
 	 */
 	private function getResponse(string $path, array $body): stdClass
 	{
 		$options = ['body' => Json::encode($body)];
-		//		dump($options);
 		$request = $this->client->get($path, $options);
-
 		$response = Json::decode($request->getBody()->getContents());
 
 		if (isset($response->error) && isset($response->error->message)) {
