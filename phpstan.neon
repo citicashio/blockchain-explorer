@@ -25,3 +25,4 @@ parameters:
 		- '#Parameter \#(.*) \$(.*) of class App\\Models\\(.*) constructor expects (.*), Mockery\\MockInterface given.#'
 		- '#Parameter \#1 \$transfers of class App\\Models\\Parser\\AllTransfersData constructor expects array, object given.#'
 		- '#Call to an undefined method Nette\\Utils\\Html::addClass\(\).#'
+		- '#Variable \"(.*)\" is not in valid camel caps format (Squiz.NamingConventions.ValidVariableName.NotCamelCaps).#'

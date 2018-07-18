@@ -121,13 +121,10 @@ class BlockData
 
 	public function __construct()
 	{
-
 	}
 
 	public static function fromResponse(stdClass $response): BlockData
 	{
-		//dump($response);
-
 		$header = $response->result->block_header;
 
 		$blockData = new BlockData();
@@ -148,7 +145,6 @@ class BlockData
 		$blockData->raw = $response;
 
 		$json = Json::decode($response->result->json);
-		//dump($json);
 		$blockData->txHashes = $json->tx_hashes;
 		$blockData->prevId = $json->prev_id;
 		$blockData->minerTxVersion = $json->miner_tx->version;
@@ -157,8 +153,6 @@ class BlockData
 		$blockData->minerTxVout = $json->miner_tx->vout;
 		$blockData->minerTxExtra = $json->miner_tx->extra;
 		//$blockData->minerTxSignatures = $json->miner_tx->signatures;
-
-		//dump($blockData);
 
 		return $blockData;
 	}
@@ -223,6 +217,9 @@ class BlockData
 		return $this->dateTime;
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function getTxHashes(): array
 	{
 		return $this->txHashes;
@@ -258,16 +255,25 @@ class BlockData
 		return $this->minerTxUnlockTime;
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function getMinerTxVin(): array
 	{
 		return $this->minerTxVin;
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function getMinerTxVout(): array
 	{
 		return $this->minerTxVout;
 	}
 
+	/**
+	 * @return int[]
+	 */
 	public function getMinerTxExtra(): array
 	{
 		return $this->minerTxExtra;
@@ -276,5 +282,12 @@ class BlockData
 	public function getMinerTxSignatures(): string
 	{
 		return $this->minerTxSignatures;
+	}
+
+	public function getAge(): string
+	{
+		$now = new DateTime();
+		$timeBefore = $now->getTimestamp() - $this->getTimestamp();
+		return \gmstrftime('%H:%M:%S', $timeBefore);
 	}
 }
