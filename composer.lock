@@ -892,16 +892,16 @@
         },
         {
             "name": "nette/mail",
-            "version": "v2.4.4",
+            "version": "v2.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/mail.git",
-                "reference": "fc651794923e0f44d6bd89afca4a16873c8f269c"
+                "reference": "9211e3826f7424376c969c9f0b7097768fe0dda1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/mail/zipball/fc651794923e0f44d6bd89afca4a16873c8f269c",
-                "reference": "fc651794923e0f44d6bd89afca4a16873c8f269c",
+                "url": "https://api.github.com/repos/nette/mail/zipball/9211e3826f7424376c969c9f0b7097768fe0dda1",
+                "reference": "9211e3826f7424376c969c9f0b7097768fe0dda1",
                 "shasum": ""
             },
             "require": {
@@ -956,7 +956,7 @@
                 "nette",
                 "smtp"
             ],
-            "time": "2017-12-05T11:26:49+00:00"
+            "time": "2018-07-16T21:08:57+00:00"
         },
         {
             "name": "nette/neon",
