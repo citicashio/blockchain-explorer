@@ -53,6 +53,9 @@ class ErrorPresenter extends Nette\Application\UI\Presenter
 		});
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function formatLayoutTemplateFiles(): array
 	{
 		return [
