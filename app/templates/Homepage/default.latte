@@ -21,7 +21,7 @@
 				<td class="table__cell">{$data->getAge()}</td>
 				<td class="table__cell"><a n:href="detail, $data->getIdHash()" class="table__link">{$data->getIdHash()}</a></td>
 				<td class="table__cell">{$data->getFee()/1000000000} CCH</td>
-				<td class="table__cell">{$data->getBlobSize()/1000} kB</td>
+				<td class="table__cell">{$data->getBlobSize()/1024} kB</td>
 			</tr>
 		</table>
 	</div>
@@ -58,6 +58,7 @@
 				<td class="table__cell"> 27.43</td>
 			</tr>
 		</table>
+		{php dump($blocks);}
 	</div>
 	{include ../VisualPaginator/paginator.latte}
 </div>
