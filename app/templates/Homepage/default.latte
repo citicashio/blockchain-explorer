@@ -52,7 +52,7 @@
 				<td class="table__cell">{$block->getAge()}</td>
 				<td class="table__cell"><a n:href="detail, $block->getHash()"
 							class="table__link">{$block->getHash()}</a></td>
-				<td class="table__cell">0.007</td>
+				<td class="table__cell">{$block->getCoinbaseTxSum()->getFeeAmount()}</td>
 				<td class="table__cell">{$block->getTxCount()} / 1</td>
 				<td class="table__cell"> N / A</td>
 				<td class="table__cell"> 27.43</td>

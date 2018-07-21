@@ -119,6 +119,11 @@ class BlockData
 	 */
 	private $minerTxSignatures;
 
+	/**
+	 * @var CoinbaseTxSum
+	 */
+	private $coinbaseTxSum;
+
 	public function __construct()
 	{
 	}
@@ -289,5 +294,15 @@ class BlockData
 		$now = new DateTime();
 		$timeBefore = $now->getTimestamp() - $this->getTimestamp();
 		return \gmstrftime('%H:%M:%S', $timeBefore);
+	}
+
+	public function setCoinbaseTxSum(CoinbaseTxSum $coinbaseTxSum): void
+	{
+		$this->coinbaseTxSum = $coinbaseTxSum;
+	}
+
+	public function getCoinbaseTxSum(): CoinbaseTxSum
+	{
+		return $this->coinbaseTxSum;
 	}
 }

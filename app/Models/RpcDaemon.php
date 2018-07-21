@@ -69,7 +69,26 @@ class RpcDaemon
 
 		$response = $this->getResponse('/json_rpc', $body);
 
-		return BlockData::fromResponse($response);
+		$blockData = BlockData::fromResponse($response);
+		$coinbase = $this->getCoinbaseTxSum($height);
+		$blockData->setCoinbaseTxSum($coinbase);
+
+		return $blockData;
+	}
+
+	public function getCoinbaseTxSum(int $height): CoinbaseTxSum
+	{
+		$body = [
+			'method' => 'get_coinbase_tx_sum',
+			'params' => [
+				'height' => $height,
+				'count' => 1,
+			],
+		];
+
+		$response = $this->getResponse('/json_rpc', $body);
+
+		return CoinbaseTxSum::fromResponse($response);
 	}
 
 	public function getBlockByHash(string $hash): BlockData
