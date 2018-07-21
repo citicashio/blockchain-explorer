@@ -18,7 +18,11 @@ session:
 services:
 	router: App\Router\RouterFactory::createRouter
 	- App\Models\RpcDaemon(%daemon_url%, %daemon_port%)
+	- App\Models\Filters\TemplateFilters()
 
+	nette.latteFactory:
+		setup:
+			- addFilter(null,[App\Models\Filters\TemplateFilters(), 'loader'])
 http:
 	headers:
 		X-Powered-By: CitiCash Nette
