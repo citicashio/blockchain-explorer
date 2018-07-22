@@ -37,11 +37,11 @@
 			<thead class="table__header">
 			<tr>
 				<th class="table__cell"><span class="pictogram pictogram--block">Height</span></th>
-				{*<th class="table__cell"><span class="pictogram pictogram--age">Age [h:m:s]</span></th>*}
 				<th class="table__cell"><span class="pictogram pictogram--age">Age [h:m:s]</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--fee">Fees</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--in-out">In/out</span></th>
+				<th class="table__cell"><span class="pictogram pictogram--mixin">RCT/type</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--mixin">Mixin</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--save">Size(kb)</span></th>
 			</tr>
@@ -49,12 +49,11 @@
 			<tr n:foreach="$blocks as $block" class="table__row">
 				<td class="table__cell"><a n:href="detail, $block->getHash()"
 							class="table__link">{$block->getHeight()}</a></td>
-				{*<td class="table__cell">{$block->getDateTime()|date:"Y-m-d H:i:s"}</td>*}
 				<td class="table__cell">{$block->getAge()}</td>
-				<td class="table__cell"><a n:href="detail, $block->getHash()"
-							class="table__link">{$block->getHash()}</a></td>
+				<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
 				<td class="table__cell">{$block->getCoinbaseTxSum()->getFeeAmount()|feeInt}</td>
 				<td class="table__cell">{$block->getTxCount()} / 1</td>
+				<td class="table__cell">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
 				<td class="table__cell">N / A</td>
 				<td class="table__cell">27.43</td>
 			</tr>

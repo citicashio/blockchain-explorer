@@ -124,6 +124,16 @@ class BlockData
 	 */
 	private $coinbaseTxSum;
 
+	/**
+	 * @var string
+	 */
+	private $rawResultJsonRctSignatures;
+
+	/**
+	 * @var int
+	 */
+	private $rawResultJsonRctSignaturesType;
+
 	public function __construct()
 	{
 	}
@@ -157,6 +167,8 @@ class BlockData
 		$blockData->minerTxVin = $json->miner_tx->vin;
 		$blockData->minerTxVout = $json->miner_tx->vout;
 		$blockData->minerTxExtra = $json->miner_tx->extra;
+		$blockData->rawResultJsonRctSignatures = isset($json->miner_tx->rct_signatures) ? 'yes' : 'no';
+		$blockData->rawResultJsonRctSignaturesType = $json->miner_tx->rct_signatures->type;
 		//$blockData->minerTxSignatures = $json->miner_tx->signatures;
 
 		return $blockData;
@@ -304,5 +316,15 @@ class BlockData
 	public function getCoinbaseTxSum(): CoinbaseTxSum
 	{
 		return $this->coinbaseTxSum;
+	}
+
+	public function getRawResultJsonRctSignatures(): string
+	{
+		return $this->rawResultJsonRctSignatures;
+	}
+
+	public function getRawResultJsonRctSignaturesType(): int
+	{
+		return $this->rawResultJsonRctSignaturesType;
 	}
 }
