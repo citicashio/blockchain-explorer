@@ -301,6 +301,9 @@ class BlockData
 		return $this->minerTxSignatures;
 	}
 
+	/**
+	 * @todo compute javascript on frontend
+	 */
 	public function getAge(): string
 	{
 		$now = new DateTime();
