@@ -13,7 +13,7 @@ use Nette\Utils\Paginator;
 class HomepagePresenter extends BasePresenter
 {
 
-	private const ITEMS_PER_PAGE = 30;
+	private const ITEMS_PER_PAGE = 50;
 
 	/**
 	 * @var RpcDaemon

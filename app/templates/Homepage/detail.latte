@@ -8,11 +8,11 @@
 	<div class="list list--2col">
 		<div class="list__row">
 			<div class="list__item list__item--20w">TX Hash:</div>
-			<div class="list__item list__item--80w">{$block->getHash()}</div>
+			<div class="list__item list__item--80w"><a n:href="detail, $block->getHash()">{$block->getHash()}</a></div>
 		</div>
 		<div class="list__row">
 			<div class="list__item list__item--20w">TX Prefix Hash:</div>
-			<div class="list__item list__item--80w">{$block->getPrevHash()}</div>
+			<div class="list__item list__item--80w"><a n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></div>
 		</div>
 		<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
 			<div class="list__item list__item--20w">TX Public key:</div>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
 			<div class="list__item list__item--20w">Output Total:</div>
-			<div class="list__item list__item--80w">{$output->amount}</div>
+			<div class="list__item list__item--80w">{$output->amount|amountInt}</div>
 		</div>
 		<div class="list__row" n:foreach="$block->getMinerTxVin() as $input">
 			<div class="list__item list__item--20w">Input Total:</div>
@@ -44,7 +44,7 @@
 		</div>
 		<div class="list__row">
 			<div class="list__item list__item--20w">Reward:</div>
-			<div class="list__item list__item--80w">{$block->getReward()}</div>
+			<div class="list__item list__item--80w">{$block->getReward()|amountInt}</div>
 		</div>
 	</div>
 </div>
@@ -59,10 +59,10 @@
 </tr>
 <tr n:foreach="$block->getMinerTxVout() as $output">
 	<td>Output amount</td>
-	<td>{$output->amount}</td>
+	<td>{$output->amount|amountInt}</td>
 	<td>key: {$output->target->key}</td>
 </tr>
 
 {php dump($block);}
-<td>Blob</td>
-<td><textarea rows="7" cols="60">{$block->getBlob()}</textarea></td>
+{*<td>Blob</td>*}
+{*<td><textarea rows="7" cols="60">{$block->getBlob()}</textarea></td>*}
