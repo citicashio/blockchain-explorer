@@ -143,6 +143,9 @@ class RpcDaemon
 		];
 
 		$response = $this->getResponse('/gettransactions', $body);
+		if (isset($response->missed_tx)) {
+			throw new BadRequestException();
+		}
 
 		return TransactionData::fromResponse($response);
 	}
