@@ -169,6 +169,7 @@ class BlockData
 		$blockData->minerTxExtra = $json->miner_tx->extra;
 		$blockData->rawResultJsonRctSignatures = isset($json->miner_tx->rct_signatures) ? 'yes' : 'no';
 		$blockData->rawResultJsonRctSignaturesType = $json->miner_tx->rct_signatures->type;
+
 		//$blockData->minerTxSignatures = $json->miner_tx->signatures;
 
 		return $blockData;
@@ -280,12 +281,22 @@ class BlockData
 		return $this->minerTxVin;
 	}
 
+	public function getCountOfMinerTxVin(): int
+	{
+		return \count($this->minerTxVin);
+	}
+
 	/**
 	 * @return string[]
 	 */
 	public function getMinerTxVout(): array
 	{
 		return $this->minerTxVout;
+	}
+
+	public function getCountOfMinerTxVout(): int
+	{
+		return \count($this->minerTxVout);
 	}
 
 	/**
@@ -308,6 +319,7 @@ class BlockData
 	{
 		$now = new DateTime();
 		$timeBefore = $now->getTimestamp() - $this->getTimestamp();
+
 		return \gmstrftime('%H:%M:%S', $timeBefore);
 	}
 
