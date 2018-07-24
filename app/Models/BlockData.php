@@ -120,11 +120,6 @@ class BlockData
 	private $minerTxSignatures;
 
 	/**
-	 * @var CoinbaseTxSum
-	 */
-	private $coinbaseTxSum;
-
-	/**
 	 * @var string
 	 */
 	private $rawResultJsonRctSignatures;
@@ -134,12 +129,18 @@ class BlockData
 	 */
 	private $rawResultJsonRctSignaturesType;
 
+	/**
+	 * @var int
+	 */
+	private $fee;
+
 	public function __construct()
 	{
 	}
 
 	public static function fromResponse(stdClass $response): BlockData
 	{
+		//dump($response);
 		$header = $response->result->block_header;
 
 		$blockData = new BlockData();
@@ -155,6 +156,7 @@ class BlockData
 		$blockData->reward = $header->reward;
 		$blockData->timestamp = $header->timestamp;
 		$blockData->dateTime = DateTime::from($header->timestamp);
+		$blockData->fee = $header->fee;
 
 		$blockData->blob = $response->result->blob;
 		$blockData->raw = $response;
@@ -323,16 +325,6 @@ class BlockData
 		return \gmstrftime('%H:%M:%S', $timeBefore);
 	}
 
-	public function setCoinbaseTxSum(CoinbaseTxSum $coinbaseTxSum): void
-	{
-		$this->coinbaseTxSum = $coinbaseTxSum;
-	}
-
-	public function getCoinbaseTxSum(): CoinbaseTxSum
-	{
-		return $this->coinbaseTxSum;
-	}
-
 	public function getRawResultJsonRctSignatures(): string
 	{
 		return $this->rawResultJsonRctSignatures;
@@ -341,5 +333,10 @@ class BlockData
 	public function getRawResultJsonRctSignaturesType(): int
 	{
 		return $this->rawResultJsonRctSignaturesType;
+	}
+
+	public function getFee(): int
+	{
+		return $this->fee;
 	}
 }

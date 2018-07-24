@@ -51,7 +51,7 @@
 							class="table__link">{$block->getHeight()}</a></td>
 				<td class="table__cell">{$block->getAge()}</td>
 				<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
-				<td class="table__cell">{$block->getCoinbaseTxSum()->getFeeAmount()|feeInt}</td>
+				<td class="table__cell">{$block->getFee()|feeInt}</td>
 				<td class="table__cell">{$block->getCountOfMinerTxVin()} / {$block->getCountOfMinerTxVout()}</td>
 				<td class="table__cell">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
 				<td class="table__cell">N / A</td>
