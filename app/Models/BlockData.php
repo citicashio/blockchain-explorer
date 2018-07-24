@@ -134,6 +134,11 @@ class BlockData
 	 */
 	private $fee;
 
+	/**
+	 * @var int
+	 */
+	private $blockSize;
+
 	public function __construct()
 	{
 	}
@@ -157,6 +162,7 @@ class BlockData
 		$blockData->timestamp = $header->timestamp;
 		$blockData->dateTime = DateTime::from($header->timestamp);
 		$blockData->fee = $header->fee;
+		$blockData->blockSize = $header->block_size;
 
 		$blockData->blob = $response->result->blob;
 		$blockData->raw = $response;
@@ -338,5 +344,10 @@ class BlockData
 	public function getFee(): int
 	{
 		return $this->fee;
+	}
+
+	public function getBlockSize(): int
+	{
+		return $this->blockSize;
 	}
 }
