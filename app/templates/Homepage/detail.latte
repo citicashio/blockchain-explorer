@@ -6,13 +6,13 @@
 	</div>
 	<div class="section__table-container">
 	<div class="list list--2col">
-		<div class="list__row">
+		<div n:foreach="$block->getTxHashes() as $txHash" class="list__row">
 			<div class="list__item list__item--20w">TX Hash:</div>
-			<div class="list__item list__item--80w"><a n:href="detail, $block->getHash()">{$block->getHash()}</a></div>
+			<div class="list__item list__item--80w"><a class="list__href" n:href="detail, $block->getHash()">{$block->getHash()}</a></div>
 		</div>
 		<div class="list__row">
 			<div class="list__item list__item--20w">TX Prefix Hash:</div>
-			<div class="list__item list__item--80w"><a n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></div>
+			<div class="list__item list__item--80w"><a class="list__href" n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></div>
 		</div>
 		<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
 			<div class="list__item list__item--20w">TX Public key:</div>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
 			<div class="list__item list__item--20w">Output Total:</div>
-			<div class="list__item list__item--80w">{$output->amount|amountInt}</div>
+			<div class="list__item list__item--80w">{$output->amount|amountInt} CCH</div>
 		</div>
 		<div class="list__row" n:foreach="$block->getMinerTxVin() as $input">
 			<div class="list__item list__item--20w">Input Total:</div>
@@ -48,20 +48,6 @@
 		</div>
 	</div>
 </div>
-<tr n:foreach="$block->getTxHashes() as $txHash">
-	<td>Tx Hashes</td>
-	<td><a n:href="transaction, $txHash">{$txHash}</a></td>
-</tr>
-
-<tr n:foreach="$block->getMinerTxVin() as $input">
-	<td>intput</td>
-	<td>{$input->gen->height}</td>
-</tr>
-<tr n:foreach="$block->getMinerTxVout() as $output">
-	<td>Output amount</td>
-	<td>{$output->amount|amountInt}</td>
-	<td>key: {$output->target->key}</td>
-</tr>
 
 {php dump($block);}
 {*<td>Blob</td>*}
