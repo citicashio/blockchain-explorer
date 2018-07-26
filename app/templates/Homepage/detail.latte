@@ -6,7 +6,7 @@
 	</div>
 	<div class="section__table-container">
 		<div class="list list--2col">
-			<div n:foreach="$block->getTxHashes() as $txHash" class="list__row">
+			<div class="list__row">
 				<div class="list__item list__item--20w">TX Hash:</div>
 				<div class="list__item list__item--80w"><a class="list__href" n:href="detail, $block->getHash()">{$block->getHash()}</a></div>
 			</div>
@@ -49,3 +49,27 @@
 		</div>
 	</div>
 </div>
+
+<div class="section">
+	<div class="section__name section__name--alone">
+		<h1 class="section__heading"> Transactions in block </h1>
+	</div>
+	<div class="section__table-container">
+		<table class="table">
+			<thead class="table__header">
+			<tr>
+				<th class="table__cell"><span class="pictogram pictogram--block">#</span></th>
+				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
+			</tr>
+			</thead>
+			{var $i= 1}
+			<tr n:foreach="$block->getTxHashes() as $txHash" class="table__row">
+				<td class="table__cell">{$i++} </td>
+				<td class="table__cell"><a class="table__link" n:href="detail, $block->getHash()">{$txHash}</a></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+
+{php dump($block);}
