@@ -1,9 +1,9 @@
-{default $maxCountLinks = 12}
+{default $maxCountLinks = 10}
 {default $successivePages = 3}
+{var $transactionOnPage = 30}
 {var $min = $paginator->getBase()}
 {var $max = $paginator->getPageCount()}
 {var $itemCount = $paginator->getItemCount()}
-{var $count = ($max - $min)}
 {var $currentPage = $paginator->getPage()}
 {var $additionalPages = $maxCountLinks - 2 - ($successivePages*2) + 1}
 {var $freePlaces = $maxCountLinks - $additionalPages}
@@ -25,9 +25,9 @@
 				{var $addOn = (($p % $additionalStep) == 0)}
 				{if $firstAndLast || $closestRange || $addOn}
 					<li n:class="pagination__item, ($heightStart == min($p * 30, $itemCount)) ? active">
-						<a class="pagination__link" n:href="this, heightStart => min($p * 30, $itemCount)">{min($p * 30, $itemCount)}</a>
+						<a class="pagination__link" n:href="this, heightStart => min($p * $transactionOnPage, $itemCount)">{min($p * $transactionOnPage, $itemCount)}</a>
 					</li>
-					<li class="pagination__item"> |</li>
+					<li class="pagination__item">|</li>
 				{/if}
 			{/for}
 		{/if}
