@@ -65,7 +65,7 @@
 			{var $i= 1}
 			<tr n:foreach="$block->getTxHashes() as $txHash" class="table__row">
 				<td class="table__cell">{$i++} </td>
-				<td class="table__cell"><a class="table__link" n:href="detail, $block->getHash()">{$txHash}</a></td>
+				<td class="table__cell"><a class="table__link" n:href="detail, $txHash">{$txHash}</a></td>
 			</tr>
 		</table>
 	</div>
