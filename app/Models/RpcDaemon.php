@@ -146,6 +146,10 @@ class RpcDaemon
 			throw new BadRequestException();
 		}
 
+		if (isset($response->status) && ($response->status === 'Failed to parse hex representation of transaction hash')) {
+			throw new BadRequestException();
+		}
+
 		return TransactionData::fromResponse($response);
 	}
 
