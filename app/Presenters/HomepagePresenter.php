@@ -46,9 +46,9 @@ class HomepagePresenter extends BasePresenter
 		$this->template->blocks = $blocks;
 		$this->template->heightStart = $heightStart;
 		$paginator = new Paginator();
-		$paginator->setItemCount($lastHeight - 1);
+		$paginator->setItemCount($lastHeight);
 		$paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
-		$paginator->setPage($heightStart);
+		$paginator->setPage($heightStart / self::ITEMS_PER_PAGE);
 		$paginator->setBase(1);
 		$this->template->paginator = $paginator;
 	}
