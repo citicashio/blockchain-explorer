@@ -2,17 +2,31 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="{$basePath}/build/css/styles.css">
 </head>
 
-<body id="body">
-<div class="layer" id="layer"></div>
-
-<div n:foreach="$flashes as $flash" n:class="alert, alert-primary, $flash->type" role="alert">
-	{$flash->message}
+<body>
+<div class="header">
+	<div class="header__container">
+		<div class="header__item">
+			<a href="/">
+				<img class="header__img" src="{$baseUri}/images/layout/cc-logo-explorer.svg">
+			</a>
+		</div>
+		<div class="header__item">
+			<a href="http://www.citicash.loc/?lang=cs" target="_blank" class="header__link">
+				Citicash.loc
+			</a>
+		</div>
+	</div>
 </div>
 
+<div class="body">
+	{include content}
+</div>
 
-{include content}
-
+<div class="footer">
+	<p class="text"> Copyright © {$now->format('Y')} CitiCash.io </p>
+</div>
 </body>
 </html>

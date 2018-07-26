@@ -41,6 +41,7 @@ class ErrorPresenter extends Nette\Application\UI\Presenter
 			}
 
 			$this->template->setFile($file);
+			$this->template->now = new \DateTime();
 			$source = $this->template->render();
 
 			return new Responses\TextResponse($source);
@@ -59,7 +60,7 @@ class ErrorPresenter extends Nette\Application\UI\Presenter
 	public function formatLayoutTemplateFiles(): array
 	{
 		return [
-			__DIR__ . '/../templates/@layout.latte',
+			__DIR__ . '/../templates/Error/@layout.latte',
 		];
 	}
 }
