@@ -5,64 +5,73 @@
 		<h1 class="section__heading"> Transaction </h1>
 	</div>
 	<div class="section__table-container">
-	<div class="list list--2col">
-		<div class="list__row">
-			<div class="list__item list__item--20w">TX Hash:</div>
-			<div class="list__item list__item--80w"><a n:href="detail, $block->getHash()">{$block->getHash()}</a></div>
-		</div>
-		<div class="list__row">
-			<div class="list__item list__item--20w">TX Prefix Hash:</div>
-			<div class="list__item list__item--80w"><a n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></div>
-		</div>
-		<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
-			<div class="list__item list__item--20w">TX Public key:</div>
-			<div class="list__item list__item--80w">{$output->target->key}</div>
-		</div>
-		<div class="list__row">
-			<div class="list__item list__item--20w">Height:</div>
-			<div class="list__item list__item--80w">{$block->getHeight()}</div>
-		</div>
-		<div class="list__row">
-			<div class="list__item list__item--20w">Date:</div>
-			<div class="list__item list__item--80w">{$block->getDateTime()|date:"Y-m-d H:i:sP"}</div>
-		</div>
-		<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
-			<div class="list__item list__item--20w">Output Total:</div>
-			<div class="list__item list__item--80w">{$output->amount|amountInt}</div>
-		</div>
-		<div class="list__row" n:foreach="$block->getMinerTxVin() as $input">
-			<div class="list__item list__item--20w">Input Total:</div>
-			<div class="list__item list__item--80w">{$input->gen->height}</div>
-		</div>
-		<div class="list__row">
-			<div class="list__item list__item--20w">Tx Size:</div>
-			<div class="list__item list__item--80w"> 000</div> <!-- Dodělat! -->
-		</div>
-		<div class="list__row">
-			<div class="list__item list__item--20w">Depth:</div>
-			<div class="list__item list__item--80w">{$block->getDepth()}</div>
-		</div>
-		<div class="list__row">
-			<div class="list__item list__item--20w">Reward:</div>
-			<div class="list__item list__item--80w">{$block->getReward()|amountInt}</div>
+		<div class="list list--2col">
+			<div class="list__row">
+				<div class="list__item list__item--20w">TX Hash:</div>
+				<div class="list__item list__item--80w"><a class="list__href" n:href="detail, $block->getHash()">{$block->getHash()}</a></div>
+			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">TX Prefix Hash:</div>
+				<div class="list__item list__item--80w"><a class="list__href" n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></div>
+			</div>
+			<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
+				<div class="list__item list__item--20w">TX Public key:</div>
+				<div class="list__item list__item--80w">{$output->target->key}</div>
+			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Height:</div>
+				<div class="list__item list__item--80w">{$block->getHeight()}</div>
+			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Date:</div>
+				<div class="list__item list__item--80w">{$block->getDateTime()|date:"Y-m-d H:i:sP"}</div>
+			</div>
+			<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
+				<div class="list__item list__item--20w">Output Total:</div>
+				<div class="list__item list__item--80w">{$output->amount|amountInt} CCH</div>
+			</div>
+			<div class="list__row" n:foreach="$block->getMinerTxVin() as $input">
+				<div class="list__item list__item--20w">Input Total:</div>
+				<div class="list__item list__item--80w">{$input->gen->height}</div>
+			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Tx Size:</div>
+				<div class="list__item list__item--80w"> 000</div> <!-- Dodělat! -->
+			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Depth:</div>
+				<div class="list__item list__item--80w">{$block->getDepth()}</div>
+			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Reward:</div>
+				<div class="list__item list__item--80w">{$block->getReward()|amountInt}</div>
+			</div>
 		</div>
 	</div>
 </div>
-<tr n:foreach="$block->getTxHashes() as $txHash">
-	<td>Tx Hashes</td>
-	<td><a n:href="transaction, $txHash">{$txHash}</a></td>
-</tr>
 
-<tr n:foreach="$block->getMinerTxVin() as $input">
-	<td>intput</td>
-	<td>{$input->gen->height}</td>
-</tr>
-<tr n:foreach="$block->getMinerTxVout() as $output">
-	<td>Output amount</td>
-	<td>{$output->amount|amountInt}</td>
-	<td>key: {$output->target->key}</td>
-</tr>
+<div class="section" n:if="$block->getTxHashes()">
+	<div class="section__name section__name--alone">
+		<h1 class="section__heading"> Transactions in block </h1>
+	</div>
+	<div class="section__table-container">
+		<table class="table">
+			<thead class="table__header">
+			<tr>
+				<th class="table__cell"><span class="pictogram pictogram--block">#</span></th>
+				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
+				<th class="table__cell"><span class="pictogram pictogram--transaction">Amount</span></th>
+			</tr>
+			</thead>
+			{var $i= 1}
+			<tr class="table__row" n:foreach="$block->getTxHashes() as $txHash">
+				<td class="table__cell">{$i++} </td>
+				<td class="table__cell"><a class="table__link" n:href="detail, $txHash">{$txHash}</a></td>
+				<th class="table__cell">confidential</th>
+			</tr>
+		</table>
+	</div>
+</div>
+
 
 {php dump($block);}
-{*<td>Blob</td>*}
-{*<td><textarea rows="7" cols="60">{$block->getBlob()}</textarea></td>*}
