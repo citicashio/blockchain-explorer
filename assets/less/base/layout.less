@@ -8,12 +8,18 @@ html, body{
     overflow-x: hidden;
 }
 body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: fixed; 
     overflow-y: scroll;
     top: 0; left: 0; right: 0; bottom: 0;
 }
 .body{
-    margin: 9rem auto 4rem auto;
+    width: 100%;
+    margin: 0 auto;
+    padding: 9rem 0 0 0;
     max-width: @max-content-width;
 }
 input, body{
@@ -24,7 +30,7 @@ input, body{
 }
 @media @--narrow-viewport{
     .body{
-        margin-left: 2rem;
-        margin-right: 2rem; 
+        padding-left: 2rem;
+        padding-right: 2rem; 
     }
 }
