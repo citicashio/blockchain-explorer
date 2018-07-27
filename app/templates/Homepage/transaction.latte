@@ -1,10 +1,6 @@
 {block content}
 {dump $transactions->getData()}
-
-<pre>
-{$pretty}
-</pre>
-
+{dump $block}
 
 
 <div class="section">
@@ -15,7 +11,7 @@
 		<div class="list list--2col">
 			<div class="list__row">
 				<div class="list__item list__item--20w">TX Hash:</div>
-				<div class="list__item list__item--80w"> </div>
+				<div class="list__item list__item--80w"></div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">TX Prefix Hash:</div>
@@ -36,7 +32,7 @@
 
 			<div class="list__row">
 				<div class="list__item list__item--20w">Fee:</div>
-				<div class="list__item list__item--80w"> </div>
+				<div class="list__item list__item--80w"></div>
 			</div>
 		</div>
 	</div>

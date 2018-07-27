@@ -71,7 +71,7 @@ class HomepagePresenter extends BasePresenter
 	public function renderTransaction(string $hash): void
 	{
 		$transactions = $this->rpcDaemon->getTransactions([$hash]);
+		$this->template->block = $this->rpcDaemon->getBlockByHeight($transactions->getData()->block_height);
 		$this->template->transactions = $transactions;
-		$this->template->pretty = Json::encode($transactions->getData(), Json::PRETTY);
 	}
 }
