@@ -11,18 +11,18 @@
 		<table class="table">
 			<thead class="table__header">
 			<tr>
-				<th class="table__cell"><span class="pictogram pictogram--age">Age [h:m:s]</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--age">Age [h:m:s]</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
-				<th class="table__cell"><span class="pictogram pictogram--fee">Fees</span></th>
-				<th class="table__cell"><span class="pictogram pictogram--save">Size(kb)</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--fee">Fees</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--save">Size(kb)</span></th>
 			</tr>
 			</thead>
 			<tr n:foreach="$tpData as $data" class="table__row">
-				<td class="table__cell">{$data->getAge()}</td>
+				<td class="table__cell table__cell--resp-hidden">{$data->getAge()}</td>
 				<td class="table__cell"><a n:href="detail, $data->getIdHash()"
 							class="table__link">{$data->getIdHash()}</a></td>
-				<td class="table__cell">{$data->getFee()|feeInt} CCH</td>
-				<td class="table__cell">{$data->getBlobSize()/1024} kB</td>
+				<td class="table__cell table__cell--resp-hidden">{$data->getFee()|feeInt} CCH</td>
+				<td class="table__cell table__cell--resp-hidden">{$data->getBlobSize()/1024} kB</td>
 			</tr>
 		</table>
 	</div>
@@ -38,22 +38,22 @@
 			<tr>
 				<th class="table__cell"><span class="pictogram pictogram--block">Height</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--age">Age [h:m:s]</span></th>
-				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
-				<th class="table__cell"><span class="pictogram pictogram--fee">Fees</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--transaction">TX Hash</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--fee">Fees</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--in-out">In/out</span></th>
-				<th class="table__cell"><span class="pictogram pictogram--mixin">RCT/type</span></th>
-				<th class="table__cell"><span class="pictogram pictogram--save">Size(b)</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--mixin">RCT/type</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--save">Size(b)</span></th>
 			</tr>
 			</thead>
 			<tr n:foreach="$blocks as $block" class="table__row">
 				<td class="table__cell"><a n:href="detail, $block->getHash()"
 							class="table__link">{$block->getHeight()}</a></td>
 				<td class="table__cell">{$block->getAge()}</td>
-				<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
-				<td class="table__cell">{$block->getFee()|feeInt}</td>
+				<td class="table__cell table__cell--resp-hidden"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
+				<td class="table__cell table__cell--resp-hidden">{$block->getFee()|feeInt}</td>
 				<td class="table__cell">{$block->getCountOfMinerTxVin()} / {$block->getCountOfMinerTxVout()}</td>
-				<td class="table__cell">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
-				<td class="table__cell">{$block->getBlockSize()}</td>
+				<td class="table__cell table__cell--resp-hidden">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
+				<td class="table__cell table__cell--resp-hidden">{$block->getBlockSize()}</td>
 			</tr>
 		</table>
 		{php dump($blocks);}
