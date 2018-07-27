@@ -24,7 +24,9 @@ class TransactionData
 		$data = Json::decode($data);
 		$data->block_height = $response->txs[0]->block_height;
 		$data->in_pool = $response->txs[0]->in_pool;
-		$data->output_indices = $response->txs[0]->output_indices;
+		if (isset($response->txs[0]->output_indices)) {
+			$data->output_indices = $response->txs[0]->output_indices;
+		}
 		$data->tx_hash = $response->txs[0]->tx_hash;
 		//dump($data);
 
