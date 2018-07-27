@@ -27,7 +27,7 @@
 		</table>
 	</div>
 </div>
-
+{php dump($blocks);}
 <div class="section">
 	<div class="section__name">
 		<h1 class="section__heading">Transactions in blocks</h1>
@@ -42,21 +42,32 @@
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--fee">Fees</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--in-out">In/out</span></th>
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--mixin">RCT/type</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--mixin">Mixin</span></th>
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--save">Size(b)</span></th>
 			</tr>
 			</thead>
-			<tr n:foreach="$blocks as $block" class="table__row">
-				<td class="table__cell"><a n:href="detail, $block->getHash()"
-							class="table__link">{$block->getHeight()}</a></td>
+			{foreach $blocks as $block}
+			<tr class="table__row">
+				<td class="table__cell"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHeight()}</a></td>
 				<td class="table__cell">{$block->getAge()}</td>
 				<td class="table__cell table__cell--resp-hidden"><a n:href="detail, $block->getHash()" class="table__link">{$block->getHash()}</a></td>
 				<td class="table__cell table__cell--resp-hidden">{$block->getFee()|feeInt}</td>
 				<td class="table__cell">{$block->getCountOfMinerTxVin()} / {$block->getCountOfMinerTxVout()}</td>
 				<td class="table__cell table__cell--resp-hidden">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
+				<td class="table__cell table__cell--resp-hidden">N/A</td>
 				<td class="table__cell table__cell--resp-hidden">{$block->getBlockSize()}</td>
 			</tr>
+				<tr n:foreach="$block->getTransactions() as $transaction" class="table__row">
+					<td></td>
+					<td></td>
+					<td class="table__cell">{$transaction->getData()->tx_hash}</td>
+					<td class="table__cell">{$transaction->getData()->rct_signatures->txnFee|feeInt}</td>
+					<td class="table__cell">{\count($transaction->getData()->vin)} / {\count($transaction->getData()->vout)}</td>
+					<td class="table__cell">Mixin</td>
+					<td class="table__cell">size</td>
+				</tr>
+			{/foreach}
 		</table>
-		{php dump($blocks);}
 	</div>
 	{include ../VisualPaginator/paginator.latte}
 </div>

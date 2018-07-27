@@ -133,8 +133,9 @@ class RpcDaemon
 
 	/**
 	 * @param string[] $transactions
+	 * @return TransactionData[]
 	 */
-	public function getTransactions(array $transactions): TransactionData
+	public function getTransactions(array $transactions): array
 	{
 		$body = [
 			'txs_hashes' => $transactions,
@@ -143,14 +144,23 @@ class RpcDaemon
 
 		$response = $this->getResponse('/gettransactions', $body);
 		if (isset($response->missed_tx)) {
-			throw new BadRequestException();
+			throw new BadRequestException('Missed_tx');
 		}
 
 		if (isset($response->status) && ($response->status === 'Failed to parse hex representation of transaction hash')) {
-			throw new BadRequestException();
+			throw new BadRequestException($response->status);
 		}
 
-		return TransactionData::fromResponse($response);
+		if (isset($response->status) && ($response->status !== 'OK')) {
+			throw new BadRequestException($response->status);
+		}
+
+		$return = [];
+		foreach ($response->txs as $tx) {
+			$return[] = TransactionData::fromResponse($tx);
+		}
+
+		return $return;
 	}
 
 	/**

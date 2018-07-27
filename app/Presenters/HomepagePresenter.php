@@ -39,9 +39,14 @@ class HomepagePresenter extends BasePresenter
 			$heightStart = $lastHeight;
 		}
 
-		$transactionsPoolData = $this->rpcDaemon->getTransactionPool();
-		$this->template->tpData = $transactionsPoolData->getAllData();
+		$this->template->tpData = $this->rpcDaemon->getTransactionPool()->getAllData();
+
 		$blocks = $this->rpcDaemon->getBlocksByHeight($heightStart, self::ITEMS_PER_PAGE);
+		foreach ($blocks as $block) {
+			if (\count($block->getTxHashes()) > 0) {
+				$block->setTransactions($this->rpcDaemon->getTransactions($block->getTxHashes()));
+			}
+		}
 		$this->template->blocks = $blocks;
 		$this->template->heightStart = $heightStart;
 		$paginator = new Paginator();

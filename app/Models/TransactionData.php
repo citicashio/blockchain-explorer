@@ -20,14 +20,14 @@ class TransactionData
 	public static function fromResponse(stdClass $response): TransactionData
 	{
 		//dump($response);
-		$data = $response->txs[0]->as_json;
+		$data = $response->as_json;
 		$data = Json::decode($data);
-		$data->block_height = $response->txs[0]->block_height;
-		$data->in_pool = $response->txs[0]->in_pool;
-		if (isset($response->txs[0]->output_indices)) {
-			$data->output_indices = $response->txs[0]->output_indices;
+		$data->block_height = $response->block_height;
+		$data->in_pool = $response->in_pool;
+		if (isset($response->output_indices)) {
+			$data->output_indices = $response->output_indices;
 		}
-		$data->tx_hash = $response->txs[0]->tx_hash;
+		$data->tx_hash = $response->tx_hash;
 		//dump($data);
 
 		$blockData = new TransactionData();

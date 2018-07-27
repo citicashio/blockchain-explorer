@@ -139,6 +139,11 @@ class BlockData
 	 */
 	private $blockSize;
 
+	/**
+	 * @var TransactionData[]
+	 */
+	private $transactions = [];
+
 	public function __construct()
 	{
 	}
@@ -349,5 +354,15 @@ class BlockData
 	public function getBlockSize(): int
 	{
 		return $this->blockSize;
+	}
+
+	public function setTransactions(array $transactions)
+	{
+		$this->transactions = $transactions;
+	}
+
+	public function getTransactions(): array
+	{
+		return $this->transactions;
 	}
 }
