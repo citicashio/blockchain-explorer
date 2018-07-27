@@ -3,7 +3,6 @@
 {dump $block}
 
 
-
 <div class="section">
 	<div class="section__name section__name--alone">
 		<h1 class="section__heading"> Transaction </h1>
@@ -18,25 +17,27 @@
 				<div class="list__item list__item--20w">TX Prefix Hash:</div>
 				<div class="list__item list__item--80w"></div>
 			</div>
-			<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
+			<div class="list__row" n:if="$block !== null" n:foreach="$block->getMinerTxVout() as $output">
 				<div class="list__item list__item--20w">TX Public key:</div>
 				<div class="list__item list__item--80w"></div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Height:</div>
-				<div class="list__item list__item--80w"> <a n:href="DetailByHeight, $block->getHeight()">{$block->getHeight()}</a></div>
+				<div class="list__item list__item--80w">
+					<a n:href="DetailByHeight, $transactions->getData()->block_height">{$transactions->getData()->block_height}</a>
+				</div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Date:</div>
-				<div class="list__item list__item--80w"> {$block->getDateTime()|date:"Y-m-d H:i:sP"} </div>
+				<div class="list__item list__item--80w" n:inner-if="$block"> {$block->getDateTime()|date:"Y-m-d H:i:sP"} </div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Output Total:</div>
-				<div class="list__item list__item--80w"> 
+				<div class="list__item list__item--80w">
 					{if $transactions->getData()->vout[0]->amount === 0}
 						confidential
 					{else}
-						{$transactions->getData()->vout[0]->amount} 
+						{$transactions->getData()->vout[0]->amount}
 					{/if}
 				</div>
 			</div>

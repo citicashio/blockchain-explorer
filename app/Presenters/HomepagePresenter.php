@@ -5,7 +5,6 @@ namespace App\Presenters;
 use App\Models\RpcDaemon;
 use Nette\Application\BadRequestException;
 use Nette\Bridges\ApplicationLatte\Template;
-use Nette\Utils\Json;
 use Nette\Utils\Paginator;
 
 /**
@@ -71,7 +70,12 @@ class HomepagePresenter extends BasePresenter
 	public function renderTransaction(string $hash): void
 	{
 		$transactions = $this->rpcDaemon->getTransactions([$hash]);
-		$this->template->block = $this->rpcDaemon->getBlockByHeight((int)$transactions->getData()->block_height);
+		$block = null;
+		if ($transactions->getData()->in_pool === false) {
+			$block = $this->rpcDaemon->getBlockByHeight((int)$transactions->getData()->block_height);
+		}
+
+		$this->template->block = $block;
 		$this->template->transactions = $transactions;
 	}
 }
