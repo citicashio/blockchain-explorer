@@ -44,6 +44,10 @@
 				<div class="list__item list__item--20w">Fee:</div>
 				<div class="list__item list__item--80w"> {$transactions->getData()->rct_signatures->txnFee|feeInt} </div>
 			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Tx version:</div>
+				<div class="list__item list__item--80w"> {$transactions->getData()->version} </div>
+			</div>
 		</div>
 	</div>
 </div>
