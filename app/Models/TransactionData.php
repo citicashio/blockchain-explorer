@@ -26,7 +26,7 @@ class TransactionData
 		$data->in_pool = $response->txs[0]->in_pool;
 		$data->output_indices = $response->txs[0]->output_indices;
 		$data->tx_hash = $response->txs[0]->tx_hash;
-		dump($data);
+		//dump($data);
 
 		$blockData = new TransactionData();
 		$blockData->data = $data;
