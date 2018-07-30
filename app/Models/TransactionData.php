@@ -19,11 +19,12 @@ class TransactionData
 
 	public static function fromResponse(stdClass $response): TransactionData
 	{
-		//dump($response);
+		dump($response);
 		$data = $response->as_json;
 		$data = Json::decode($data);
 		$data->block_height = $response->block_height;
 		$data->in_pool = $response->in_pool;
+		$data->tx_mixin = $response->tx_mixin;
 		if (isset($response->output_indices)) {
 			$data->output_indices = $response->output_indices;
 		}

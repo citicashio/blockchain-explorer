@@ -63,9 +63,9 @@
 					<td class="table__cell">{$transaction->getData()->tx_hash}</td>
 					<td class="table__cell">{$transaction->getData()->rct_signatures->txnFee|feeInt}</td>
 					<td class="table__cell">{\count($transaction->getData()->vin)} / {\count($transaction->getData()->vout)}</td>
-					<td class="table__cell">rct</td>
-					<td class="table__cell">Mixin</td>
-					<td class="table__cell">size</td>
+					<td class="table__cell">rct todo</td>
+					<td class="table__cell">{$transaction->getData()->tx_mixin}</td>
+					<td class="table__cell">size todo</td>
 				</tr>
 			{/foreach}
 		</table>
