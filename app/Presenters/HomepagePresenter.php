@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use App\Models\RpcDaemon;
+use App\Models\Service\Settings;
 use Nette\Application\BadRequestException;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Paginator;
@@ -20,16 +21,24 @@ class HomepagePresenter extends BasePresenter
 	 */
 	private $rpcDaemon;
 
-	public function __construct(RpcDaemon $rpcDaemon)
+	/**
+	 * @var Settings
+	 */
+	private $settings;
+
+	public function __construct(RpcDaemon $rpcDaemon, Settings $settings)
 	{
 		parent::__construct();
 		$this->rpcDaemon = $rpcDaemon;
+		$this->settings = $settings;
 	}
 
 	public function beforeRender(): void
 	{
 		$infoData = $this->rpcDaemon->getInfo();
 		$this->template->info = $infoData;
+		$this->template->linkToCitiCash = $this->settings->citiCashUrl;
+		$this->template->linkToCitiCashShort = $this->settings->citiCashUrlShort;
 	}
 
 	public function renderDefault(int $heightStart = 0): void

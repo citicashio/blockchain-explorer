@@ -1,3 +1,6 @@
 parameters:
 	daemon_url: 'http://ubnt'
 	daemon_port: 19834
+	settings:
+		citiCashUrl: https://www.citicash.io
+		citiCashUrlShort: www.citicash.io
