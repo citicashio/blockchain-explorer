@@ -14,7 +14,7 @@
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--age">Age [h:m:s]</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--fee">Fees</span></th>
-				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--save">Size(kb)</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--save">Size</span></th>
 			</tr>
 			</thead>
 			<tr n:foreach="$tpData as $data" class="table__row">
@@ -22,7 +22,7 @@
 				<td class="table__cell"><a n:href="detail, $data->getIdHash()"
 							class="table__link">{$data->getIdHash()}</a></td>
 				<td class="table__cell table__cell--resp-hidden">{$data->getFee()|feeInt} CCH</td>
-				<td class="table__cell table__cell--resp-hidden">{$data->getBlobSize()/1024} kB</td>
+				<td class="table__cell table__cell--resp-hidden">{$data->getBlobSize()|bytes}</td>
 			</tr>
 		</table>
 	</div>
@@ -43,7 +43,7 @@
 				<th class="table__cell"><span class="pictogram pictogram--in-out">In/out</span></th>
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--mixin">RCT/type</span></th>
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--mixin">Mixin</span></th>
-				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--save">Size(b)</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--save">Size</span></th>
 			</tr>
 			</thead>
 			{foreach $blocks as $block}
@@ -55,7 +55,7 @@
 				<td class="table__cell">{$block->getCountOfMinerTxVin()} / {$block->getCountOfMinerTxVout()}</td>
 				<td class="table__cell table__cell--resp-hidden">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
 				<td class="table__cell table__cell--resp-hidden">N/A</td>
-				<td class="table__cell table__cell--resp-hidden">{$block->getBlockSize()}</td>
+				<td class="table__cell table__cell--resp-hidden">{$block->getBlockSize()|bytes}</td>
 			</tr>
 				<tr n:foreach="$block->getTransactions() as $transaction" class="table__row">
 					<td></td>
