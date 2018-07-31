@@ -8,15 +8,18 @@ class Settings
 {
 	use SmartObject;
 
+	/**
+	 * @var mixed[]
+	 */
 	protected $params;
 
-	public function __construct($params)
+	public function __construct(array $params)
 	{
 		$this->params = $params;
 	}
 
 
-	public function __get($name)
+	public function __get($name): string
 	{
 		return $this->params[$name];
 	}
