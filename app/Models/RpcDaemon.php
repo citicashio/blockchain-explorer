@@ -134,6 +134,7 @@ class RpcDaemon
 	/**
 	 * @param string[] $transactions
 	 * @return TransactionData[]
+	 * @throws BadRequestException
 	 */
 	public function getTransactions(array $transactions): array
 	{

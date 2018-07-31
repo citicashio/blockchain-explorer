@@ -40,17 +40,18 @@ class TemplateFilters
 
 	public static function age(int $timeBefore): string
 	{
-		$hour = 60*60;
-		$day = $hour*24;
+		$hour = 60 * 60;
+		$day = $hour * 24;
 
 		if ($timeBefore < $hour) {
 			$result = \gmstrftime('%M:%S', $timeBefore);
 		} elseif ($timeBefore < $day) {
 			$result = \gmstrftime('%H:%M:%S', $timeBefore);
 		} else {
-			$days = \floor($timeBefore/$day);
-			$inday = $timeBefore%$day;
-			$result = $days.':' . \gmstrftime('%H:%M:%S', $inday);
+			$days = \floor($timeBefore / $day);
+			$daysString = (string) $days < 10 ? '0'.$days : $days;
+			$inday = $timeBefore % $day;
+			$result = $daysString.':' . \gmstrftime('%H:%M:%S', $inday);
 		}
 
 		return $result;

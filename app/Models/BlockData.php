@@ -356,11 +356,17 @@ class BlockData
 		return $this->blockSize;
 	}
 
-	public function setTransactions(array $transactions)
+	/**
+	 * @param TransactionData[] $transactions
+	 */
+	public function setTransactions(array $transactions): void
 	{
 		$this->transactions = $transactions;
 	}
 
+	/**
+	 * @return TransactionData[]
+	 */
 	public function getTransactions(): array
 	{
 		return $this->transactions;
