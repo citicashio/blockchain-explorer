@@ -63,9 +63,8 @@
 				<th class="table__cell"><span class="pictogram pictogram--transaction">Amount</span></th>
 			</tr>
 			</thead>
-			{var $i= 1}
 			<tr class="table__row" n:foreach="$block->getTxHashes() as $txHash">
-				<td class="table__cell">{$i++} </td>
+				<td class="table__cell">{$iterator->getCounter()} </td>
 				<td class="table__cell"><a class="table__link" n:href="detail, $txHash">{$txHash}</a></td>
 				<th class="table__cell">confidential</th>
 			</tr>
