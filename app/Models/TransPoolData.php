@@ -88,9 +88,6 @@ class TransPoolData
 	 */
 	public $created;
 
-	/**
-	 * @param mixed[] $data
-	 */
 	public function __construct(stdClass $data)
 	{
 		$this->blobSize = $data->blob_size;
@@ -110,7 +107,7 @@ class TransPoolData
 		//$this->txBlob = $data->tx_blob;
 		$this->created = new DateTime();
 		if (isset($data->tx_json)) {
-			$this->tx_json = new TransPoolDetailData($data->tx_json);
+			$this->txJson = new TransPoolDetailData($data->tx_json);
 		}
 	}
 
