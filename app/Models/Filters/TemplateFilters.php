@@ -37,4 +37,22 @@ class TemplateFilters
 	{
 		return (string) ($number / self::RAD);
 	}
+
+	public static function age(int $timeBefore): string
+	{
+		$hour = 60*60;
+		$day = $hour*24;
+
+		if ($timeBefore < $hour) {
+			$result = \gmstrftime('%M:%S', $timeBefore);
+		} elseif ($timeBefore < $day) {
+			$result = \gmstrftime('%H:%M:%S', $timeBefore);
+		} else {
+			$days = \floor($timeBefore/$day);
+			$inday = $timeBefore%$day;
+			$result = $days.':' . \gmstrftime('%H:%M:%S', $inday);
+		}
+
+		return $result;
+	}
 }
