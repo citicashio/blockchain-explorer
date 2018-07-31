@@ -82,15 +82,15 @@ fi
 if [ "$1" = "private:travis:before_script" ]
 then
     if [ ! -d "vendor/php-parallel-lint" ]; then git clone https://github.com/mzk/PHP-Parallel-Lint.git vendor/php-parallel-lint && composer install  --no-interaction --prefer-dist --no-dev -d vendor/php-parallel-lint ; fi
-    git -C vendor/php-parallel-lint reset --hard dc6dc7246dceb44dcc316cfd97bfebeb53c613da
+    #git -C vendor/php-parallel-lint reset --hard dc6dc7246dceb44dcc316cfd97bfebeb53c613da
 
     if [ ! -d "vendor/phpcs" ]; then git clone https://github.com/slevomat/coding-standard.git vendor/phpcs; fi
-    git -C vendor/phpcs  reset --hard dd4cd2abfbac3540cf1f6f97cb6a98994f1cf668 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpcs ;
+    git -C vendor/phpcs  reset --hard 76e31b7cb2ce1de53b36430a332daae2db0be549 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpcs ;
 
     if [ ! -d "vendor/code-checker" ]; then composer create-project nette/code-checker -d vendor; fi
 
     if [ ! -d "vendor/phpstan" ]; then git clone https://github.com/phpstan/phpstan.git vendor/phpstan; fi
-    git -C vendor/phpstan reset --hard e59541bcc7cac9b35ca54db6365bf377baf4a488 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpstan ;
+    git -C vendor/phpstan reset --hard 3179cf27542e9e47acb548150e7ca21ca5ab92d6 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpstan ;
     composer require phpstan/phpstan-strict-rules -d vendor/phpstan ;
     composer require thecodingmachine/phpstan-strict-rules -d vendor/phpstan ;
 fi
@@ -109,6 +109,8 @@ fi
 if [ "$1" = "private:test-coding-style" ]
 then
     out=0
+    #echo_blue "development=true php app/console orm:validate"
+    #development=true php app/console orm:validate || { out=1; }
     echo_blue "private:test-coding-style"
     #php app/console cache:warmup --env=dev || { out=1; }
     echo_blue "php vendor/php-parallel-lint/parallel-lint.php -e php,phpt,phtml --exclude vendor --show-deprecated ."

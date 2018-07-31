@@ -11,6 +11,7 @@ parameters:
 		- Mockery\HigherOrderMessage
 		- Nette\Utils\ArrayHash
 		- Nette\Bridges\ApplicationLatte\Template
+		- Nette\Application\UI\ITemplate
 	autoload_directories:
 		- %root%/tests
 	fileExtensions:

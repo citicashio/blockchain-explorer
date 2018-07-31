@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46ad82d35a54c22c97ee358bb1838945",
+    "content-hash": "f508cf5390e77ebc49faedc30085c4f6",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -1502,20 +1502,20 @@
     "packages-dev": [
         {
             "name": "nette/tester",
-            "version": "v2.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "93f70b53f7b87b44334d98219302939eda2a423b"
+                "reference": "a65fa39e930204842f48bb44f376e8d9583855bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/93f70b53f7b87b44334d98219302939eda2a423b",
-                "reference": "93f70b53f7b87b44334d98219302939eda2a423b",
+                "url": "https://api.github.com/repos/nette/tester/zipball/a65fa39e930204842f48bb44f376e8d9583855bd",
+                "reference": "a65fa39e930204842f48bb44f376e8d9583855bd",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
+                "php": ">=7.1"
             },
             "bin": [
                 "src/tester"
@@ -1523,7 +1523,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -1560,13 +1560,14 @@
                 "testing",
                 "unit"
             ],
-            "time": "2018-02-07T12:55:20+00:00"
+            "time": "2018-07-20T12:46:29+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "guzzlehttp/guzzle": 20
+        "guzzlehttp/guzzle": 20,
+        "nette/tester": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
