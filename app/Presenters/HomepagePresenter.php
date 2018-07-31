@@ -84,12 +84,13 @@ class HomepagePresenter extends BasePresenter
 	public function renderTransaction(string $hash): void
 	{
 		$transactions = $this->rpcDaemon->getTransactions([$hash]);
+		$transaction = $transactions[0]->getData();
 		$block = null;
-		if ($transactions->getData()->in_pool === false) {
-			$block = $this->rpcDaemon->getBlockByHeight((int)$transactions->getData()->block_height);
+		if ($transaction->in_pool === false) {
+			$block = $this->rpcDaemon->getBlockByHeight((int)$transaction->block_height);
 		}
 
 		$this->template->block = $block;
-		$this->template->transactions = $transactions;
+		$this->template->transaction = $transaction;
 	}
 }
