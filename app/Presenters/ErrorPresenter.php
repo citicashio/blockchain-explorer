@@ -29,6 +29,8 @@ class ErrorPresenter extends Nette\Application\UI\Presenter
 	public function run(Nette\Application\Request $request): IResponse
 	{
 		$this->template->hostname = \gethostname();
+		$this->template->isLoggedIn = false;
+		$this->template->lang = 'en';
 
 		$e = $request->getParameter('exception');
 		if ($e instanceof Nette\Application\BadRequestException) {
@@ -42,9 +44,9 @@ class ErrorPresenter extends Nette\Application\UI\Presenter
 
 			$this->template->setFile($file);
 			$this->template->now = new \DateTime();
-			$source = $this->template->render();
+			$this->template->render();
 
-			return new Responses\TextResponse($source);
+			return new Responses\TextResponse('');
 		}
 
 		$this->logger->log($e, ILogger::EXCEPTION);
