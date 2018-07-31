@@ -18,7 +18,7 @@
 			</tr>
 			</thead>
 			<tr n:foreach="$tpData as $data" class="table__row">
-				<td class="table__cell table__cell--resp-hidden">{(int)$data->getAge()|age}</td>
+				<td class="table__cell table__cell--resp-hidden">{$data->getReceiveTime()|age}</td>
 				<td class="table__cell"><a n:href="detail, $data->getIdHash()"
 							class="table__link">{$data->getIdHash()}</a></td>
 				<td class="table__cell table__cell--resp-hidden">{$data->getFee()|feeInt} CCH</td>

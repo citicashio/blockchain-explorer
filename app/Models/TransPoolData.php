@@ -79,17 +79,13 @@ class TransPoolData
 	private $txBlob;
 
 	/**
-	 * @var string
+	 * @var TransPoolDetailData
 	 */
 	private $txJson;
 
-	/**
-	 * @var DateTime
-	 */
-	public $created;
-
 	public function __construct(stdClass $data)
 	{
+		dump($data);
 		$this->blobSize = $data->blob_size;
 		$this->fee = $data->fee;
 		$this->idHash = $data->id_hash;
@@ -105,7 +101,6 @@ class TransPoolData
 		//$this->doubleSpendSeen = $data->double_spend_seen;
 		//$this->lastRelayedTime = $data->last_relayed_time;
 		//$this->txBlob = $data->tx_blob;
-		$this->created = new DateTime();
 		if (isset($data->tx_json)) {
 			$this->txJson = new TransPoolDetailData($data->tx_json);
 		}
@@ -181,14 +176,8 @@ class TransPoolData
 		return $this->txBlob;
 	}
 
-	public function getTxJson(): string
+	public function getTxJson(): TransPoolDetailData
 	{
 		return $this->txJson;
-	}
-
-	public function getAge(): string
-	{
-		$timeBefore = $this->created->getTimestamp() - $this->getReceiveTime();
-		return \gmstrftime('%H:%M:%S', $timeBefore);
 	}
 }
