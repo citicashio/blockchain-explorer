@@ -63,7 +63,7 @@
 					<td class="table__cell"><a class="table__link" n:href="transaction, $transaction->getData()->tx_hash">{$transaction->getData()->tx_hash}</a></td>
 					<td class="table__cell">{$transaction->getData()->rct_signatures->txnFee|feeInt}</td>
 					<td class="table__cell">{\count($transaction->getData()->vin)} / {\count($transaction->getData()->vout)}</td>
-					<td class="table__cell">rct todo</td>
+					<td class="table__cell">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
 					<td class="table__cell">{$transaction->getData()->tx_mixin}</td>
 					<td class="table__cell">{$transaction->getData()->tx_size|bytes|hardSpace|noescape}</td>
 				</tr>
