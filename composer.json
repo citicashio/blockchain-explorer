@@ -30,7 +30,7 @@
 		"guzzlehttp/guzzle": "^6.3@dev"
 	},
 	"require-dev": {
-		"nette/tester": "^2.0"
+		"nette/tester": "^2.1@dev"
 	},
 	"minimum-stability": "dev",
 	"config": {
