@@ -22,7 +22,7 @@
 				<td class="table__cell"><a n:href="detail, $data->getIdHash()"
 							class="table__link">{$data->getIdHash()}</a></td>
 				<td class="table__cell table__cell--resp-hidden">{$data->getFee()|feeInt} CCH</td>
-				<td class="table__cell table__cell--resp-hidden">{$data->getBlobSize()|bytes}</td>
+				<td class="table__cell table__cell--resp-hidden">{$data->getBlobSize()|bytes|hardSpace|noescape}</td>
 			</tr>
 		</table>
 	</div>
@@ -55,7 +55,7 @@
 				<td class="table__cell">{$block->getCountOfMinerTxVin()} / {$block->getCountOfMinerTxVout()}</td>
 				<td class="table__cell table__cell--resp-hidden">{$block->getRawResultJsonRctSignatures()} / {$block->getRawResultJsonRctSignaturesType()}</td>
 				<td class="table__cell table__cell--resp-hidden">N/A</td>
-				<td class="table__cell table__cell--resp-hidden">{$block->getBlockSize()|bytes}</td>
+				<td class="table__cell table__cell--resp-hidden">{$block->getBlockSize()|bytes|hardSpace|noescape}</td>
 			</tr>
 				<tr n:foreach="$block->getTransactions() as $transaction" class="table__row">
 					<td></td>

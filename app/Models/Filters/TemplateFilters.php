@@ -55,4 +55,9 @@ class TemplateFilters
 
 		return $result;
 	}
+
+	public function hardSpace(string $string): string
+	{
+		return \str_replace(' ', '&nbsp;', $string);
+	}
 }
