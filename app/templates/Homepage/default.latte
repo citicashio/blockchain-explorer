@@ -65,7 +65,7 @@
 					<td class="table__cell">{\count($transaction->getData()->vin)} / {\count($transaction->getData()->vout)}</td>
 					<td class="table__cell">rct todo</td>
 					<td class="table__cell">{$transaction->getData()->tx_mixin}</td>
-					<td class="table__cell">size todo</td>
+					<td class="table__cell">{$transaction->getData()->tx_size|bytes|hardSpace|noescape}</td>
 				</tr>
 			{/foreach}
 		</table>

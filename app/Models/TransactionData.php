@@ -25,6 +25,7 @@ class TransactionData
 		$data->block_height = $response->block_height;
 		$data->in_pool = $response->in_pool;
 		$data->tx_mixin = $response->tx_mixin;
+		$data->tx_size = $response->tx_size;
 		if (isset($response->output_indices)) {
 			$data->output_indices = $response->output_indices;
 		}
