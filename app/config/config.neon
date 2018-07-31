@@ -19,7 +19,6 @@ services:
 	router: App\Router\RouterFactory::createRouter
 	- App\Models\RpcDaemon(%daemon_url%, %daemon_port%)
 	- App\Models\Filters\TemplateFilters()
-	- App\Models\Service\Settings(%settings%)
 
 	nette.latteFactory:
 		setup:
