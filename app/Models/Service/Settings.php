@@ -6,20 +6,23 @@ use Nette\SmartObject;
 
 class Settings
 {
+
 	use SmartObject;
 
 	/**
-	 * @var mixed[]
+	 * @var string[]
 	 */
 	protected $params;
 
+	/**
+	 * @param string[] $params
+	 */
 	public function __construct(array $params)
 	{
 		$this->params = $params;
 	}
 
-
-	public function __get($name): string
+	public function __get(string $name): string
 	{
 		return $this->params[$name];
 	}

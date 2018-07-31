@@ -78,6 +78,7 @@
 		<exclude name="Squiz.ControlStructures.InlineIfDeclaration.NoBrackets"/>
 		<exclude name="Squiz.Files.FileExtension.ClassFound"/>
 		<exclude name="Squiz.Formatting.OperatorBracket.MissingBrackets"/>
+		<exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/>
 		<exclude name="Squiz.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
 		<exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
 		<exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue"/>

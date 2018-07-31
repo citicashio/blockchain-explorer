@@ -8,6 +8,11 @@ use stdClass;
 class TransPoolDetailData
 {
 
+	/**
+	 * @var stdClass
+	 */
+	private $txJson;
+
 	public function __construct(string $data)
 	{
 		$this->txJson = Json::decode($data);
