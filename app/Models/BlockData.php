@@ -328,12 +328,12 @@ class BlockData
 	/**
 	 * @todo compute javascript on frontend
 	 */
-	public function getAge(): string
+	public function getAge(): int
 	{
 		$now = new DateTime();
 		$timeBefore = $now->getTimestamp() - $this->getTimestamp();
 
-		return \gmstrftime('%H:%M:%S', $timeBefore);
+		return $timeBefore;
 	}
 
 	public function getRawResultJsonRctSignatures(): string
