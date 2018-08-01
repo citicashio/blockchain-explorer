@@ -85,7 +85,7 @@ class TransPoolData
 
 	public function __construct(stdClass $data)
 	{
-		dump($data);
+		//\dump($data);
 		$this->blobSize = $data->blob_size;
 		$this->fee = $data->fee;
 		$this->idHash = $data->id_hash;

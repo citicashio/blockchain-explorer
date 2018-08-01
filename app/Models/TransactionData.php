@@ -19,7 +19,7 @@ class TransactionData
 
 	public static function fromResponse(stdClass $response): TransactionData
 	{
-		\dump($response);
+		//\dump($response);
 		$data = $response->as_json;
 		$data = Json::decode($data);
 		$data->block_height = $response->block_height;

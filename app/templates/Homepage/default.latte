@@ -11,6 +11,7 @@
 		<table class="table">
 			<thead class="table__header">
 			<tr>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--age">Id</span></th>
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--age">Age [days:h:m:s]</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
 				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--fee">Fees</span></th>
@@ -18,6 +19,7 @@
 			</tr>
 			</thead>
 			<tr n:foreach="$tpData as $data" class="table__row">
+				<td class="table__cell table__cell--resp-hidden">{$iterator->getCounter()}</td>
 				<td class="table__cell table__cell--resp-hidden">{$data->getAge()|age}</td>
 				<td class="table__cell"><a n:href="detail, $data->getIdHash()"
 							class="table__link">{$data->getIdHash()}</a></td>
