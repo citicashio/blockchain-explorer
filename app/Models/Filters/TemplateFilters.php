@@ -30,12 +30,12 @@ class TemplateFilters
 
 	public static function amountInt(int $number): string
 	{
-		return (string) ($number / self::RAD);
+		return (string)($number / self::RAD);
 	}
 
 	public static function feeInt(int $number): string
 	{
-		return (string) ($number / self::RAD);
+		return (string)($number / self::RAD);
 	}
 
 	public static function age(int $timeBefore): string
@@ -49,9 +49,9 @@ class TemplateFilters
 			$result = \gmstrftime('%H:%M:%S', $timeBefore);
 		} else {
 			$days = \floor($timeBefore / $day);
-			$daysString = (string) $days < 10 ? '0'.$days : $days;
+			$daysString = (string)$days < 10 ? '0' . $days : $days;
 			$inday = $timeBefore % $day;
-			$result = $daysString.':' . \gmstrftime('%H:%M:%S', $inday);
+			$result = $daysString . ':' . \gmstrftime('%H:%M:%S', $inday);
 		}
 
 		return $result;
