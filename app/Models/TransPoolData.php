@@ -166,6 +166,17 @@ class TransPoolData
 		return $this->receiveTime;
 	}
 
+	/**
+	 * @todo compute javascript on frontend
+	 */
+	public function getAge(): int
+	{
+		$now = new DateTime();
+		$timeBefore = $now->getTimestamp() - $this->getReceiveTime();
+
+		return $timeBefore;
+	}
+
 	public function isRelayed(): bool
 	{
 		return $this->relayed;
