@@ -14,8 +14,11 @@ $container = include __DIR__ . '/../../bootstrap.php';
 
 class TemplateFiltersTest extends BaseTestCase
 {
+
 	private const MINUTE = 60;
+
 	private const HOUR = 60 * 60;
+
 	private const DAY = 60 * 60 * 24;
 
 	public function testAmountInt(): void
