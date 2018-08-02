@@ -15,7 +15,7 @@
     }
     &__row{
         display: table-row;
-        &::nth-child(2n){
+        &:nth-child(2n){
             background: @white;
             border-bottom: 1px solid @light-blue;
             border-top: 1px solid @light-blue;
@@ -25,6 +25,12 @@
         padding: 0.8rem 1rem;
         font-size: 0.8rem;
         color: @dark-grey;
+        &--counter{
+            padding-left: 1.5rem;
+        }
+        &--desc-hidden{
+            display: none;
+        }
     }
     &__link{
         color: @blue;
@@ -37,7 +43,7 @@
             &:hover{
                 background: @light-hover-blue;
             }
-            &::nth-child(2n):hover{
+            &:nth-child(2n):hover{
                 background: @hover-white;
             }
         }
@@ -46,8 +52,29 @@
 
 @media @--mobile-landscape-viewport{
     .table{
-        &__cell--resp-hidden{
-            display: none;
+        table-layout:fixed;
+        &__row{
+            max-width: 100%;
+            overflow: hidden;
+        }
+        &__cell{
+            width: 100%;
+            &--resp-hidden{
+                display: none;
+            }
+            &--double{
+                width: 200%;
+            }
+            &--desc-hidden{
+                display: table-cell;
+            }
+        }
+        &__transaction{
+            width: 100%;
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden; 
+            white-space: nowrap;
         }
     }
 }

@@ -21,6 +21,8 @@ body{
     margin: 0 auto;
     padding: 9rem 0 0 0;
     max-width: @max-content-width;
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
 }
 input, body{
     font-size: @small-font-size;
