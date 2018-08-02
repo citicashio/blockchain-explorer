@@ -56,3 +56,27 @@
 		</div>
 	</div>
 </div>
+
+<div class="section">
+	<div class="section__name section__name--alone">
+		<h1 class="section__heading"> Add View Key </h1>
+	</div>
+	<div class="section__table-container">
+		<div class="list list--2col">
+			<form n:name="viewKeyForm">
+				<ul class="errors" n:if="$form->hasErrors()">
+					<li n:foreach="$form->errors as $error">{$error}</li>
+				</ul>
+				<div class="list__row">
+					<div class="list__item list__item--20w"><label n:name="viewKey">TX View key:</label></div>
+					<div class="list__item list__item--80w"><input n:name="viewKey" type="text" class="search__input" />&nbsp;<input n:name="send" type="submit" /></div>
+				</div>
+			</form>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Amount:</div>
+				<div n:if="$transaction->tx_amount !== null" class="list__item list__item--80w"> {$transaction->tx_amount|amountInt} CCH</div>
+				<div n:if="$transaction->tx_amount === null" class="list__item list__item--80w">Encrypted</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -29,6 +29,11 @@ class TransactionData
 		if (isset($response->output_indices)) {
 			$data->output_indices = $response->output_indices;
 		}
+		if (isset($response->tx_amount)) {
+			$data->tx_amount = $response->tx_amount;
+		} else {
+			$data->tx_amount = null;
+		}
 		$data->tx_hash = $response->tx_hash;
 		//dump($data);
 
