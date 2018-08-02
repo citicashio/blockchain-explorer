@@ -47,7 +47,7 @@ $container = $configurator->createContainer();
 /** @var Application $application */
 $application = $container->getByType(Application::class);
 $application->errorPresenter = 'Error';
-$application->catchExceptions = !$configurator->isDebugMode();
+$application->catchExceptions = $configurator->isDebugMode();
 
 
 return $container;
