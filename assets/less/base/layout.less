@@ -21,8 +21,6 @@ body{
     margin: 0 auto;
     padding: 9rem 0 0 0;
     max-width: @max-content-width;
-    overflow-y: scroll; /* has to be scroll, not auto */
-    -webkit-overflow-scrolling: touch;
 }
 input, body{
     font-size: @small-font-size;
@@ -34,5 +32,11 @@ input, body{
     .body{
         padding-left: 2rem;
         padding-right: 2rem; 
+    }
+}
+@media @--tablet-viewport{
+    .body{
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 }
