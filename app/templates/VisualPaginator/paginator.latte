@@ -16,14 +16,14 @@
 				<li n:class="pagination__item, ($currentPage === $p)? active">
 					<a class="pagination__link" n:href="this, heihtStart => $p">{$p}</a>
 				</li>
-				<li class="pagination__item pagination__item--hidden"> | </li>
+				<li class="pagination__item pagination__line pagination__item--hidden"> | </li>
 			{/for}
 		{else}
 			{if $heightStart < $itemCount}
 				<li n:class="pagination__item">
 					<a class="pagination__link" n:href="this, heightStart => (min($heightStart + $transactionOnPage, $itemCount))">Previous</a>
 				</li>
-				<li class="pagination__item">|</li>
+				<li class="pagination__item pagination__line">|</li>
 			{/if}
 			{for $p = $max; $p>=$min; $p--}
 				{var $firstAndLast = ($p === $min || $p === $max)}
@@ -34,14 +34,14 @@
 					<li n:class="pagination__item, ($item === $heightStart) ? active">
 						<a class="pagination__link" n:href="this, heightStart => $item" n:tag-if="$item !== $heightStart">{$item}</a>
 					</li>
-					<li class="pagination__item">|</li>
+					<li class="pagination__item pagination__line">|</li>
 				{/if}
 			{/for}
 			{if $heightStart > $transactionOnPage}
 				<li n:class="pagination__item">
 					<a class="pagination__link" n:href="this, heightStart => (min($heightStart - $transactionOnPage, $itemCount))">Next</a>
 				</li>
-				<li class="pagination__item">|</li>
+				<li class="pagination__item pagination__line">|</li>
 			{/if}
 		{/if}
 </nav>

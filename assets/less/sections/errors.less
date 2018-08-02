@@ -1,0 +1,67 @@
+.errorPage{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	&__name{
+		margin-bottom: 3rem;
+	}
+	&__pacman{
+		display: flex;
+		justify-content: center;
+		height: 200px;
+	}
+	&__pacman-logo{
+		opacity: .3;
+		z-index: 10;
+		position: absolute;
+		top: 0; right: 0;
+		bottom: 0; left: 0;
+		background: url('/images/layout/cc-black.svg') no-repeat;
+		background-size: 100px;
+		background-position: 25px 30px;
+		animation: movement 0.5s infinite linear;
+	}
+	&__desc{
+		margin-top: 3rem;
+	}
+	&__link{
+		color: @red;
+	}
+	&__heading{
+		text-align: center;
+		font-size: 1.3rem;
+		font-weight: 300;
+		&--main{
+			margin: 0 auto;
+			font-size: 7em;
+			color: @red;
+			font-weight: 400;
+		}
+		&--semi{
+			margin-top: 0;
+			font-size: 2rem;
+			font-weight: 400;
+
+		}
+	}
+}
+
+@keyframes movement {
+	0%  {left: 0;}
+	50%{left: 24px}  
+}
+
+@supports (-ms-ime-align:auto) {
+	.errorPage{
+		&__pacman-logo{
+			display: none;
+		}
+	}
+}
+@media @--explorer{
+	.errorPage{
+		&__pacman-logo{
+			display: none;
+		}
+	}	
+}

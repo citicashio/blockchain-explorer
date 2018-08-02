@@ -1,9 +1,25 @@
 {block content}
 
-<h1 n:block=title> Transaction not found </h1>
+<div class="errorPage">
+	<div class="errorPage__name">
+		<h3 class="errorPage__heading errorPage__heading--main"> 404 </h3>
+	</div>
+	<div class="errorPage__pacman">
+		<div class="pacman">
+			<div class="errorPage__pacman-logo"></div>
+			<div class="pacman-top"></div>
+			<div class="pacman-bottom"></div>
+		<div class="feed"></div>
+</div>
 
-<p>
-	You can search by blk height, blk hash, tx hash, tx payment id,
-	encrypted payment id, tx public key, input key image,
-	stealth address, and datetime. {$hostname}
-</p>
+	</div>
+	<div class="errorPage__desc">
+		<h3 class="errorPage__heading errorPage__heading--semi"> Oops, Citiman ate this site! </h3>
+		<h3 class="errorPage__heading">
+			Something went wrong, try to go on
+			<a class="errorPage__link" href="/">HomePage </a>.
+		</h3>
+	</div>
+</div>
+
+<!--{$hostname}-->
