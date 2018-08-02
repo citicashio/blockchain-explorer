@@ -4,7 +4,7 @@
     display: table;
     border-collapse: collapse;
     border-spacing: 0;
-    .table__header{
+    &__header{
         background: @white;
         border-bottom: 1px solid @light-grey;
         .table__cell{
@@ -13,33 +13,40 @@
             padding: 0.8rem 1rem 0.8rem 1rem;
         }
     }
-    .table__row{
+    &__row{
         display: table-row;
+        &::nth-child(2n){
+            background: @white;
+            border-bottom: 1px solid @light-blue;
+            border-top: 1px solid @light-blue;
+        }
     }
-    .table__row:hover{
-        background: @light-hover-blue;
-    }
-    .table__row:nth-child(2n){
-        background: @white;
-        border-bottom: 1px solid @light-blue;
-        border-top: 1px solid @light-blue;
-    }
-    .table__row:nth-child(2n):hover{
-        background: @hover-white;
-    }
-    .table__cell{
+    &__cell{
         padding: 0.8rem 1rem;
         font-size: 0.8rem;
         color: @dark-grey;
     }
-    .table__link{
+    &__link{
         color: @blue;
+    }
+}
+
+@media @--desktop-viewport{
+    .table{
+        &__row{
+            &:hover{
+                background: @light-hover-blue;
+            }
+            &::nth-child(2n):hover{
+                background: @hover-white;
+            }
+        }
     }
 }
 
 @media @--mobile-landscape-viewport{
     .table{
-        .table__cell--resp-hidden{
+        &__cell--resp-hidden{
             display: none;
         }
     }
