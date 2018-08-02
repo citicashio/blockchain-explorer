@@ -13,13 +13,20 @@
 				<div class="list__item list__item--20w">TX Hash:</div>
 				<div class="list__item list__item--80w"> {$transaction->tx_hash}</div>
 			</div>
-			<div class="list__row">
-				<div class="list__item list__item--20w">TX Prefix Hash:</div>
-				<div class="list__item list__item--80w"></div>
+			<div n:foreach="$block ? $block->getMinerTxVout() : [] as $output" n:if="$block">
+				<div class="list__row">
+					<div class="list__item list__item--20w">MinerTxVout: Amount:</div>
+					<div class="list__item list__item--80w">{$output->amount|amountInt} CCH</div>
+				</div>
+				<div class="list__row">
+					<div class="list__item list__item--20w">Target key</div>
+					<div class="list__item list__item--80w">{$output->target->key}</div>
+				</div>
 			</div>
-			<div class="list__row" n:foreach="$block ? $block->getMinerTxVout() : [] as $output">
-				<div class="list__item list__item--20w">TX Public key:</div>
-				<div class="list__item list__item--80w"></div>
+			<div class="list__row" n:if="$transaction->in_pool === false">
+				<div class="list__item list__item--20w">TX Prev Hash:</div>
+				<div class="list__item list__item--80w"><a
+							class="list__href" n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></div>
 			</div>
 			<div class="list__row" n:if="$transaction->in_pool === false">
 				<div class="list__item list__item--20w">Height:</div>
@@ -43,7 +50,7 @@
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Fee:</div>
-				<div class="list__item list__item--80w"> {$transaction->rct_signatures->txnFee|feeInt} </div>
+				<div class="list__item list__item--80w"> {$transaction->rct_signatures->txnFee|feeInt} CCH</div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Tx version:</div>
@@ -74,7 +81,7 @@
 			</form>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Amount:</div>
-				<div n:if="$transaction->tx_amount !== null" class="list__item list__item--80w"> {$transaction->tx_amount|amountInt} CCH</div>
+				<div n:if="$transaction->tx_amount !== null" class="list__item list__item--80w"> {$transaction->tx_amount} CCH</div>
 				<div n:if="$transaction->tx_amount === null" class="list__item list__item--80w">Encrypted</div>
 			</div>
 		</div>

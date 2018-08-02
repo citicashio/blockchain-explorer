@@ -72,7 +72,9 @@ class HomepagePresenter extends BasePresenter
 	public function renderDetail(string $hash): void
 	{
 		try {
-			$this->template->block = $this->rpcDaemon->getBlockByHash($hash);
+			$blockData = $this->rpcDaemon->getBlockByHash($hash);
+			//\dump($blockData);
+			$this->template->block = $blockData;
 		} catch (BadRequestException $e) {
 			$this->redirect('transaction', $hash);
 		}
@@ -88,10 +90,12 @@ class HomepagePresenter extends BasePresenter
 	{
 		$transactions = $this->rpcDaemon->getTransactions([$hash], $this->getRequest()->getPost('viewKey'));
 		$transaction = $transactions[0]->getData();
+		//\dump($transaction);
 		$block = null;
 		if ($transaction->in_pool === false) {
 			$block = $this->rpcDaemon->getBlockByHeight((int)$transaction->block_height);
 		}
+		//dump($block);
 
 		$this->template->block = $block;
 		$this->template->transaction = $transaction;
