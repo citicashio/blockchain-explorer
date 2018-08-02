@@ -13,13 +13,20 @@
 				<div class="list__item list__item--20w">TX Hash:</div>
 				<div class="list__item list__item--80w"> {$transaction->tx_hash}</div>
 			</div>
-			<div class="list__row">
-				<div class="list__item list__item--20w">TX Prefix Hash:</div>
-				<div class="list__item list__item--80w"></div>
+			<div n:foreach="$block ? $block->getMinerTxVout() : [] as $output" n:if="$block">
+				<div class="list__row">
+					<div class="list__item list__item--20w">MinerTxVout: Amount:</div>
+					<div class="list__item list__item--80w">{$output->amount|amountInt} CCH</div>
+				</div>
+				<div class="list__row">
+					<div class="list__item list__item--20w">Target key</div>
+					<div class="list__item list__item--80w">{$output->target->key}</div>
+				</div>
 			</div>
-			<div class="list__row" n:foreach="$block ? $block->getMinerTxVout() : [] as $output">
-				<div class="list__item list__item--20w">TX Public key:</div>
-				<div class="list__item list__item--80w"></div>
+			<div class="list__row" n:if="$transaction->in_pool === false">
+				<div class="list__item list__item--20w">TX Prev Hash:</div>
+				<div class="list__item list__item--80w"><a
+							class="list__href" n:href="detail, $block->getPrevHash()">{$block->getPrevHash()}</a></div>
 			</div>
 			<div class="list__row" n:if="$transaction->in_pool === false">
 				<div class="list__item list__item--20w">Height:</div>
@@ -43,7 +50,7 @@
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Fee:</div>
-				<div class="list__item list__item--80w"> {$transaction->rct_signatures->txnFee|feeInt} </div>
+				<div class="list__item list__item--80w"> {$transaction->rct_signatures->txnFee|feeInt} CCH</div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Tx version:</div>
@@ -52,6 +59,30 @@
 			<div class="list__row">
 				<div class="list__item list__item--20w">Tx size:</div>
 				<div class="list__item list__item--80w"> {$transaction->tx_size|bytes} </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="section">
+	<div class="section__name section__name--alone">
+		<h1 class="section__heading"> Add View Key </h1>
+	</div>
+	<div class="section__table-container">
+		<div class="list list--2col">
+			<form n:name="viewKeyForm">
+				<ul class="errors" n:if="$form->hasErrors()">
+					<li n:foreach="$form->errors as $error">{$error}</li>
+				</ul>
+				<div class="list__row">
+					<div class="list__item list__item--20w"><label n:name="viewKey">TX View key:</label></div>
+					<div class="list__item list__item--80w"><input n:name="viewKey" type="text" class="search__input" />&nbsp;<input n:name="send" type="submit" /></div>
+				</div>
+			</form>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Amount:</div>
+				<div n:if="$transaction->tx_amount !== null" class="list__item list__item--80w"> {$transaction->tx_amount} CCH</div>
+				<div n:if="$transaction->tx_amount === null" class="list__item list__item--80w">Encrypted</div>
 			</div>
 		</div>
 	</div>

@@ -19,11 +19,16 @@ services:
 	router: App\Router\RouterFactory::createRouter
 	- App\Models\RpcDaemon(%daemon_url%, %daemon_port%)
 	- App\Models\Filters\TemplateFilters()
-
+	- App\Forms\ViewKeyFormFactory
+	- App\Forms\FormFactory
 	nette.latteFactory:
 		setup:
 			- addFilter(null,[App\Models\Filters\TemplateFilters(), 'loader'])
 http:
 	headers:
 		X-Powered-By: CitiCash Nette
-		#Strict-Transport-Security: 'max-age=31536000; includeSubDomains; preload'
+		Strict-Transport-Security: 'max-age=3600; includeSubDomains; preload'
+		X-Content-Type-Options: 'nosniff'
+		Referrer-Policy: 'no-referrer'
+		Feature-Policy: 'none'
+		X-Frame-Options: 'DENY'

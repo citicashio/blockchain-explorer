@@ -136,12 +136,16 @@ class RpcDaemon
 	 * @return TransactionData[]
 	 * @throws BadRequestException
 	 */
-	public function getTransactions(array $transactions): array
+	public function getTransactions(array $transactions, ?string $viewKey = null): array
 	{
 		$body = [
 			'txs_hashes' => $transactions,
 			'decode_as_json' => true,
 		];
+
+		if ($viewKey) {
+			$body['txs_view_key'] = $viewKey;
+		}
 
 		$response = $this->getResponse('/gettransactions', $body);
 		if (isset($response->missed_tx)) {

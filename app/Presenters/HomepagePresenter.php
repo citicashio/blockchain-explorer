@@ -2,8 +2,10 @@
 
 namespace App\Presenters;
 
+use App\Forms\ViewKeyFormFactory;
 use App\Models\RpcDaemon;
 use Nette\Application\BadRequestException;
+use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Paginator;
 
@@ -20,10 +22,16 @@ class HomepagePresenter extends BasePresenter
 	 */
 	private $rpcDaemon;
 
-	public function __construct(RpcDaemon $rpcDaemon)
+	/**
+	 * @var ViewKeyFormFactory
+	 */
+	private $viewKeyFormFactory;
+
+	public function __construct(RpcDaemon $rpcDaemon, ViewKeyFormFactory $viewKeyFormFactory)
 	{
 		parent::__construct();
 		$this->rpcDaemon = $rpcDaemon;
+		$this->viewKeyFormFactory = $viewKeyFormFactory;
 	}
 
 	public function beforeRender(): void
@@ -64,7 +72,9 @@ class HomepagePresenter extends BasePresenter
 	public function renderDetail(string $hash): void
 	{
 		try {
-			$this->template->block = $this->rpcDaemon->getBlockByHash($hash);
+			$blockData = $this->rpcDaemon->getBlockByHash($hash);
+			//\dump($blockData);
+			$this->template->block = $blockData;
 		} catch (BadRequestException $e) {
 			$this->redirect('transaction', $hash);
 		}
@@ -78,14 +88,25 @@ class HomepagePresenter extends BasePresenter
 
 	public function renderTransaction(string $hash): void
 	{
-		$transactions = $this->rpcDaemon->getTransactions([$hash]);
+		$transactions = $this->rpcDaemon->getTransactions([$hash], $this->getRequest()->getPost('viewKey'));
 		$transaction = $transactions[0]->getData();
+		//\dump($transaction);
 		$block = null;
 		if ($transaction->in_pool === false) {
 			$block = $this->rpcDaemon->getBlockByHeight((int)$transaction->block_height);
 		}
+		//dump($block);
 
 		$this->template->block = $block;
 		$this->template->transaction = $transaction;
+	}
+
+	public function createComponentViewKeyForm(): Form
+	{
+		$onSuccess = function (string $viewKey): void {
+			$this->flashMessage('Unlocked by View Key');
+		};
+
+		return $this->viewKeyFormFactory->create($onSuccess);
 	}
 }
