@@ -50,3 +50,18 @@
 	0%  {left: 0;}
 	50%{left: 24px}  
 }
+
+@supports (-ms-ime-align:auto) {
+	.errorPage{
+		&__pacman-logo{
+			display: none;
+		}
+	}
+}
+@media @--explorer{
+	.errorPage{
+		&__pacman-logo{
+			display: none;
+		}
+	}	
+}
