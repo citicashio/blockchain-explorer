@@ -1,6 +1,6 @@
 {block content}
-{dump $transaction}
-{dump $block}
+{php dump($transaction);}
+{php dump($block);}
 
 
 <div class="section">
@@ -59,6 +59,10 @@
 			<div class="list__row">
 				<div class="list__item list__item--20w">Tx size:</div>
 				<div class="list__item list__item--80w"> {$transaction->tx_size|bytes} </div>
+			</div>
+			<div class="list__row">
+				<div class="list__item list__item--20w">Mixin:</div>
+				<div class="list__item list__item--80w"> {$transaction->tx_mixin} </div>
 			</div>
 		</div>
 	</div>
