@@ -31,3 +31,4 @@ http:
 		X-Content-Type-Options: 'nosniff'
 		Referrer-Policy: 'no-referrer'
 		Feature-Policy: 'none'
+		X-Frame-Options: 'DENY'
