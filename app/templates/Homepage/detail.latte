@@ -60,13 +60,14 @@
 			<tr>
 				<th class="table__cell"><span class="pictogram pictogram--block">#</span></th>
 				<th class="table__cell"><span class="pictogram pictogram--transaction">TX Hash</span></th>
-				<th class="table__cell"><span class="pictogram pictogram--transaction">Amount</span></th>
+				<th class="table__cell table__cell--resp-hidden"><span class="pictogram pictogram--transaction">Amount</span></th>
 			</tr>
 			</thead>
 			<tr class="table__row" n:foreach="$block->getTxHashes() as $txHash">
 				<td class="table__cell">{$iterator->getCounter()} </td>
-				<td class="table__cell"><a class="table__link" n:href="detail, $txHash">{$txHash}</a></td>
-				<th class="table__cell">confidential</th>
+				<td class="table__cell table__cell--desc-hidden" colspan="2"><a class="table__link table__transaction" n:href="detail, $txHash">{$txHash}</a></td>
+				<td class="table__cell table__cell--resp-hidden"><a class="table__link table__transaction" n:href="detail, $txHash">{$txHash}</a></td>
+				<th class="table__cell table__cell--resp-hidden">confidential</th>
 			</tr>
 		</table>
 	</div>

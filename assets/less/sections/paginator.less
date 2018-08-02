@@ -5,30 +5,38 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    .pagination__item{
+    &__item{
         list-style-type: none;
         margin: 2rem 0.5rem 1rem 0.5rem;
         font-size: @small-font-size;
+        &:last-child{
+            display: none;
+        }
     }
-    .pagination__item:last-child{
-        display: none;
+    &__line{
+        margin: 2rem 0.4rem 1rem 0.4rem;
     }
-    .pagination__link{
+    &__link{
         color: @blue;
     }
 }
-@media @--large-viewport{
+@media only screen and (max-width: 1075px){
     .pagination{
-        .pagination__item--hidden{
+        &__item{
+            margin-left: 0;
+            margin-right: 0;
+            width: 20%;
+            text-align: center;
+        }
+        &__line{
             display: none;
         }
     }
 }
-@media @--small-tablet-viewport{
+@media @--micro-viewport{
     .pagination{
-        padding-top: 2rem;
-        .pagination__item{
-            margin: 1rem;
+        &__item{
+            width: 33%;
         }
     }
 }

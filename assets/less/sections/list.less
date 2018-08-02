@@ -4,17 +4,48 @@
 	font-size: @small-font-size;
 	background: @white;
 	overflow-x: auto;
-	.list__row{
+	&__row{
 		display: flex;
 		padding: 0.4rem 0;
 	}
-	.list__item--20w{
+	&__item--20w{
 		width: 20%;
 	}
-	.list__item--80w{
+	&__item--80w{
 		width: 80%;
 	}
-	.list__href{
+	&__href{
 		color: @blue;
+	}
+}
+
+@media @--small-tablet-viewport{
+	.list{
+		&__item{
+			word-break: break-all;
+		}
+		&__item--20w{
+			width: 40%;
+		}
+		&__item--80w{
+			width: 60%;
+		}
+	}
+}
+@media @--mobile-viewport{
+	.list{
+		&__row{
+			flex-direction: column;
+		}
+		&__item{
+			width: 100%;
+		}
+		&__item--20w{
+			margin-bottom: 0.3rem;
+			color: @grey;
+		}
+		&__item--80w{
+			margin-bottom: 0.5rem;
+		}
 	}
 }
