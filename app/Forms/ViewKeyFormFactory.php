@@ -25,8 +25,12 @@ class ViewKeyFormFactory
 		$form->addText('viewKey', 'View key')
 			->setRequired();
 		$form->addSubmit('send', 'Send');
+		$form->addSubmit('reset', 'Reset');
 
 		$form->onSuccess[] = function (Form $form, array $values) use ($onSuccess): void {
+			if ($form->isSubmitted()->getValue() === 'Reset') {
+				$form->getPresenter()->redirect('this');
+			}
 			$onSuccess($values['viewKey']);
 		};
 
