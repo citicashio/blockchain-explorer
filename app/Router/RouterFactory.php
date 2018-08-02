@@ -15,6 +15,10 @@ class RouterFactory
 	public static function createRouter(): IRouter
 	{
 		$router = new RouteList();
+		$router[] = new Route('/block/<hash>', 'Homepage:detail');
+		$router[] = new Route('/height/<height>', 'Homepage:detailByHeight');
+		$router[] = new Route('/tx/<hash>', 'Homepage:transaction');
+
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 
 		return $router;
