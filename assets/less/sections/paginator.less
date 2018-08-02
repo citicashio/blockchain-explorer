@@ -5,30 +5,45 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    .pagination__item{
+    &__item{
         list-style-type: none;
         margin: 2rem 0.5rem 1rem 0.5rem;
         font-size: @small-font-size;
-    }
-    .pagination__item:last-child{
-        display: none;
-    }
-    .pagination__link{
-        color: @blue;
-    }
-}
-@media @--large-viewport{
-    .pagination{
-        .pagination__item--hidden{
+        &:last-child{
             display: none;
         }
     }
+    &__line{
+        margin: 2rem 0.4rem 1rem 0.4rem;
+    }
+    &__link{
+        color: @blue;
+    }
 }
-@media @--small-tablet-viewport{
+@media only screen and (max-width: 1075px){
     .pagination{
-        padding-top: 2rem;
-        .pagination__item{
-            margin: 1rem;
+        &__item{
+            width: 16%;
+            text-align: center;
+        }
+        &__line{
+            width: 4%;
+            &:nth-child(5n){
+                display: none;
+            }
+        }
+    }
+}
+@media @--micro-viewport{
+    .pagination{
+        &__item{
+            width: 25%;
+        }
+        &__line{
+            width: 12.5%;
+            &:nth-child(3n){
+                display: none;
+            }
         }
     }
 }
