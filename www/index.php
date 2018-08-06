@@ -4,6 +4,8 @@ if (\PHP_SAPI === 'cli') {
 	die('run app/console.php');
 }
 
+ob_start(); // prevent ini_set(): Headers already sent.
+
 $container = require __DIR__ . '/../app/bootstrap.php';
 
 /** @var \Nette\Application\Application $app */
