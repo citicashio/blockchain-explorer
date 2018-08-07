@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\Handler\StreamHandler;
+use GuzzleHttp\HandlerStack;
 use Nette\Application\BadRequestException;
 use Nette\Utils\Json;
 use stdClass;
@@ -29,10 +32,13 @@ class RpcDaemon
 	{
 		$this->host = $host;
 		$this->port = $port;
+		$handler = new CurlHandler();
+		$stack = HandlerStack::create($handler);
 		$this->client = new Client(
 			[
 				'base_uri' => $this->host . ':' . $this->port,
 				'timeout' => 15.0,
+				'handler' => $stack,
 			]
 		);
 	}
@@ -178,22 +184,22 @@ class RpcDaemon
 	{
 		$options = [
 			'body' => Json::encode($body),
-			'allow_redirects' => false,
 			'debug' => false,
-			'synchronous' => true,
-			'version' => '2.0',
+			'allow_redirects' => false,
+			'synchronous' => false,
+			//'version' => '2.0', fail on aws
 			'curl.options' => [
 				CURLOPT_VERBOSE => false,
 				CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
 			],
 		];
-		$request = $this->client->get($path, $options);
-		$response = Json::decode($request->getBody()->getContents());
+		$response = $this->client->get($path, $options);
+		$responseJson = Json::decode($response->getBody()->getContents());
 
-		if (isset($response->error) && isset($response->error->message)) {
-			throw new BadRequestException($response->error->message);
+		if (isset($responseJson->error) && isset($responseJson->error->message)) {
+			throw new BadRequestException($responseJson->error->message);
 		}
 
-		return $response;
+		return $responseJson;
 	}
 }
