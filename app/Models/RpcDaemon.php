@@ -4,7 +4,6 @@ namespace App\Models;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
-use GuzzleHttp\Handler\StreamHandler;
 use GuzzleHttp\HandlerStack;
 use Nette\Application\BadRequestException;
 use Nette\Utils\Json;
@@ -193,6 +192,32 @@ class RpcDaemon
 				CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
 			],
 		];
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, [
+			CURLOPT_PORT => $this->port,
+			CURLOPT_URL => $this->host . $path,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'GET',
+			CURLOPT_POSTFIELDS => $options['body'],
+		]);
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			throw new BadRequestException($err);
+		}
+
+		return Json::decode($response);
+
 		$response = $this->client->get($path, $options);
 		$responseJson = Json::decode($response->getBody()->getContents());
 
