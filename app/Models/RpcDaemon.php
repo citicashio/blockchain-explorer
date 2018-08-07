@@ -4,6 +4,7 @@ namespace App\Models;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\Handler\StreamHandler;
 use GuzzleHttp\HandlerStack;
 use Nette\Application\BadRequestException;
 use Nette\Utils\Json;
@@ -31,7 +32,8 @@ class RpcDaemon
 	{
 		$this->host = $host;
 		$this->port = $port;
-		$handler = new CurlHandler();
+		//$handler = new CurlHandler();
+		$handler = new StreamHandler();
 		$stack = HandlerStack::create($handler);
 		$this->client = new Client(
 			[
