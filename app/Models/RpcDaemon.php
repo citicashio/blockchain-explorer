@@ -201,7 +201,6 @@ class RpcDaemon
 		];
 
 //		$curl = curl_init();
-//
 //		curl_setopt_array($curl, [
 //			CURLOPT_PORT => $this->port,
 //			CURLOPT_URL => $this->host . $path,
