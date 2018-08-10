@@ -47,6 +47,7 @@ $container = $configurator->createContainer();
 /** @var Application $application */
 $application = $container->getByType(Application::class);
 $application->errorPresenter = 'Error';
+Debugger::$errorTemplate = __DIR__ . '/templates/Error/500.phtml';
 $application->catchExceptions = !$configurator->isDebugMode();
 
 

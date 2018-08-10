@@ -176,7 +176,17 @@ class RpcDaemon
 	 */
 	private function getResponse(string $path, array $body): stdClass
 	{
-		$options = ['body' => Json::encode($body)];
+		$options = [
+			'body' => Json::encode($body),
+			'allow_redirects' => false,
+			'debug' => false,
+			'synchronous' => true,
+			'version' => '2.0',
+			'curl.options' => [
+				CURLOPT_VERBOSE => false,
+				CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+			],
+		];
 		$request = $this->client->get($path, $options);
 		$response = Json::decode($request->getBody()->getContents());
 

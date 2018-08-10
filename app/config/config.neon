@@ -12,6 +12,7 @@ tracy:
 	showLocation: true
 
 session:
+	autoStart: true
 	expiration: 14 days
 
 
