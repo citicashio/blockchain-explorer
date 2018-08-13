@@ -18,7 +18,7 @@ class RouterFactory
 		$router[] = new Route('/block/<hash>', 'Homepage:detail');
 		$router[] = new Route('/height/<height>', 'Homepage:detailByHeight');
 		$router[] = new Route('/tx/<hash>', 'Homepage:transaction');
-		$router[] = new Route('/info.json', 'Homepage:info');
+		$router[] = new Route('/api/info', 'Homepage:info');
 
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 
