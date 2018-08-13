@@ -5,6 +5,7 @@ namespace App\Presenters;
 use App\Forms\ViewKeyFormFactory;
 use App\Models\RpcDaemon;
 use Nette\Application\BadRequestException;
+use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Form;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Paginator;
@@ -109,5 +110,21 @@ class HomepagePresenter extends BasePresenter
 		};
 
 		return $this->viewKeyFormFactory->create($onSuccess);
+	}
+
+	public function renderInfo(): JsonResponse
+	{
+		$infoData = $this->rpcDaemon->getInfo();
+		$lastHeight = $infoData->getHeight() - 1;
+		$block = $this->rpcDaemon->getBlockByHeight($lastHeight);
+
+		$response = [
+			'difficulty' => $infoData->getDifficulty(),
+			'hashRate' => $infoData->getHashRate(),
+			'reward' => $block->getReward(),
+			'dateTime' => $block->getDateTime(),
+		];
+
+		$this->sendJson($response);
 	}
 }
