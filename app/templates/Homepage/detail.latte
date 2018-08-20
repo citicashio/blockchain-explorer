@@ -20,11 +20,11 @@
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Height:</div>
-				<div class="list__item list__item--80w">{$block->getHeight()}</div>
+				<div class="list__item list__item--80w splittingNumb">{$block->getHeight()}</div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Difficulty:</div>
-				<div class="list__item list__item--80w">{$block->getDifficulty()}</div>
+				<div class="list__item list__item--80w splittingNumb">{$block->getDifficulty()}</div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Date:</div>
@@ -36,7 +36,7 @@
 			</div>
 			<div class="list__row" n:foreach="$block->getMinerTxVin() as $input">
 				<div class="list__item list__item--20w">Input Total:</div>
-				<div class="list__item list__item--80w">{$input->gen->height}</div>
+				<div class="list__item list__item--80w splittingNumb">{$input->gen->height}</div>
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Tx Size:</div>
@@ -56,7 +56,7 @@
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Nonce:</div>
-				<div class="list__item list__item--80w">{$block->getNonce()}</div>
+				<div class="list__item list__item--80w splittingNumb">{$block->getNonce()}</div>
 			</div>
 		</div>
 	</div>

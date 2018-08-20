@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="description" lang="cs" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="bitcoins, transactions, blocks, address, block chain, best block, mining difficulty">
@@ -68,5 +69,8 @@
 		<p class="text"> Copyright © {$now->format('Y')} CitiCash.io </p>
 	</div>
 </div>
+{block scripts}
+	<script src="{$basePath}/build/js/main.js" type="text/javascript"></script>
+{/block}
 </body>
 </html>

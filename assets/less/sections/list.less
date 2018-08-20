@@ -13,6 +13,24 @@
 	}
 	&__item--80w{
 		width: 80%;
+		.input{
+			flex: 1;
+			font-size: 0.8rem;
+		}
+		@media @--mobile-landscape-viewport{
+			flex-wrap: wrap;
+			.input{
+				width: 100%;
+				flex: inherit;
+			}
+			.button{
+				margin: 1rem 0;
+				width: 45%;
+				&:last-child{
+					margin-left: auto;
+				}
+			}
+		}
 	}
 	&__href{
 		color: @blue;
