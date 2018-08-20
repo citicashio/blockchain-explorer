@@ -31,7 +31,7 @@
 			<div class="list__row" n:if="$transaction->in_pool === false">
 				<div class="list__item list__item--20w">Height:</div>
 				<div class="list__item list__item--80w">
-					<a class="list__href" n:href="DetailByHeight, $transaction->block_height">{$transaction->block_height}</a>
+					<a class="list__href splittingNumb" n:href="DetailByHeight, $transaction->block_height">{$transaction->block_height}</a>
 				</div>
 			</div>
 			<div class="list__row">
