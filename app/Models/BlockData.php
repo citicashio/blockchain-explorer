@@ -330,7 +330,7 @@ class BlockData
 	 */
 	public function getAge(): int
 	{
-		$now = new DateTime();
+		$now = new \DateTime();
 		$timeBefore = $now->getTimestamp() - $this->getTimestamp();
 
 		return $timeBefore;

@@ -90,8 +90,11 @@ then
     if [ ! -d "vendor/code-checker" ]; then composer create-project nette/code-checker -d vendor; fi
 
     if [ ! -d "vendor/phpstan" ]; then git clone https://github.com/phpstan/phpstan.git vendor/phpstan; fi
-    git -C vendor/phpstan reset --hard 3179cf27542e9e47acb548150e7ca21ca5ab92d6 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpstan ;
+    git -C vendor/phpstan reset --hard 24603c8563bd9c27ad830691ca5ca08ce0faaa95 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpstan ;
     composer require phpstan/phpstan-strict-rules -d vendor/phpstan ;
+    composer require phpstan/phpstan-doctrine -d vendor/phpstan ;
+    composer require phpstan/phpstan-mockery -d vendor/phpstan ;
+    composer require phpstan/phpstan-nette -d vendor/phpstan ;
     composer require thecodingmachine/phpstan-strict-rules -d vendor/phpstan ;
 fi
 
@@ -109,8 +112,10 @@ fi
 if [ "$1" = "private:test-coding-style" ]
 then
     out=0
-    #echo_blue "development=true php app/console orm:validate"
-    #development=true php app/console orm:validate || { out=1; }
+#    echo_blue "development=true php app/console orm:validate"
+#    development=true php app/console orm:validate || { out=1; }
+#    echo_blue "development=true php app/console orm:schema-tool:update --force"
+#    development=true php app/console orm:schema-tool:update --force || { out=1; }
     echo_blue "private:test-coding-style"
     #php app/console cache:warmup --env=dev || { out=1; }
     echo_blue "php vendor/php-parallel-lint/parallel-lint.php -e php,phpt,phtml --exclude vendor --show-deprecated ."
@@ -122,7 +127,9 @@ then
     php vendor/code-checker/code-checker -l -f --short-arrays --strict-types -d tests || { out=1; }
     echo_blue "phpstan"
     rm -rf vendor/php-code-checker/vendor/phpstan/tmp/cache
+    echo_blue "vendor/phpstan/bin/phpstan analyse -l 7 -c phpstan.neon app tests"
     vendor/phpstan/bin/phpstan analyse -l 7 -c phpstan.neon app tests || { out=1; }
+    echo_blue "./vendor/bin/tester -C -j 1 -o tap -C tests"
     ./vendor/bin/tester -C -j 1 -o tap -C tests || { out=1; }
     exit $out
 fi
