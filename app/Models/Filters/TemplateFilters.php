@@ -61,4 +61,9 @@ class TemplateFilters
 	{
 		return \str_replace(' ', '&nbsp;', $string);
 	}
+
+	public function numberFormat(float $number): string
+	{
+		return \number_format($number, 0, '.', ' ');
+	}
 }

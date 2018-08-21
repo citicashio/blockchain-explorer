@@ -28,7 +28,7 @@
 			<div class="list__row" n:if="$transaction->in_pool === false">
 				<div class="list__item list__item--20w">Height:</div>
 				<div class="list__item list__item--80w">
-					<a n:href="DetailByHeight, $transaction->block_height">{$transaction->block_height}</a>
+					<a n:href="DetailByHeight, $transaction->block_height">{$transaction->block_height|numberFormat}</a>
 				</div>
 			</div>
 			<div class="list__row">
@@ -77,9 +77,9 @@
 				</ul>
 				<div class="list__row">
 					<div class="list__item list__item--20w"><label n:name="viewKey">TX View key:</label></div>
-					<div class="list__item list__item--80w" style="display:flex"><input n:name="viewKey" type="text" style="flex: 1" class="search__input" />&nbsp;
-						<input n:name="send" />
-						<input n:name="reset" />
+					<div class="list__item list__item--80w" style="display:flex"><input n:name="viewKey" type="text" style="flex: 1" class="input" />&nbsp;
+						<input n:name="send" class="button button--red" />
+						<input n:name="reset" class="button button--grey" />
 					</div>
 				</div>
 			</form>
