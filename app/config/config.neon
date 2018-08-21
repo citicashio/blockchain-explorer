@@ -27,11 +27,12 @@ services:
 			- addFilter(null,[App\Models\Filters\TemplateFilters(), 'loader'])
 http:
 	headers:
-		X-Powered-By: CitiCash Nette
-		Strict-Transport-Security: 'max-age=3600; includeSubDomains; preload'
-		X-Content-Type-Options: 'nosniff'
-		Referrer-Policy: 'no-referrer'
-		Feature-Policy: 'none'
-		X-Frame-Options: 'DENY'
 		Access-Control-Allow-Methods: 'GET, POST, OPTIONS'
 		Access-Control-Allow-Origin: '*'
+		Feature-Policy: 'none'
+		Referrer-Policy: 'no-referrer'
+		Strict-Transport-Security: 'max-age=2592000; includeSubDomains; preload'
+		X-Content-Type-Options: 'nosniff'
+		X-Frame-Options: 'DENY'
+		X-Powered-By: CitiCash Nette
+		X-XSS-Protection: '1; mode=block'
