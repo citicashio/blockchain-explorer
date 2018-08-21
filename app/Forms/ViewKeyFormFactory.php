@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use Nette\Application\UI\Form;
+use Nette\Forms\ISubmitterControl;
 
 class ViewKeyFormFactory
 {
@@ -17,7 +18,7 @@ class ViewKeyFormFactory
 		$this->formFactory = $formFactory;
 	}
 
-	public function create(callable $onSuccess): Form
+	public function create(callable $onSuccess, callable $onClear): Form
 	{
 		$form = $this->formFactory->create();
 		$form->getElementPrototype()
@@ -27,9 +28,10 @@ class ViewKeyFormFactory
 		$form->addSubmit('send', 'Send');
 		$form->addSubmit('reset', 'Reset');
 
-		$form->onSuccess[] = function (Form $form, array $values) use ($onSuccess): void {
-			if ($form->isSubmitted()->getValue() === 'Reset') {
-				$form->getPresenter()->redirect('this');
+		$form->onSuccess[] = function (Form $form, array $values) use ($onSuccess, $onClear): void {
+			$submitterControl = $form->isSubmitted();
+			if ($submitterControl instanceof ISubmitterControl && $submitterControl->getValue() === 'Reset') {
+				$onClear();
 			}
 			$onSuccess($values['viewKey']);
 		};
