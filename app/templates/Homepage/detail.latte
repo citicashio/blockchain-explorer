@@ -28,7 +28,13 @@
 			</div>
 			<div class="list__row">
 				<div class="list__item list__item--20w">Date:</div>
-				<div class="list__item list__item--80w">{$block->getDateTime()|date:"Y-m-d H:i:sP"}</div>
+				<div class="list__item list__item--80w">
+					{if $block->getHeight() === 0}
+						N/A
+					{else}
+						{$block->getDateTime()|date:"Y-m-d H:i:sP"}
+					{/if}
+				</div>
 			</div>
 			<div class="list__row" n:foreach="$block->getMinerTxVout() as $output">
 				<div class="list__item list__item--20w">Output Total:</div>
