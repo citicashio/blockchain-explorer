@@ -14,6 +14,7 @@
 		<exclude name="SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces.NoEmptyLineBeforeClosingBrace"/>
 		<exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed"/>
 		<exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint"/>
+		<exclude name="SlevomatCodingStandard.Operators.DisallowIncrementAndDecrementOperators.DisallowedPostIncrementOperator"/>
 	</rule>
 	<rule ref="SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces">
 		<properties>

@@ -21,8 +21,5 @@ parameters:
 		- %root%/vendor/autoload.php
 		- %root%/tests/autoloadForPhpstan.php
 	ignoreErrors:
-		- '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::(andReturn|with)\(\).#'
-		- '#Call to an undefined method Mockery\\ExpectationInterface|Mockery\\ExpectsHigherOrderMessage::andReturn\(\).#'
-		- '#Parameter \#(.*) \$(.*) of class App\\Models\\(.*) constructor expects (.*), Mockery\\MockInterface given.#'
 		- '#Call to an undefined method Nette\\Utils\\Html::addClass\(\).#'
-		- '#Variable \"(.*)\" is not in valid camel caps format (Squiz.NamingConventions.ValidVariableName.NotCamelCaps).#'
+		- '#Only booleans are allowed in a negated boolean, int given.#'

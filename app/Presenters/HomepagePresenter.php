@@ -90,7 +90,7 @@ class HomepagePresenter extends BasePresenter
 	public function renderTransaction(string $hash): void
 	{
 		$this['viewKeyForm']; // fix session problem
-		$transactions = $this->rpcDaemon->getTransactions([$hash], $this->getRequest()->getPost('viewKey'));
+		$transactions = $this->rpcDaemon->getTransactions([$hash], $this->request->getPost('viewKey'));
 		$transaction = $transactions[0]->getData();
 		//\dump($transaction);
 		$block = null;
@@ -109,7 +109,11 @@ class HomepagePresenter extends BasePresenter
 			$this->flashMessage('Unlocked by View Key');
 		};
 
-		return $this->viewKeyFormFactory->create($onSuccess);
+		$onClear = function (): void {
+			$this->redirect('this');
+		};
+
+		return $this->viewKeyFormFactory->create($onSuccess, $onClear);
 	}
 
 	public function renderInfo(): JsonResponse

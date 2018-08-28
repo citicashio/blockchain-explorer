@@ -19,10 +19,6 @@ abstract class BaseTestCase extends TestCase
 		$this->container = $container;
 	}
 
-	protected function setup(): void
-	{
-	}
-
 	public function run(): void
 	{
 		if (\defined('PHPSTAN_ACTIVE')) {

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Nette\Utils\DateTime;
+use DateTime;
 use stdClass;
 
 class TransPoolData

@@ -38,6 +38,8 @@ abstract class BasePresenter extends Presenter
 		$nowUtc = new \DateTime('now', new \DateTimeZone('UTC'));
 		$template->nowUtc = $nowUtc->format(\DateTime::RFC850);
 
+		$template->fileMtimeCss = \filemtime(__DIR__ . '/../../www/build/css/styles.css');
+
 		return $template;
 	}
 }
