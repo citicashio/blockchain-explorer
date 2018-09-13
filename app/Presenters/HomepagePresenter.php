@@ -105,7 +105,7 @@ class HomepagePresenter extends BasePresenter
 
 	public function createComponentViewKeyForm(): Form
 	{
-		$onSuccess = function (string $viewKey): void {
+		$onSuccess = function (): void {
 			$this->flashMessage('Unlocked by View Key');
 		};
 

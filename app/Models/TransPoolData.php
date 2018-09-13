@@ -172,9 +172,8 @@ class TransPoolData
 	public function getAge(): int
 	{
 		$now = new DateTime();
-		$timeBefore = $now->getTimestamp() - $this->getReceiveTime();
 
-		return $timeBefore;
+		return $now->getTimestamp() - $this->getReceiveTime();
 	}
 
 	public function isRelayed(): bool
