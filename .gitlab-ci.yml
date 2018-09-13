@@ -54,6 +54,34 @@ staging:
   tags:
   - citicash
 
+production:
+  stage: deploy
+  before_script:
+   - echo "Deploy to production server!"
+   - mkdir -p ~/.ssh
+   - echo -e "$SSH_PRODUCTION_PRIVATE_KEY" > ~/.ssh/id_rsa
+   - chmod 600 ~/.ssh/id_rsa
+   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - composer install --prefer-dist --no-dev
+    - rsync -rvvazhP --delete --filter="merge .rsync-filter.conf" ./ ${$SSH_PRODUCTION_PRIVATE_KEY}:/var/www/blockchain-explorer
+    - ssh ${$SSH_PRODUCTION_PRIVATE_KEY} "cd /var/www/blockchain-explorer/ &&
+            sudo rm -rf var/temp/cache/ var/tempcli/cache/ &&
+            composer install --prefer-dist --no-dev &&
+            composer dump-autoload --optimize --no-dev &&
+            redis-cli -h ${SSH_PRODUCTION_REDIS_SERVER} -n 1 flushdb &&
+            development=true php app/console orm:schema-tool:update --dump-sql"
+        - echo "deploy to production succesfully completed!"
+        - curl --request POST --header 'Content-Type:application/json' --data "{\"icon_emoji\":\":avocado:\",\"text\":\"new realease PRODUCTION https://blockchain-explorer.citicash.io, hash ${CI_COMMIT_SHA}, message ${CI_COMMIT_TITLE}\"}" ${WEBHOOK_URL}
+  environment:
+    name: production
+    url: https://blockchain-explorer.citicash.io
+  when: manual
+  only:
+  - master
+  tags:
+  - live
+
 # Cache libraries in between jobs
 cache:
   key: ${CI_COMMIT_REF_SLUG}
