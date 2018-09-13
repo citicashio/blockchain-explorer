@@ -331,9 +331,8 @@ class BlockData
 	public function getAge(): int
 	{
 		$now = new \DateTime();
-		$timeBefore = $now->getTimestamp() - $this->getTimestamp();
 
-		return $timeBefore;
+		return $now->getTimestamp() - $this->getTimestamp();
 	}
 
 	public function getRawResultJsonRctSignatures(): string

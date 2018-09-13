@@ -28,12 +28,12 @@ class ViewKeyFormFactory
 		$form->addSubmit('send', 'Send');
 		$form->addSubmit('reset', 'Reset');
 
-		$form->onSuccess[] = function (Form $form, array $values) use ($onSuccess, $onClear): void {
+		$form->onSuccess[] = function (Form $form) use ($onSuccess, $onClear): void {
 			$submitterControl = $form->isSubmitted();
 			if ($submitterControl instanceof ISubmitterControl && $submitterControl->getValue() === 'Reset') {
 				$onClear();
 			}
-			$onSuccess($values['viewKey']);
+			$onSuccess();
 		};
 
 		return $form;

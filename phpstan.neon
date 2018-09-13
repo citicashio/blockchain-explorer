@@ -1,11 +1,15 @@
 includes:
-	- vendor/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
-	- vendor/phpstan/vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+	- vendor/coding-style-checkers/vendor/phpstan/phpstan-strict-rules/rules.neon
+	- vendor/coding-style-checkers/vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+	- vendor/coding-style-checkers/vendor/phpstan/phpstan-mockery/extension.neon
+	- vendor/coding-style-checkers/vendor/phpstan/phpstan-nette/extension.neon
+	- vendor/coding-style-checkers/vendor/phpstan/phpstan-nette/rules.neon
 parameters:
-	root: %rootDir%/../..
-	tmpDir: %rootDir%/var/cache
+	root: %rootDir%/../../../../../
+	tmpDir: %rootDir%/var/cache2
 	excludes_analyse:
 		- %root%/var/
+		- %root%/vendor/coding-style-checkers/
 	universalObjectCratesClasses:
 		- Mockery\ExpectationInterface
 		- Mockery\HigherOrderMessage
@@ -21,5 +25,4 @@ parameters:
 		- %root%/vendor/autoload.php
 		- %root%/tests/autoloadForPhpstan.php
 	ignoreErrors:
-		- '#Call to an undefined method Nette\\Utils\\Html::addClass\(\).#'
 		- '#Only booleans are allowed in a negated boolean, int given.#'
