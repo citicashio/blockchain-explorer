@@ -9,20 +9,25 @@ stages:
   - build
   - deploy
 
+variables:
+  #CI_DEBUG_TRACE: "true"
+
 job1:
   stage: build
   script:
     - pwd
     - composer install
     - docker/docker.sh private:travis:before_script
-    - php vendor/code-checker/code-checker -l --short-arrays --strict-types -d app
-    - php vendor/code-checker/code-checker -l --short-arrays --strict-types -d tests
     - cp app/config/config.local.dist.neon app/config/config.local.neon
     - rm -rf var/tempcli/cache
+    - redis-cli -h localhost -n 1 flushdb
+#    - development=true php app/console orm:schema-tool:drop --force
+#    - development=true php app/console orm:schema-tool:update --force
     - docker/docker.sh private:test-coding-style
     - echo "job1 succesfully completed!"
   tags:
-    - php
+    - citicash
+
 staging:
   stage: deploy
   before_script:
@@ -32,10 +37,18 @@ staging:
     - chmod 600 ~/.ssh/id_rsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   script:
-    - ssh ${SSH_DEV_SERVER} "cd /var/www/blockchain-explorer/ && git fetch origin && git reset --hard ${CI_COMMIT_SHA} && sudo rm -rf var/temp/cache/ && composer install"
+    - composer install --prefer-dist --no-dev
+    - rsync -rvvazhP --delete --filter="merge .rsync-filter.conf" ./ ${SSH_DEV_SERVER}:/var/www/blockchain-explorer
+    - ssh ${SSH_DEV_SERVER} "cd /var/www/blockchain-explorer/ &&
+        sudo rm -rf var/temp/cache/ var/tempcli/cache/ &&
+        composer install --prefer-dist --no-dev &&
+        composer dump-autoload --optimize --no-dev &&
+        redis-cli -h ${SSH_DEV_REDIS_SERVER} -n 1 flushdb"
+    - echo "deploy to staging succesfully completed!"
+    - curl --request POST --header 'Content-Type:application/json' --data "{\"icon_emoji\":\":avocado:\",\"text\":\"new realease DEV https://blockchain-explorer.citicash.loc, hash ${CI_COMMIT_SHA}, message ${CI_COMMIT_TITLE}\"}" ${WEBHOOK_URL}
   environment:
     name: staging
-    url: https://explorer.citicash.loc
+    url: https://blockchain-explorer.citicash.loc
   only:
   - master
   tags:
