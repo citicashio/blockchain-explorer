@@ -81,21 +81,8 @@ fi
 
 if [ "$1" = "private:travis:before_script" ]
 then
-    if [ ! -d "vendor/php-parallel-lint" ]; then git clone https://github.com/mzk/PHP-Parallel-Lint.git vendor/php-parallel-lint && composer install  --no-interaction --prefer-dist --no-dev -d vendor/php-parallel-lint ; fi
-    #git -C vendor/php-parallel-lint reset --hard dc6dc7246dceb44dcc316cfd97bfebeb53c613da
-
-    if [ ! -d "vendor/phpcs" ]; then git clone https://github.com/slevomat/coding-standard.git vendor/phpcs; fi
-    git -C vendor/phpcs  reset --hard 76e31b7cb2ce1de53b36430a332daae2db0be549 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpcs ;
-
+    if [ ! -d "vendor/coding-style-checkers" ]; then git clone https://github.com/mzk/coding-style-checkers.git vendor/coding-style-checkers && composer install --no-interaction --prefer-dist --no-dev -d vendor/coding-style-checkers; fi
     if [ ! -d "vendor/code-checker" ]; then composer create-project nette/code-checker -d vendor; fi
-
-    if [ ! -d "vendor/phpstan" ]; then git clone https://github.com/phpstan/phpstan.git vendor/phpstan; fi
-    git -C vendor/phpstan reset --hard 24603c8563bd9c27ad830691ca5ca08ce0faaa95 && composer install  --no-interaction --prefer-dist --no-dev -d vendor/phpstan ;
-    composer require phpstan/phpstan-strict-rules -d vendor/phpstan ;
-    composer require phpstan/phpstan-doctrine -d vendor/phpstan ;
-    composer require phpstan/phpstan-mockery -d vendor/phpstan ;
-    composer require phpstan/phpstan-nette -d vendor/phpstan ;
-    composer require thecodingmachine/phpstan-strict-rules -d vendor/phpstan ;
 fi
 
 
@@ -118,19 +105,17 @@ then
 #    development=true php app/console orm:schema-tool:update --force || { out=1; }
     echo_blue "private:test-coding-style"
     #php app/console cache:warmup --env=dev || { out=1; }
-    echo_blue "php vendor/php-parallel-lint/parallel-lint.php -e php,phpt,phtml --exclude vendor --show-deprecated ."
-    php vendor/php-parallel-lint/parallel-lint.php -e php,phpt,phtml -j 5 --exclude vendor --show-deprecated . || { out=1; }
+    echo_blue "php vendor/coding-style-checkers/vendor/jakub-onderka/php-parallel-lint/parallel-lint.php -e php,phpt,phtml -j 5 --exclude vendor --show-deprecated ."
+    php vendor/coding-style-checkers/vendor/jakub-onderka/php-parallel-lint/parallel-lint.php -e php,phpt,phtml -j 5 --exclude vendor --show-deprecated . || { out=1; }
     echo_blue "phpcs app"
-    vendor/phpcs/bin/phpcs --standard=ruleset.xml --extensions=php,phpt --warning-severity=0 --encoding=utf-8 --report-width=auto -sp app tests || { out=1; }
+    vendor/coding-style-checkers/vendor/bin/phpcs --standard=ruleset.xml --extensions=php,phpt --warning-severity=0 --encoding=utf-8 --report-width=auto -sp app tests || { out=1; }
     echo_blue "nette code checker"
     php vendor/code-checker/code-checker -l -f --short-arrays --strict-types -d app || { out=1; }
     php vendor/code-checker/code-checker -l -f --short-arrays --strict-types -d tests || { out=1; }
     echo_blue "phpstan"
     rm -rf vendor/php-code-checker/vendor/phpstan/tmp/cache
-    echo_blue "vendor/phpstan/bin/phpstan analyse -l 7 -c phpstan.neon app tests"
-    vendor/phpstan/bin/phpstan analyse -l 7 -c phpstan.neon app tests || { out=1; }
-    echo_blue "./vendor/bin/tester -C -j 1 -o tap -C tests"
-    ./vendor/bin/tester -C -j 1 -o tap -C tests || { out=1; }
+    vendor/coding-style-checkers/vendor/bin/phpstan analyse -l 7 -c phpstan.neon app tests || { out=1; }
+    ./vendor/bin/tester -C -j 4 -C tests || { out=1; }
     exit $out
 fi
 
