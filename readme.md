@@ -1,5 +1,6 @@
 Citicash Blockchain explorer
 =================
+[![Build Status](https://travis-ci.com/citicashio/blockchain-explorer.svg?branch=master)](https://travis-ci.com/citicashio/blockchain-explorer)
 
 Written in PHP and Nette Framework.
 
