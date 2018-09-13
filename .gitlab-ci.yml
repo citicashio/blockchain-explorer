@@ -16,6 +16,7 @@ job1:
   stage: build
   script:
     - pwd
+    - composer require --dev roave/security-advisories:dev-master
     - composer install
     - docker/docker.sh private:travis:before_script
     - cp app/config/config.local.dist.neon app/config/config.local.neon
@@ -37,7 +38,6 @@ staging:
     - chmod 600 ~/.ssh/id_rsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   script:
-    - composer require --dev roave/security-advisories:dev-master
     - composer install --prefer-dist --no-dev
     - rsync -rvvazhP --delete --filter="merge .rsync-filter.conf" ./ ${SSH_DEV_SERVER}:/var/www/blockchain-explorer
     - ssh ${SSH_DEV_SERVER} "cd /var/www/blockchain-explorer/ &&

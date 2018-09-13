@@ -1,0 +1,26 @@
+language: generic
+
+dist: trusty
+sudo: false
+
+services:
+  - docker
+
+before_script:
+  - pwd
+  - composer require --dev roave/security-advisories:dev-master
+  - composer install
+  - docker/docker.sh private:travis:before_script
+  - cp app/config/config.local.dist.neon app/config/config.local.neon
+  - rm -rf var/tempcli/cache
+
+script:
+  - stty cols 80;
+  - docker/docker.sh private:test-coding-style
+  - echo "job1 succesfully completed!"
+
+cache:
+  directories:
+    - $HOME/download
+    - $HOME/.composer/cache
+    - $TRAVIS_BUILD_DIR/vendor
